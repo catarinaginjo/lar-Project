@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
                 child: TextField(
                   style: TextStyle(fontSize: 20.0),
                   decoration: InputDecoration(
-                      border: InputBorder.none, labelText: 'E-Mail'),
+                      border: InputBorder.none, labelText: 'Email'),
                 ),
               ),
               Padding(
