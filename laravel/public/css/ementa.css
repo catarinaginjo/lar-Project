@@ -1,0 +1,28 @@
+.container1 {
+    margin-bottom: 50px;
+    margin-left: 350px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    margin-left: 420px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 50px;
+    font-size: 10px;
+    font-weight: bold;
+    color: red;
+}
+p{
+    font-size:23px;
+    font-weight: bold;
+}

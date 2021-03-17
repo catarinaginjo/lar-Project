@@ -1,7 +1,7 @@
 <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/x-icon">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:20px; font-weight:bold">
   <img alt="logotipo" class="logotipo" type="image/x-icon" src="{{ asset('images/homepic.png') }}" style="width:80px">
@@ -28,8 +28,18 @@
           <a class="dropdown-item" href="{{url('inicio/cozinheiros')}}">Cozinheiros</a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stock
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{url('inicio/stock_alimentos')}}">Alimentos</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{url('inicio/stock_produtos')}}">Produtos</a>
+        </div>
+      </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('inicio/stock')}}">Stock</a>
+        <a class="nav-link" href="{{url('inicio/controlo_mp')}}">Matérias-primas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{url('inicio/ementa')}}">Ementa</a>
@@ -38,19 +48,18 @@
         <a class="nav-link" href="{{url('inicio/recados')}}">Recados</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{url('inicio/contactos')}}">Contactos</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{url('inicio/perfil')}}">Perfil</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
 <style>
   .nav-item {
-    font-family: 'Oswald', sans-serif;
-    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
   }
 </style>

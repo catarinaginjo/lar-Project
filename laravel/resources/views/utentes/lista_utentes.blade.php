@@ -1,6 +1,7 @@
 @extends('layouts.backend')
 @section('content')
 
+<link href="{{ url('css/button.css') }}" rel="stylesheet">
 <h1> Utentes</h1>
 
 <div class="row">
@@ -16,5 +17,8 @@
     </div>
 </div>
 
+<div class="add_utente">
+    <a class="btn btn-primary" href="{{ url('/inicio/create_utente')}}">ADICIONAR NOVO UTENTE</a>
+</div>
 
 @endsection
