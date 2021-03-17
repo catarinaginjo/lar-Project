@@ -25,3 +25,15 @@ Route::get('/inicio/auxiliares', function () {
 Route::get('/inicio/cozinheiros', function () {
     return view('cozinheiros');
 });
+Route::get('/inicio/recados', function () {
+    return view('cozinheiros');
+});
+Route::get('/inicio/ementa', function () {
+    return view('ementa');
+});
+Route::get('/inicio/perfil', function () {
+    return view('perfil');
+});
+Route::get('/inicio/stock', function () {
+    return view('stock');
+});

@@ -1,6 +1,5 @@
+<!DOCTYPE html>
 <html lang="en">
-<!--CSS-->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <head>
     <!-- Required meta tags -->
@@ -12,11 +11,22 @@
 
     <title>@yield('title', 'Lar - administrador')</title>
 </head>
+@include('includes.navbar')
 
 <body>
-    @include('includes.navbar')
-    <main class="container" style="margin-top:120px;">
+    <main class="container" style="margin-top:80px;">
         @yield('content')
     </main>
 
 </body>
+
+</html>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url(images/fundo.jpg);
+        background-size: cover;
+    }
+</style>
