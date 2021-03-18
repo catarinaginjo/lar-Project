@@ -31,6 +31,10 @@ Route::get('/inicio/cozinheiros', function () {
 Route::get('/inicio/recados', function () {
     return view('info.recados');
 });
+
+Route::get('/inicio/recados/id', function () {
+    return view('info.ver_recado');
+});
 Route::get('/inicio/contactos', function () {
     return view('info.contactos');
 });

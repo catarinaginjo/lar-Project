@@ -7,6 +7,7 @@
     <h1 style="font-size:20px;margin-bottom:20px">CONTACTOS URGENTES - BOMBEIROS, HOSPITAIS</h1>
 
     <a class="btn btn-warning" style="float:right; margin-bottom:20px">Adicionar contacto</a>
+    
     <table class="table table-striped table-hover" name="SOS" style="margin-bottom:50px;">
         <thead>
             <tr>
