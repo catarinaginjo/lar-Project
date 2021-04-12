@@ -1,10 +1,9 @@
 <link href="{{ url('css/ementa.css') }}" rel="stylesheet">
 
-@extends('layouts.backend')
+@extends('layouts.vertical')
+@section('titulo', 'Perfil de Utente')
 @section('content')
 
-<h1> PERFIL DE UTENTE </h1>
-<p>DADOS</p>
 
 <!-- Tabela Dados utente -->
 @include('includes.dadosTable')

@@ -1,9 +1,11 @@
-@extends('layouts.backend')
+@extends('layouts.vertical')
+
+@section('titulo', 'Recados')
 @section('content')
 
-<button type="submit" id="btn" class="btn btn-warning">Novo Recado</button>
+<a href="{{'/'}}" class="btn btn-primary"><b>Novo Recado</b></a>
 
-<table class="table table-striped table-hover" id="mytable">
+<table class="table table-secondary table-hover" id="mytable">
     <thead>
         <tr>
             <th scope="col">Data do recado</th>
@@ -14,13 +16,14 @@
     </thead>
     <tbody>
         <tr>
+            <!-- A data do recado tem de ser a data do pc ao criar o recado-->
             <th scope="row">10/05/2021</th>
             <td>Reunião 20/05/2021</td>
             <td>Ana Gomes</td>
             <!-- Botões -->
             <td>
-                <button type="submit" id="btn" class="btn btn-primary">Ver Recado</button>
-                <button type="submit" id="btn" class="btn btn-danger">Apagar Recado</button>
+                <a href="{{'/inicio/recados/id'}}" class="btn btn-primary"><b>Ver Recado</b></a>
+                <a href="{{'/'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
             </td>
         </tr>
         <tr>
@@ -29,8 +32,8 @@
             <td>Joana Martins</td>
             <!-- Botões -->
             <td>
-                <button type="submit" id="btn" class="btn btn-primary">Ver Recado</button>
-                <button type="submit" id="btn" class="btn btn-danger">Apagar Recado</button>
+                <a href="{{'/'}}" class="btn btn-primary"><b>Ver Recado</b></a>
+                <a href="{{'/'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
             </td>
         </tr>
     </tbody>

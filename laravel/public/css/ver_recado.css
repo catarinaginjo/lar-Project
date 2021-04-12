@@ -1,0 +1,24 @@
+#recado {
+    width: 500px;
+    height: 200px;
+}
+
+h1 {
+    margin-left: 420px;
+}
+
+p {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#btn {
+    font-weight: bold;
+    margin-top: 40px;
+    float: left;
+    margin-left: 15px;
+}
+
+.botoes{
+    margin-top:10px;
+}

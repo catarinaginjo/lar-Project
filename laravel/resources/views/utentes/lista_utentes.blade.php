@@ -1,24 +1,26 @@
-@extends('layouts.backend')
+<link href="{{ url('css/button.css') }}" rel="stylesheet">
+@extends('layouts.vertical')
+@section('titulo', 'Lista de Utentes')
 @section('content')
 
-<link href="{{ url('css/button.css') }}" rel="stylesheet">
-<h1> Utentes</h1>
-
-<div class="row">
-    <div class="imgbox" style=" margin-left:20px">
-        <a href="{{url('/inicio/utente')}}">
-            <img src="{{ asset('images/idosa0.jpg') }}" alt="utente" class="rounded-circle" style="width:150px; height:150px">
-            <p style="margin-left:10px">Maria Rodrigues</p>
-        </a>
-    </div>
-    <div class="imgbox" style=" margin-left:20px">
-        <img src="{{ asset('images/idoso5.jpg') }}" alt="utente" class="rounded-circle" style="width:150px; height:150px;">
-        <p style="margin-left:10px">Roberto Gomes</p>
-    </div>
-</div>
-
 <div class="add_utente">
-    <a class="btn btn-primary" href="{{ url('/inicio/create_utente')}}">ADICIONAR NOVO UTENTE</a>
+    <a class="btn btn-success" href="{{ url('/inicio/create_utente')}}">ADICIONAR NOVO UTENTE</a>
 </div>
+
+
+<div class="myUtente" style="margin-top:50px">
+    @foreach($utentes as $utente)
+    <div class="row" style="margin-left:10px;">
+        <div class="imgbox" style="background-color:white">
+            <a href="{{url('/inicio/utente/' . $utente->id)}}">
+                <img src="{{ asset('images/idosa0.jpg') }}" alt="utente" class="rounded-circle" style="width:150px; height:150px">
+                <p style="margin-left:13px; font-size:20px; color:white">{{$utente->nome}} {{$utente->apelido}}</p>
+                
+            </a>
+        </div>
+        @endforeach
+    </div>
+</div>
+
 
 @endsection

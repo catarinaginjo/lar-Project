@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:larproject/components/BackgroundPic.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({
-    Key key,
-  }) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _LoginScreenState();
+  }
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  void sendLoginRequest(String email, String password) {
+    // Nesta função enviar um HTTP Post Request ao Laravel/Servidor (http://localhost:8000/api/login)
+    // O Laravel depois de enviar o token para trás, caso a auth tenha sido com sucesso, guardar resposta numa variavel
+    var response;
+    print(response);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +29,7 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: TextField(
+                  controller: TextEditingController(text: 'catarina@gmail.com'),
                   style: TextStyle(fontSize: 20.0),
                   decoration: InputDecoration(
                       border: InputBorder.none, labelText: 'E-Mail'),
@@ -25,6 +38,7 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: TextField(
+                  controller: TextEditingController(text: '12345'),
                   obscureText: true,
                   style: TextStyle(fontSize: 20.0),
                   decoration: InputDecoration(
@@ -55,6 +69,9 @@ class LoginScreen extends StatelessWidget {
                 builder: (context) => RaisedButton(
                   child: Text('Fazer login'),
                   onPressed: () {
+                    //sendLoginRequest(email, password) --> HTTP.PostRequest
+                    //---> http://localhost:8000/api/login
+                    //response <---- request.response
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Login efetuado com sucesso'),

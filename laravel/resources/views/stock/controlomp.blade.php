@@ -1,9 +1,7 @@
 <link href="{{ url('css/controlomp.css') }}" rel="stylesheet">
-@extends('layouts.backend')
+@extends('layouts.vertical')
+@section('titulo', 'Controlo de receção de matérias-primas')
 @section('content')
-
-<h1>CONTROLO DA RECEÇÃO DAS MATÉRIAS-PRIMAS </h1>
-
 
 
 <table class="table table-hover table-striped table-secondary" style="width:800px; height:400px;">

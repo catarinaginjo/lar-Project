@@ -1,9 +1,9 @@
 <link href="{{ url('css/ementa.css') }}" rel="stylesheet">
-@extends('layouts.backend')
+@extends('layouts.vertical')
+@section('titulo', 'Ementa semanal')
 @section('content')
 
-<h1>Ementa Semanal </h1>
-<div class="imgbox" style=" margin-left:20px;float:left">
+<div class="imgbox" style=" margin-left:20px;">
         <a href="{{url('/')}}">
             <img src="{{ asset('images/previous.png') }}" alt="previous" style="width:50px; height:50px">
         </a>

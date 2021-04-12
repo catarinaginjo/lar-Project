@@ -1,6 +1,6 @@
-@extends('layouts.backend')
-@section('content')
+@extends('layouts.vertical')
 
+@section('content')
 
 @endsection
 

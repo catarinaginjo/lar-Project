@@ -1,13 +1,15 @@
-@extends('layouts.backend')
+@extends('layouts.vertical')
+
+@section('titulo', 'Contactos')
 @section('content')
 
 <div class="container" style="background-color:white;">
 
     <!-- CONTACTOS SOS-->
-    <h1 style="font-size:20px;margin-bottom:20px">CONTACTOS URGENTES - BOMBEIROS, HOSPITAIS</h1>
+    <h1 style="font-size:20px;margin-bottom:5px; color:black">CONTACTOS URGENTES - BOMBEIROS, HOSPITAIS</h1>
 
-    <a class="btn btn-warning" style="float:right; margin-bottom:20px">Adicionar contacto</a>
-    
+    <a class="btn btn-secondary" href="{{url('/inicio/contactos/create_contacto')}}" style="float:right; margin-bottom:20px">Adicionar contacto</a>
+
     <table class="table table-striped table-hover" name="SOS" style="margin-bottom:50px;">
         <thead>
             <tr>
@@ -21,10 +23,12 @@
                 <td>Bombeiros Sendim</td>
                 <td>273 739 121</td>
                 <td scope="row">
-                    <form action="" method="POST">
-                        <a class="btn btn-success">Editar</a>
+                  <!-- dentro de action colocar a rota de apagar contacto com x ID-->
+                  <form action="" method="POST">
+                    <!-- {url('contactos/edit/'. $contacto->id)}-->
+                        <a class="btn btn-success" href=""><b>Editar</b></a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Apagar</button>
+                        <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
             </tr>
@@ -32,7 +36,7 @@
     </table>
 
     <!-- GESTORES -->
-    <h1 style="font-size:20px;margin-bottom:20px">GESTORES</h1>
+    <h1 style="font-size:20px;margin-bottom:20px;color:black">GESTORES</h1>
 
     <table class="table table-striped table-hover" name="gestores" style="margin-bottom:50px;">
         <thead>
@@ -48,10 +52,12 @@
                 <td>Etelvina Martins</td>
                 <td>931 222 111</td>
                 <td scope="row">
-                    <form action="" method="POST">
-                        <a class="btn btn-success">Editar</a>
+                 <!-- dentro de action colocar a rota de apagar contacto com x ID-->
+                 <form action="" method="POST">
+                    <!-- {url('contactos/edit/'. $contacto->id)}-->
+                        <a class="btn btn-success" href=""><b>Editar</b></a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Apagar</button>
+                        <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
             </tr>
@@ -59,7 +65,7 @@
     </table>
 
     <!-- FUNCIONÁRIOS -->
-    <h1 style="font-size:20px;margin-bottom:20px">FUNCIONÁRIOS</h1>
+    <h1 style="font-size:20px;margin-bottom:20px;color:black">FUNCIONÁRIOS</h1>
 
     <table class="table table-striped table-hover" name="funcionarios" style="margin-bottom:50px;">
 
@@ -77,10 +83,12 @@
                 <td>Auxiliar</td>
                 <td>92 222 111</td>
                 <td scope="row">
+                    <!-- dentro de action colocar a rota de apagar contacto com x ID-->
                     <form action="" method="POST">
-                        <a class="btn btn-success">Editar</a>
+                    <!-- {url('contactos/edit/'. $contacto->id)}-->
+                        <a class="btn btn-success" href=""><b>Editar</b></a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Apagar</button>
+                        <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
             </tr>
@@ -89,10 +97,12 @@
                 <td>Cozinheira</td>
                 <td>92 222 111</td>
                 <td scope="row">
-                    <form action="" method="POST">
-                        <a class="btn btn-success">Editar</a>
+                   <!-- dentro de action colocar a rota de apagar contacto com x ID-->
+                   <form action="" method="POST">
+                    <!-- {url('contactos/edit/'. $contacto->id)}-->
+                        <a class="btn btn-success" href=""><b>Editar</b></a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Apagar</button>
+                        <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
             </tr>
@@ -100,7 +110,7 @@
     </table>
 
     <!-- OUTROS -->
-    <h1 style="font-size:20px;margin-bottom:20px">OUTROS</h1>
+    <h1 style="font-size:20px;margin-bottom:20px;color:black">OUTROS</h1>
 
     <table class="table table-striped table-hover" name="outros" style="margin-bottom:50px;">
         <thead>
@@ -118,10 +128,12 @@
                 <td>Funcionária de Limpeza</td>
                 <td>931 222 111</td>
                 <td scope="row">
+                <!-- dentro de action colocar a rota de apagar contacto com x ID-->
                     <form action="" method="POST">
-                        <a class="btn btn-success">Editar</a>
+                    <!-- {url('contactos/edit/'. $contacto->id)}-->
+                        <a class="btn btn-success" href=""><b>Editar</b></a>
                         @csrf
-                        <button type="submit" class="btn btn-danger">Apagar</button>
+                        <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
             </tr>

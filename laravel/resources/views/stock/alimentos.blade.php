@@ -1,4 +1,5 @@
-@extends('layouts.backend')
+@extends('layouts.vertical')
+@section('titulo', 'Stock - Alimentos')
 @section('content')
 
 
