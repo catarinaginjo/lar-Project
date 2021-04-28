@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon;
 
 class CreateRecadosTable extends Migration
 {
@@ -15,7 +16,6 @@ class CreateRecadosTable extends Migration
     {
         Schema::create('recados', function (Blueprint $table) {
             $table->id();
-            $table->string('data_recado');
             $table->string('assunto');
             $table->string('descriçao');
             $table->unsignedBigInteger('responsavel');

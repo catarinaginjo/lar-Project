@@ -1,34 +1,51 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-//Controlador destinado aos funcionários e gestores
+//Controlador destinado aos funcionários e gestores (utilizadores)
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //lista de funcionarios
+    public function show_funcionarios()
     {
-        //return view('funcionarios.lista_funcionarios');
-        $user = User::all(); //vai ao modelo e ve as utentes
-        return view('funcionarios.lista_funcionarios')->with('users', $user); //recebe dentro de 'utentes' todos os utentes
+        $user = User::all(); //vai ao modelo e ve os users
+        return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    public function show_funcionarios()
+    {
+        $user = User::all(); //vai ao modelo e ve os users
+        if (!($user->cargo = "ab")) {
+            return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+        }
+        else {
+            echo "not found";
+        }
+    }*/
+
+
+    //lista de funcionarios e gestores
+    public function show_users()
+    {
+        $user = User::all(); //vai ao modelo e ve os users
+        return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+    }
+
+    public function show_perfil()
+    {
+        $user = User::all(); //vai ao modelo e ve os users
+        return view('perfil')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+    }
+
     public function create()
     {
-        return view('funcionarios.create_funcionario');
+        return view('funcionarios.criar_funcionario');
     }
 
     /**
@@ -52,20 +69,20 @@ class UsersController extends Controller
             'localidade' => 'required|string|max:255',
             'password' => 'string',
             'contacto' => 'required|max:9'
-            //falta a fotografia
         ]);
-        /*
-        if ($request->hasFile('logo')) {
-            $request->file('logo')->storeAs('public/images/frutarias/', $frutaria->id . '.png');
-        }*/
 
         //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
         if ($request->fails()) {
             return response(['error' => $request->errors(), 'Validation Error']);
         }
 
-        //senão, cria um funcionario
+        //senão, cria um user
         $user = User::create($data);
+
+        //guarda a fotografia
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
+        }
 
         return redirect('/inicio/funcionarios'); //vai ser redirecionada para o 'index'
 
@@ -82,16 +99,6 @@ class UsersController extends Controller
         return view('funcionarios.show_funcionario')->with('user', $user); //dá o utente com este ID
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\superadmin  $superadmin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -102,7 +109,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user = User::find($user->id);
+        $user->update($request->all());
+        $user->save();
+
+        return redirect('/inicio/perfil/' . $user->id . '/?sucesso_alteraçao_utilizador=1');
     }
 
     /**
@@ -114,7 +125,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('funcionarios.lista_funcionarios');
-        //return redirect('/utentes?sucesso_destroy_user=1');
+        $user->delete_foto_from_storage();
+        return redirect('/');
     }
 }

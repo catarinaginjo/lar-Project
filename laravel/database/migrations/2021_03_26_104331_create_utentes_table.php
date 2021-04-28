@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUtentesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -27,10 +26,10 @@ class CreateUtentesTable extends Migration
             $table->string('hipertensao')->nullable();
             $table->string('dieta')->nullable();
             $table->string('condiçao')->nullable();
-            $table->string('dependencia')->nullable();
             $table->string('medicaçao')->nullable();
             $table->string('doença')->nullable();
             $table->string('alergia')->nullable();
+            $table->string('cuidados')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
         });

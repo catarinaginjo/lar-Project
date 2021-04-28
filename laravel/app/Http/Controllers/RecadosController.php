@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use App\Models\Recados;
 use Illuminate\Http\Request;
+use Carbon;
 
 class RecadosController extends Controller
 {
@@ -14,7 +16,8 @@ class RecadosController extends Controller
      */
     public function index()
     {
-        return view('info.recados.recados');
+        $recados = Recados::all();
+        return view('info.recados.recados')->with('recados', $recados);
     }
 
     /**
@@ -24,7 +27,7 @@ class RecadosController extends Controller
      */
     public function create()
     {
-        //
+        return view('info.recados.create_recado');
     }
 
     /**
@@ -35,7 +38,24 @@ class RecadosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'assunto' => 'required|string|max:255',
+            'descriçao' => 'required|string|max:255',
+            'responsavel' => 'required|string|max:255',
+        ]);
+
+        //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
+        if ($validator->fails()) {
+            return response(['error' => $validator->errors(), 'Erro de validacao!!!']);
+        }
+
+        //senão, cria um utente
+        $recado = Recados::create($data);
+
+        return redirect('/inicio/recados'); //vai ser redirecionada para o 'index'
+
     }
 
     /**
@@ -46,7 +66,8 @@ class RecadosController extends Controller
      */
     public function show(Recados $recados)
     {
-        //
+        return view('info.recados.show_recado')->with('recados', $recados); //dá o recado com este ID
+
     }
 
     /**
@@ -69,7 +90,12 @@ class RecadosController extends Controller
      */
     public function update(Request $request, Recados $recados)
     {
-        //
+
+        $recados = Recados::find($recados->id);
+        $recados->update($request->all());
+        $recados->save();
+
+        return redirect('/inicio/recados/' . $recados->id . '/?sucesso_alteraçao_utente=1');
     }
 
     /**
@@ -78,8 +104,9 @@ class RecadosController extends Controller
      * @param  \App\Models\Recados  $recados
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recados $recados)
+    public function destroy(Recados $recado)
     {
-        //
+        $recado->delete();
+        return redirect('/inicio/recados');
     }
 }

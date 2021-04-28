@@ -1,152 +1,165 @@
 <!--Tabela de dados relacionados ao utente -->
 
 <div class="container">
-    <div class="main-body">
-        <div class="row gutters-sm">
-            <div class="col-md-14 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="{{ asset('images/idosa0.jpg') }}" alt="Admin" class="rounded-circle" width="150">
-                            <div class="mt-3" style="color:black">
-                                <h4>{{$utente->nome}} {{$utente->apelido}}</h4>
+    <form action="/inicio/utentes/update/{{$utente->id}}" method="POST" id="alterar-perfil" class="input-grouphideBox">
+        {{ csrf_field() }}
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-14 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ $utente->foto() }}" alt="foto do utente" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
+                                <div class="mt-3" style="color:black">
+                                    <input type="text" name="nome" value="{{$utente->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                                    <input type="text" name="apelido" value="{{$utente->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
+                <div class="col-md-8">
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Contacto Familiar:</h6>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Contacto Familiar:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="tel" name="contacto_familiar" maxlength="9" value="{{$utente->contacto_familiar}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->contacto_familiar}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Data de Nascimento</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="data_nascimento" value="{{$utente->data_nascimento}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h6 class="mb-0" style="color:black">Data de Nascimento</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Idade:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <p style="font-size:18px">{{ $utente->idade() }} anos</p>
+                                </div>
                             </div>
-                            <div class="col-sm-13 text-secondary">
-                                {{$utente->data_nascimento}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Doenças:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="medicaçao" value="{{$utente->doença}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Idade:</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Medicação:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="medicaçao" value="{{$utente->medicaçao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <p>{{ $utente->idade }} anos</p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Alergias:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="alergia" value="{{$utente->alergia}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Doenças:</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Diabetes:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="diabetes" value="{{$utente->diabetes}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->doença}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Hipertenso:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="hipertensao" value=" {{$utente->hipertensao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3" style="color:black">
-                                <h6 class="mb-0">Medicação:</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Condições:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="condiçao" value="{{$utente->condiçao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->medicaçao}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Cuidados a ter:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="cuidados" value=" {{$utente->cuidados}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Alergias:</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Dieta Alimentar:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" value="{{$utente->dieta}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->alergia}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Morada:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="morada" maxlength="9" value="{{$utente->morada}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Diabetes:</h6>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Localidade:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="localidade" maxlength="9" value="{{$utente->localidade}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->diabetes}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Hipertenso:</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->hipertensao}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Condições:</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->condiçoes}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Cuidados a ter:</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->cuidados}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Dieta:</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$utente->dieta}}
-                            </div>
-                        </div>
-                        <hr>
+                            <hr>
 
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <form action="{{ url('/inicio/utente/destroy/'.$utente->id) }}" method="POST">
-                                    <a class="btn btn-primary" href="{{ url('utentes/edit/'. $utente->id) }}">Editar Perfil</a>
-                                    <hr>
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Apagar Utente</button>
-                                </form>
+                            <!--Botões-->
+                            <div class="botoes">
+                                <?php if (!isset($_GET['editar'])) { ?>
+                                    <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+                                <?php } else { ?>
+                                    <input type="submit" name="save" value="Guardar" id="save">
+                                <?php } ?>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </form>
+    <div class="row">
+        <div class="col-sm-11">
+            <form action="{{ url('/inicio/utente/destroy/'.$utente->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Apagar Utente</button>
+            </form>
+        </div>
     </div>
 </div>
-
-
-
-<?php if (isset($_GET['sucesso_alteraçao_utente'])) { ?>
-    <div style="width: 50%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px;">
-        O Perfil do utente foi alterado com sucesso!
-    </div>
-<?php }
-if (isset($_GET['sucesso_destroy_utente'])) { ?>
-    <div style="width: 50%;  padding: 0.5rem;background-color:red;color:white; margin-top:0px;">
-        O utente foi eliminado com sucesso.
-    </div>
-<?php }

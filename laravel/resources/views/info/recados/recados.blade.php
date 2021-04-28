@@ -3,7 +3,7 @@
 @section('titulo', 'Recados')
 @section('content')
 
-<a href="{{'/'}}" class="btn btn-primary"><b>Novo Recado</b></a>
+<a href="{{'/inicio/recados/create_recado'}}" class="btn btn-primary"><b>Novo Recado</b></a>
 
 <table class="table table-secondary table-hover" id="mytable">
     <thead>
@@ -15,27 +15,20 @@
         </tr>
     </thead>
     <tbody>
+    @foreach($recados as $recado)
         <tr>
             <!-- A data do recado tem de ser a data do pc ao criar o recado-->
-            <th scope="row">10/05/2021</th>
-            <td>Reunião 20/05/2021</td>
-            <td>Ana Gomes</td>
+            <th scope="row">{{$recado->created_at}}</th>
+            <td>{{$recado->assunto}}</td>
+            <td>{{$recado->responsavel}}</td>
             <!-- Botões -->
             <td>
-                <a href="{{'/inicio/recados/id'}}" class="btn btn-primary"><b>Ver Recado</b></a>
-                <a href="{{'/'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
+                <a href="{{'/inicio/recados/{recado}'}}" class="btn btn-primary"><b>Ver Recado</b></a>
+                <a href="{{'/inicio/recados/destroy/{recado}'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
             </td>
         </tr>
-        <tr>
-            <th scope="row">13/05/2021</th>
-            <td>Reunião 10/06/2021</td>
-            <td>Joana Martins</td>
-            <!-- Botões -->
-            <td>
-                <a href="{{'/'}}" class="btn btn-primary"><b>Ver Recado</b></a>
-                <a href="{{'/'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
-            </td>
-        </tr>
+        @endforeach
+       
     </tbody>
 </table>
 @endsection

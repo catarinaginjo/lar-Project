@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\Contactos;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContactosController extends Controller
@@ -15,7 +16,9 @@ class ContactosController extends Controller
      */
     public function index()
     {
-        return view('info.contactos.contactos');
+        $contactos = Contactos::all();
+        $users = User::all();
+        return view('info.contactos.lista_contactos')->with('contactos', $contactos)->with('users', $users);
     }
 
     /**
@@ -25,7 +28,7 @@ class ContactosController extends Controller
      */
     public function create()
     {
-       return view('info.contactos.create_contacto');
+        return view('info.contactos.create_contacto');
     }
 
     /**
@@ -40,8 +43,7 @@ class ContactosController extends Controller
 
         $validator = Validator::make($data, [
             'nome' => 'required|string|max:255',
-            'numero' => 'required|max:9',
-            'cargo' => 'required|string',
+            'numero' => 'required|max:9'
         ]);
 
         //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
@@ -63,7 +65,7 @@ class ContactosController extends Controller
      */
     public function show(Contactos $contactos)
     {
-        return view('info.contactos.show_contacto')->with('contacto', $contactos); //dá o utente com este ID
+        return view('info.contactos.show_contacto')->with('contacto', $contactos); //dá o contacto com este ID
     }
 
     /**
@@ -84,9 +86,13 @@ class ContactosController extends Controller
      * @param  \App\Models\Contactos  $contactos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contactos $contactos)
+    public function update(Request $request, Contactos $contacto)
     {
-        //
+        $contacto = Contactos::find($contacto->id);
+        $contacto->update($request->all());
+        $contacto->save();
+
+        return redirect('/inicio/contactos/' . $contacto->id . '/?sucesso_alteraçao_contacto=1');
     }
 
     /**
@@ -97,9 +103,7 @@ class ContactosController extends Controller
      */
     public function destroy(Contactos $contactos)
     {
-        
         $contactos->delete();
         return redirect('/inicio/contactos');
-       // return redirect('/utentes?sucesso_destroy_utente=1');
     }
 }

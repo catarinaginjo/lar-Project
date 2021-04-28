@@ -10,7 +10,6 @@ class Contactos extends Model
     use HasFactory;
     protected $fillable = [
         'nome',
-        'cargo',
         'numero',   
         
     ];

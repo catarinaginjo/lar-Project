@@ -17,7 +17,6 @@ class CreateContactosTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('numero')->unique();
-            $table->string('cargo');
             $table->timestamps();
         });
     }

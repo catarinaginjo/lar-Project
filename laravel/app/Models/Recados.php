@@ -9,7 +9,6 @@ class Recados extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nome',
         'assunto',
         'recado',
         'descriçao',

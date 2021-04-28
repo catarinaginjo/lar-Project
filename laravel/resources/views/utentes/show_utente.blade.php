@@ -4,6 +4,19 @@
 @section('titulo', 'Perfil de Utente')
 @section('content')
 
+<!-- mensagens de alerta -->
+<?php if (isset($_GET['sucesso_alteraçao_utente'])) { ?>
+    <div style="width: 30%;  height:20%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px">
+        O Perfil do utente foi alterado com sucesso!
+    </div>
+<?php }
+if (isset($_GET['sucesso_destroy_utente'])) { ?>
+    <div style="width: 50%;  padding: 0.5rem;background-color:red;color:white; margin-top:0px; margin-bottom:20px">
+        O utente foi eliminado com sucesso.
+    </div>
+<?php } ?>
+
+
 
 <!-- Tabela Dados utente -->
 @include('includes.dadosTable')

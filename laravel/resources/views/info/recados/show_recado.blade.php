@@ -9,9 +9,6 @@
 <!-- acrescentar o value:   value="{{$recado->assunto}"  mas com -->
 <input type="text" name="assunto"  class="form-control" placeholder="assunto" style="width:400px">
 
-<!--<p>Data do Recado: </p> 
-<input type="date" name="data_recado"  class="form-control" placeholder="data_recado" style="width:400px">-->
-
 <p>Responsável: </p> 
 <input type="text" name="responsavel"  class="form-control" placeholder="responsavel" style="width:400px">
 

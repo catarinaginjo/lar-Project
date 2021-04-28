@@ -8,43 +8,19 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\utentes;
 use Illuminate\Http\Request;
 
-
 class UtentesController extends Controller
 {
-    /**
-     * 
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //return view('utentes.lista_utentes');
-
         $utentes = utentes::all(); //vai ao modelo e ve as utentes
         return view('utentes.lista_utentes')->with('utentes', $utentes); //recebe dentro de 'utentes' todos os utentes
-   
     }
-
 
     public function create()
     {
-
         return view('utentes.create_utente');
     }
 
-
-
-    public function edit(utentes $utente)
-    {
-        //  return view('backoffice.frutarias.edit', ['frutaria' => $frutaria]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = $request->all();
@@ -61,30 +37,30 @@ class UtentesController extends Controller
             'dieta' => 'string|nullable',
             'hipertensao' => 'string|nullable',
             'doença' => 'string|nullable',
-            'dependencia' => 'string|nullable',
             'alergia' => 'string|nullable',
-            'contacto_familiar' => 'required|max:9'
-            //falta a foto
+            'contacto_familiar' => 'required|max:9',
+            'cuidados' => 'string|nullable',
         ]);
-        /*
-        if ($request->hasFile('logo')) {
-            $request->file('logo')->storeAs('public/images/frutarias/', $frutaria->id . '.png');
-        }*/
 
         //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
         if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Validation Error']);
+            return response(['error' => $validator->errors(), 'Erro de Validacao!!!']);
         }
 
         //senão, cria um utente
         $utente = utentes::create($data);
+
+        //guardar a fotografia
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->storeAs('public/images/utentes/', $utente->id . '.png');
+        }
 
         return redirect('/inicio/lista_utentes'); //vai ser redirecionada para o 'index'
 
     }
 
     /**
-     * Display the specified resource.
+     * Perfil do utente.
      *
      * @param  \App\Models\utentes  $utentes
      * @return \Illuminate\Http\Response
@@ -93,7 +69,6 @@ class UtentesController extends Controller
     {
         return view('utentes.show_utente')->with('utente', $utente); //dá o utente com este ID
     }
-
 
 
     /**
@@ -105,22 +80,11 @@ class UtentesController extends Controller
      */
     public function update(Request $request, utentes $utente)
     {
-        /*
-        
-        $frutaria->update($request->all());
+        $utente = utentes::find($utente->id);
+        $utente->update($request->all());
+        $utente->save();
 
-        if ($request->hasFile('logo')) {
-            $request->file('logo')->storeAs('public/images/frutarias/', $frutaria->id . '.png');
-        }
-
-        return redirect('/frutarias?sucesso_alteraçao_frutaria=1');
-
-        
-        
-        */
-    
-    
-
+        return redirect('/inicio/utente/' . $utente->id . '/?sucesso_alteraçao_utente=1');
     }
 
     /**
@@ -132,6 +96,8 @@ class UtentesController extends Controller
     public function destroy(utentes $utente)
     {
         $utente->delete();
-        return redirect('/utentes?sucesso_destroy_utente=1');
+        $utente->delete_foto_from_storage();
+        return redirect('/inicio/lista_utentes');
+        //return redirect('/inicio/lista_utentes/?sucesso_destroy_utente=1');
     }
 }
