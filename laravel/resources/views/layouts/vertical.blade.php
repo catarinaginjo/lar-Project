@@ -28,10 +28,10 @@
     <!-- Conteúdo -->
     <h2 class="display-4 text-white"> @yield('titulo', 'Bem-vindo/a Joana')</h2>
     <div class="separator"></div>
-    <div class="row text-white">
+    <!--<div class="row text-white"> -->
         @yield('content')
 
-    </div>
+   <!-- </div>-->
 
 </div>
 

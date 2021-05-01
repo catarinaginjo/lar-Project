@@ -97,7 +97,6 @@ class UtentesController extends Controller
     {
         $utente->delete();
         $utente->delete_foto_from_storage();
-        return redirect('/inicio/lista_utentes');
-        //return redirect('/inicio/lista_utentes/?sucesso_destroy_utente=1');
+        return redirect('/inicio/lista_utentes/?sucesso_destroy_utente=1');
     }
 }

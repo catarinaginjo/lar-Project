@@ -63,21 +63,11 @@ class ContactosController extends Controller
      * @param  \App\Models\Contactos  $contactos
      * @return \Illuminate\Http\Response
      */
-    public function show(Contactos $contactos)
+    public function show(Contactos $contacto)
     {
-        return view('info.contactos.show_contacto')->with('contacto', $contactos); //dá o contacto com este ID
+        return view('info.contactos.show_contacto')->with('contactos', $contacto); //dá o contacto com este ID
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contactos  $contactos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contactos $contactos)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -101,9 +91,10 @@ class ContactosController extends Controller
      * @param  \App\Models\Contactos  $contactos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contactos $contactos)
+    public function destroy(Contactos $contacto)
     {
-        $contactos->delete();
+        $contacto->delete();
+        // dd($contactos);
         return redirect('/inicio/contactos');
     }
 }

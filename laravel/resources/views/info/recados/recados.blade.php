@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($recados as $recado)
+        @foreach($recados as $recado)
         <tr>
             <!-- A data do recado tem de ser a data do pc ao criar o recado-->
             <th scope="row">{{$recado->created_at}}</th>
@@ -23,12 +23,14 @@
             <td>{{$recado->responsavel}}</td>
             <!-- Botões -->
             <td>
-                <a href="{{'/inicio/recados/{recado}'}}" class="btn btn-primary"><b>Ver Recado</b></a>
-                <a href="{{'/inicio/recados/destroy/{recado}'}}" class="btn btn-danger"><b>Apagar Recado</b></a>
+                <form action="/inicio/recados/destroy/{recado}" method="POST">
+                    @csrf
+                    <a href="{{'/inicio/recados/{recado}'}}" class="btn btn-primary"><b>Ver Recado</b></a>
+                    <button type="submit" class="btn btn-danger"><b>Apagar recado</b></button>
+                </form>
             </td>
         </tr>
         @endforeach
-       
     </tbody>
 </table>
 @endsection

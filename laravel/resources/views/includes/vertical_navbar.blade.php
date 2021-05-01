@@ -42,9 +42,9 @@
                 Stock
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{url('/inicio/stock-alimentos')}}">Alimentos</a>
+                <a class="dropdown-item" href="{{url('/inicio/stock/alimentos')}}">Alimentos</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{url('/inicio/stock-produtos')}}">Produtos</a>
+                <a class="dropdown-item" href="{{url('/inicio/stock/produtos')}}">Produtos</a>
             </div>
         </li>
 
@@ -71,7 +71,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{url('inicio/controlo_mp')}}" class="nav-link text-dark font-italic">
+            <a href="{{url('/inicio/controlo_materias_primas')}}" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
                 Matérias-Primas
             </a>

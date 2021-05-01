@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Carbon;
 
 class CreateRecadosTable extends Migration
 {
@@ -18,8 +17,7 @@ class CreateRecadosTable extends Migration
             $table->id();
             $table->string('assunto');
             $table->string('descriçao');
-            $table->unsignedBigInteger('responsavel');
-            $table->foreign('responsavel')->references('id')->on('users');//id do auxiliar responsável
+            $table->string('responsavel');
             $table->timestamps();
         });
     }

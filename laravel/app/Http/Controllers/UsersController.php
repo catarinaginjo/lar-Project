@@ -57,7 +57,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
+        
         $validator = Validator::make($data, [
             'nome' => 'required|string|max:255',
             'apelido' => 'required|string|max:255',
@@ -70,21 +70,17 @@ class UsersController extends Controller
             'password' => 'string',
             'contacto' => 'required|max:9'
         ]);
-
-        //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
-        if ($request->fails()) {
-            return response(['error' => $request->errors(), 'Validation Error']);
-        }
-
-        //senão, cria um user
+    
         $user = User::create($data);
-
+  
         //guarda a fotografia
-        if ($request->hasFile('foto')) {
+       if ($request->hasFile('foto')) {
             $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
         }
+        
+       
 
-        return redirect('/inicio/funcionarios'); //vai ser redirecionada para o 'index'
+        return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
 
     }
 
@@ -113,7 +109,7 @@ class UsersController extends Controller
         $user->update($request->all());
         $user->save();
 
-        return redirect('/inicio/perfil/' . $user->id . '/?sucesso_alteraçao_utilizador=1');
+        return redirect('/inicio/funcionarios/' . $user->id . '/?sucesso_alteraçao_utilizador=1');
     }
 
     /**
@@ -126,6 +122,6 @@ class UsersController extends Controller
     {
         $user->delete();
         $user->delete_foto_from_storage();
-        return redirect('/');
+        return redirect('/inicio/lista_funcionarios/?sucesso_destroy_utilizador=1');
     }
 }

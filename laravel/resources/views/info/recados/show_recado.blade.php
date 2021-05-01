@@ -5,19 +5,25 @@
 @section('content')
 
 <div class="edit-recado" style="margin-left:200px; margin-top:-30px">
-<p>Assunto: </p> 
-<!-- acrescentar o value:   value="{{$recado->assunto}"  mas com -->
-<input type="text" name="assunto"  class="form-control" placeholder="assunto" style="width:400px">
+    <form action="/inicio/recados/update/{{$recados->id}}" method="POST" id="alterar-recado" class="input-grouphideBox">
+        {{ csrf_field() }}
+        <p>Assunto: </p>
+        <input type="text" name="assunto" value="{{$recados->assunto}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
 
-<p>Responsável: </p> 
-<input type="text" name="responsavel"  class="form-control" placeholder="responsavel" style="width:400px">
+        <p>Responsável: </p>
+        <input type="text" name="responsavel" value="{{$recados->responsavel}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
 
-<p>Recado: </p>
-<textarea id="recado"></textarea>
+        <p>Descrição do recado: </p>
+        <textarea name="descriçao" value="{{$recados->descriçao}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">></textarea>
 
-
-<div class="botoes" style="margin-top:-15px;">
-    <button type="submit" id="btn" class="btn btn-warning">Editar</button>
-    <button type="submit" id="btn" class="btn btn-success">Guardar</button>
-</div></div>
+        <!--Botões-->
+        <div class="botoes">
+            <?php if (!isset($_GET['editar'])) { ?>
+                <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+            <?php } else { ?>
+                <input type="submit" name="save" value="Guardar" id="save">
+            <?php } ?>
+        </div>
+    </form>
+</div>
 @endsection

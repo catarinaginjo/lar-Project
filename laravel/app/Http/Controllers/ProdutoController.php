@@ -7,46 +7,68 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    //Considero Produtos: alimentos e equipamentos variados - distinguem-se pela categoria.
+    /* Produtor */
+    public function lista_produtos()
     {
-        //
+        $produtos = produto::paginate(2);
+        return view('produtos.stock.lista_produtos', ['produtos' => $produtos]);
+    }
+
+    public function create_produto(produto $produto)
+    {
+        return view('produtos.stock.create_produtos', ['produto' => $produto]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Faz update da quantidade do produto em stock_movimentos
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function produtos_update(Request $request, produto $produto)
     {
         //
     }
 
+
+    //guardar produto dentro da tabela 'produto'
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome_produto' => 'string',
+            'categoria' => 'string',
+            'reorder_point' => 'number',
+        ]);
+        $produto = new produto;
+        produto::create($request->all());
+
+        return redirect('/inicio/stock/produtos' . $produto->id . '?sucesso_criar_produto=1');
+    }
+
     /**
-     * Display the specified resource.
+     * Mostra um determinado produto
      *
      * @param  \App\Models\produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show(produto $produto)
+    public function show_movimentos(produto $produto)
     {
-        //
+        return view('produtos.stock.show_movimentos');
+    }
+
+    /**
+     * Remove um produto da tabela produto
+     *
+     * @param  \App\Models\produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(produto $produto)
+    {
+        $produto->delete();
+        return redirect('/inicio/stock/produtos/?sucesso_destroy_utente=1');
     }
 
     /**
@@ -60,26 +82,4 @@ class ProdutoController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\produto  $produto
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, produto $produto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\produto  $produto
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(produto $produto)
-    {
-        //
-    }
 }

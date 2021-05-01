@@ -4,71 +4,94 @@
 @section('titulo', 'Perfil de Funcionário')
 @section('content')
 
+<div class="msg">
+    <!-- mensagens de alerta -->
+    <?php if (isset($_GET['sucesso_alteraçao_utilizador'])) { ?>
+        <div style="width: 30%;  height:20%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px">
+            O Perfil do funcionário foi alterado com sucesso!
+        </div>
+    <?php } ?>
+</div>
 
 <div class="container">
-    <div class="main-body">
-        <div class="row gutters-sm">
-            <div class="col-md-14 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="{{ asset('images/idosa0.jpg') }}" alt="Admin" class="rounded-circle" width="150">
-                            <div class="mt-3" style="color:black">
-                                <h4>{{$user->nome}} {{$user->apelido}}</h4>
+    <form action="/inicio/funcionarios/update/{{$user->id}}" method="POST" id="alterar-perfil" class="input-grouphideBox">
+        {{ csrf_field() }}
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-14 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ $user->foto() }}" alt="Admin" class="rounded-circle" width="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
+                                <div class="mt-3" style="color:black">
+                                    <input type="text" name="nome" value="{{$user->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                                    <input type="text" name="apelido" value="{{$user->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
+                <div class="col-md-8">
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Contacto:</h6>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Contacto:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="tel" name="contacto" maxlength="9" value="{{$user->contacto}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{$user->contacto}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <h6 class="mb-0" style="color:black">Data de Nascimento</h6>
-                            </div>
-                            <div class="col-sm-13 text-secondary">
-                                {{$user->data_nascimento}}
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0" style="color:black">Idade:</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <p>{{ $user->idade }} anos</p>
-                            </div>
-                        </div>
-                        <hr>
-                        
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6 class="mb-0" style="color:black">Data de Nascimento</h6>
+                                </div>
+                                <div class="col-sm-13 text-secondary">
+                                    <input type="text" name="data_nascimento" value="{{$user->data_nascimento}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
 
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <form action="{{ url('/inicio/funcionarios/destroy/'.$user->id) }}" method="POST">
-                                    <a class="btn btn-primary" href="{{ url('inicio/funcionarios//edit/'. $user->id) }}">Editar Funcionário</a>
-                                    <hr>
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Apagar Funcionário</button>
-                                </form>
+                                </div>
                             </div>
-
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Idade:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <p style="font-size:18px">{{ $user->idade() }} anos</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Email:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="email" value="{{$user->email}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="botoes">
+                                <?php if (!isset($_GET['editar'])) { ?>
+                                    <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+                                <?php } else { ?>
+                                    <input type="submit" name="save" value="Guardar" id="save">
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </form>
+    <div class="row">
+        <div class="col-sm-11">
+            <form action="{{ url('/inicio/funcionarios/destroy/'. $user->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Apagar Utente</button>
+            </form>
+        </div>
     </div>
 </div>
 @endsection
-

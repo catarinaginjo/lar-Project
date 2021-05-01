@@ -1,17 +1,20 @@
 <link href="{{ url('css/ementa.css') }}" rel="stylesheet">
 @extends('layouts.vertical')
-@section('titulo', 'Ementa semanal')
-@section('content')
+@section('titulo', 'Criar ementa')
 
-<div class="imgbox" style=" margin-left:20px;">
-        <a href="{{url('/')}}">
-            <img src="{{ asset('images/previous.png') }}" alt="previous" style="width:50px; height:50px">
-        </a>
+@section('content')
+<div class="btn">
+    <a class="btn btn-primary" style="margin-bottom:10px;" href="/inicio/create-ementa"><b>Criar Ementa </b></a>
 </div>
-<div class="imgbox" style=" margin-left:20px; float:right">
-        <a href="{{url('/')}}">
-            <img src="{{ asset('images/next.png') }}" alt="previous" style="width:50px; height:50px">
-        </a>
+<div class="imgbox">
+    <a href="{{url('/')}}">
+        <img src="{{ asset('images/previous.png') }}" alt="previous" style="width:50px; height:50px;margin-left:-50px;">
+    </a>
+</div>
+<div class="imgbox">
+    <a href="{{url('/')}}">
+        <img src="{{ asset('images/next.png') }}" alt="previous" style="width:50px;">
+    </a>
 </div>
 
 <div class="container1">
@@ -125,4 +128,3 @@
 </div>
 
 @endsection
-

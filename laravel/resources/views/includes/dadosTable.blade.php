@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ $utente->foto() }}" alt="foto do utente" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
+                                <img src="{{ $utente->foto() }}" alt="foto do utente" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> >
                                 <div class="mt-3" style="color:black">
                                     <input type="text" name="nome" value="{{$utente->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
                                     <input type="text" name="apelido" value="{{$utente->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
@@ -51,10 +51,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0" style="color:black">Doenças:</h6>
+                                    <h6 class="mb-0" style="color:black">Doença(s):</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" name="medicaçao" value="{{$utente->doença}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                    <input type="text" name="doença" value="{{$utente->doença}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                                 </div>
                             </div>
                             <hr>
@@ -69,7 +69,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0" style="color:black">Alergias:</h6>
+                                    <h6 class="mb-0" style="color:black">Alergia(s):</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <input type="text" name="alergia" value="{{$utente->alergia}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
@@ -90,7 +90,7 @@
                                     <h6 class="mb-0" style="color:black">Hipertenso:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" name="hipertensao" value=" {{$utente->hipertensao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                    <input type="text" name="hipertensao" value="{{$utente->hipertensao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                                 </div>
                             </div>
                             <hr>
@@ -108,7 +108,7 @@
                                     <h6 class="mb-0" style="color:black">Cuidados a ter:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" name="cuidados" value=" {{$utente->cuidados}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                    <input type="text" name="cuidados" value="{{$utente->cuidados}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                                 </div>
                             </div>
                             <hr>
@@ -117,7 +117,7 @@
                                     <h6 class="mb-0" style="color:black">Dieta Alimentar:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" value="{{$utente->dieta}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                    <input type="text" name="dieta" value="{{$utente->dieta}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                                 </div>
                             </div>
                             <hr>

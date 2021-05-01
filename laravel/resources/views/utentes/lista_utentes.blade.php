@@ -14,12 +14,20 @@
         <div class="imgbox">
             <a href="{{url('/inicio/utente/' . $utente->id)}}">
                 <img src="{{ $utente->foto() }}" alt="utente" class="rounded-circle" style="width:170px; height:170px">
-                <p style="margin-left:13px; font-size:20px; color:white">{{$utente->nome}} {{$utente->apelido}}</p>          
+                <p style="margin-left:13px; font-size:20px; color:white">{{$utente->nome}} {{$utente->apelido}}</p>
             </a>
         </div>
         @endforeach
     </div>
 </div>
+
+
+<?php
+if (isset($_GET['sucesso_destroy_utente'])) { ?>
+    <div style="width: 100%; height:40px; padding: 0.5rem;background-color:red;color:white; margin-bottom:20px">
+        O utente foi eliminado com sucesso.
+    </div>
+<?php } ?>
 
 
 @endsection

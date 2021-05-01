@@ -14,7 +14,7 @@ class ControloMpController extends Controller
      */
     public function index()
     {
-        //
+        return view('produtos.materias-primas.controlomp');
     }
 
     /**
@@ -24,7 +24,7 @@ class ControloMpController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtos.materias-primas.create_mp');
     }
 
     /**
@@ -38,16 +38,7 @@ class ControloMpController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\controlo_mp  $controlo_mp
-     * @return \Illuminate\Http\Response
-     */
-    public function show(controlo_mp $controlo_mp)
-    {
-        //
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -80,6 +71,7 @@ class ControloMpController extends Controller
      */
     public function destroy(controlo_mp $controlo_mp)
     {
-        //
+        $controlo_mp->delete();
+        return view('');
     }
 }

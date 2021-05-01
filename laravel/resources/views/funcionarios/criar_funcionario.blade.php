@@ -123,11 +123,11 @@
 
                     </div>
                 </div>
-                </form>
+                
             </div>
         </div>
     </div>
-</div>
+</div></form>
 
 
 <!-- Gera mensagem de erro caso algum campo não esteja correto (relativamente as validações no controller)-->
