@@ -13,15 +13,14 @@
     </thead>
     <tbody>
         <tr>
-            <form action="{{url('/inicio/contactos/store_contacto')}}" method="POST" style="font-weight:bold;">
+            <form action="{{url('/inicio/produtos/store_produto')}}" method="POST" style="font-weight:bold;">
                 @csrf
                 <th scope="row"> <input type="text" name="nome_produto"></th>
                 <td> <input type="text" name="categoria"></td>
                 <td> <input type="text" name="reorder_point"></td>
-                <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary">Criar Produto</button>
+                <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary"><b>Criar Produto</b></button>
             </form>
-            <!-- Gera mensagem de erro caso algum campo não esteja correto (relativamente as validações no controller)-->
-            
+            <!-- Gera mensagem de erro caso algum campo não esteja correto (relativamente as validações no controller)--> 
             @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>UPS!</strong>Erro com os dados que forneceu.<br><br>

@@ -3,7 +3,8 @@
 @section('titulo', 'Controlo de receção de matérias-primas')
 @section('content')
 
-
+<a class="btn btn-success" style="margin-bottom:10px;" href="/inicio/controlo_materias_primas/create"><b>+ NOVA RECEÇÃO DE PRODUTO </b></a>
+            
 <table class="table table-hover table-striped table-secondary" style="width:800px; height:400px;">
   <thead>
     <tr>

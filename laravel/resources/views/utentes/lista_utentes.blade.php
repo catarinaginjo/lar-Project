@@ -3,8 +3,22 @@
 @section('titulo', 'Lista de Utentes')
 @section('content')
 
+<?php
+if (isset($_GET['sucesso_destroy_utente'])) { ?>
+    <div style="width: 25%; height:40px; padding: 0.5rem;background-color:green;color:white; margin-bottom:20px;border-radius:0.5rem">
+       <b> O utente foi eliminado com sucesso.</b>
+    </div>
+<?php } 
+if (isset($_GET['sucesso_criar_utente'])) { ?>
+    <div style="width: 25%; height:40px; padding: 0.5rem;background-color:green;color:white; margin-bottom:20px;border-radius:0.5rem">
+        <b> O utente foi criado com sucesso.</b>
+    </div>
+<?php } ?>
+
+
+
 <div class="add_utente">
-    <a class="btn btn-success" href="{{ url('/inicio/create_utente')}}"><b>+ Criar Utente</b></a>
+    <a class="btn btn-success" href="{{ url('/inicio/create_utente')}}"><b>+ CRIAR UTENTE</b></a>
 </div>
 
 
@@ -22,12 +36,7 @@
 </div>
 
 
-<?php
-if (isset($_GET['sucesso_destroy_utente'])) { ?>
-    <div style="width: 100%; height:40px; padding: 0.5rem;background-color:red;color:white; margin-bottom:20px">
-        O utente foi eliminado com sucesso.
-    </div>
-<?php } ?>
+
 
 
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\RecadoController;
 use App\Http\Controllers\EmentaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ControloMpController;
+use App\Http\Controllers\StockMovimentosController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ Route::get('/dashboard', function () {
 /* Rotas com middleware */
 //Route::middleware('auth:api')->group(function () {
 
-/*Home Page */
+/*Home Page*/
 Route::get('/lar', function () {
     return view('welcome');
 });
@@ -74,24 +75,25 @@ Route::post('/inicio/recados/destroy/{recado}', [RecadoController::class, 'destr
 
 /*Ementa*/
 Route::get('/inicio/ementa', [EmentaController::class, 'index']);
-Route::get('/inicio/create-ementa', [EmentaController::class, 'create']);
+Route::get('/inicio/ementa/create-ementa', [EmentaController::class, 'create']);
+Route::post('/inicio/ementa/store-ementa', [EmentaController::class, 'store']);
 
-/*Stock*/
+/*Produtos | Stock*/
 Route::get('/inicio/stock/produtos', [ProdutoController::class, 'lista_produtos']);
-Route::get('/inicio/stock/produtos/update', [ProdutoController::class, 'produtos_update']);
+Route::get('/inicio/produtos/create_produto', [ProdutoController::class, 'create_produto']);
+Route::post('/inicio/produtos/store_produto', [ProdutoController::class, 'store']);
+Route::post('/inicio/produtos/destroy_produto/{produto}', [ProdutoController::class, 'destroy']);
+Route::post('/inicio/produtos/update_produto{produto}', [ProdutoController::class, 'produtos_update']);
+Route::get('/inicio/produtos/movimentos/{produto}', [ProdutoController::class, 'show_movimentos']);
+
+//Movimentos
+Route::post('/inicio/movimentos/update/{movimento}', [StockMovimentosController::class, 'update']); //para editar a quantidade atual
 
 
-/*Produtos */
 
-Route::get('/inicio/create_produto', [ProdutoController::class, 'create_produto']);
-Route::get('/inicio/store_produto', [ProdutoController::class, 'store']);
-Route::get('/inicio/destroy_produto', [ProdutoController::class, 'destroy']);
-Route::get('/inicio/update_produto', [ProdutoController::class, 'update']);
-Route::get('/inicio/movimentos/produto/{produto}', [ProdutoController::class, 'show_movimentos']);
-
-
-/*Controlo matérias-Primas */
+/*Controlo matérias-Primas*/
 Route::get('/inicio/controlo_materias_primas', [ControloMpController::class, 'index']);
+Route::get('/inicio/controlo_materias_primas/create', [ControloMpController::class, 'create']);
 
 //});
 require __DIR__ . '/auth.php';

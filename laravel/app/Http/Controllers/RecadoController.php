@@ -85,7 +85,7 @@ class RecadoController extends Controller
         $recados->update($request->all());
         $recados->save();
 
-        return redirect('/inicio/recados/' . $recados->id . '/?sucesso_alteraçao_utente=1');
+        return redirect('/inicio/recados/' . $recados->id . '/?sucesso_alteraçao_recado=1');
     }
 
     /**
@@ -97,6 +97,6 @@ class RecadoController extends Controller
     public function destroy(recado $recado)
     {
         $recado->delete();
-        return redirect('/inicio/recados');
+        return redirect('/inicio/recados/?sucesso_delete_recado=1');
     }
 }

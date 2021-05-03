@@ -52,7 +52,7 @@ class ContactosController extends Controller
         }
 
         //senão, cria um utente
-        $contacto = Contactos::create($data);
+        Contactos::create($data);
 
         return redirect('/inicio/contactos'); //vai ser redirecionada para o 'index'
     }
@@ -95,6 +95,6 @@ class ContactosController extends Controller
     {
         $contacto->delete();
         // dd($contactos);
-        return redirect('/inicio/contactos');
+        return redirect('/inicio/contactos/?sucesso_delete_produto=1');
     }
 }

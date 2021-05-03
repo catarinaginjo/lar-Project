@@ -55,7 +55,7 @@ class UtentesController extends Controller
             $request->file('foto')->storeAs('public/images/utentes/', $utente->id . '.png');
         }
 
-        return redirect('/inicio/lista_utentes'); //vai ser redirecionada para o 'index'
+        return redirect('/inicio/lista_utentes/?sucesso_criar_utente=1'); //vai ser redirecionada para o 'index'
 
     }
 

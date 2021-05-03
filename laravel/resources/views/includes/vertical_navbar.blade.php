@@ -36,18 +36,12 @@
             </a>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark font-italic" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+            <a href="{{url('/inicio/stock/produtos')}}" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
                 Stock
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{url('/inicio/stock/alimentos')}}">Alimentos</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{url('/inicio/stock/produtos')}}">Produtos</a>
-            </div>
         </li>
-
 
         <li class="nav-item">
             <a href="{{url('inicio/ementa')}}" class="nav-link text-dark font-italic">

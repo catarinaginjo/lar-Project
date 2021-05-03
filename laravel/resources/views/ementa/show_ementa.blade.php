@@ -3,8 +3,27 @@
 @section('titulo', 'Ementa semanal')
 
 @section('content')
+<div class="msg">
+    <!-- mensagens de alerta -->
+    <?php if (isset($_GET['sucesso_alteraçao_ementa'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>A ementa foi alterada com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_criar_ementa'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>A ementa foi criada com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_delete_ementa'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>A ementa foi eliminada com sucesso!</b>
+        </div>
+    <?php } ?>
+</div>
+
 <div class="btn">
-    <a class="btn btn-primary" style="margin-bottom:10px;" href="/inicio/create-ementa"><b>Criar Ementa </b></a>
+    <a class="btn btn-success" style="margin-bottom:10px;" href="/inicio/ementa/create-ementa"><b>+ NOVA EMENTA </b></a>
 </div>
 <div class="imgbox">
     <a href="{{url('/')}}">
@@ -17,7 +36,7 @@
     </a>
 </div>
 
-<div class="container1">
+<div class="container" id="data">
     <form>
         DE <input type="date" name="semana_inicio">
         A <input type="date" name="semana_fim">
@@ -25,7 +44,7 @@
 
 </form>
 <div class="container" style="margin-bottom: 150px">
-    <table class="table table-secondary table-hover">
+    <table class="table table-secondary table-hover" style="border-radius:0.5rem">
         <thead>
             <tr>
                 <th scope="col">Dia</th>
@@ -110,17 +129,16 @@
         </tbody>
     </table>
 
-    <h2>Informações adicionais à ementa:</h2>
+    <h2 style="font-size:20px">Informações adicionais à ementa:</h2>
 
     <div class="info">
-        <textarea style="width:700px;height:200px"></textarea>
+        <textarea style="width:700px;height:200px;border-radius:0.5rem""></textarea>
     </div>
 
-    <p style="margin-top:20px;">Ementa criada por:</p>
+    <p style="margin-top:20px; font-size:20px">Ementa criada por:</p>
     <div>
-        <form action="">
-            <input type="text" name="nutricionista" style="width:400px;height:50px;">
-        </form>
+        <input type="text" name="nutricionista" style="width:400px;height:50px;border-radius:0.5rem"">
+
     </div>
 
   

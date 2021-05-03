@@ -77,8 +77,6 @@ class UsersController extends Controller
        if ($request->hasFile('foto')) {
             $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
         }
-        
-       
 
         return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
 

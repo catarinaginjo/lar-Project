@@ -1,6 +1,6 @@
-.container1 {
-    margin-bottom: 50px;
-    margin-left: 350px;
+#data {
+    margin-bottom: 20px;
+   /* margin-left: 350px;*/
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 20px;

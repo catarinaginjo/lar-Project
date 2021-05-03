@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cozinheiro;
 use Illuminate\Http\Request;
 
-class CozinheiroController extends Controller
+class EmentaApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,16 +12,6 @@ class CozinheiroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -41,21 +30,10 @@ class CozinheiroController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\cozinheiro  $cozinheiro
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(cozinheiro $cozinheiro)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\cozinheiro  $cozinheiro
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(cozinheiro $cozinheiro)
+    public function show($id)
     {
         //
     }
@@ -64,10 +42,10 @@ class CozinheiroController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\cozinheiro  $cozinheiro
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cozinheiro $cozinheiro)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +53,10 @@ class CozinheiroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\cozinheiro  $cozinheiro
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cozinheiro $cozinheiro)
+    public function destroy($id)
     {
         //
     }

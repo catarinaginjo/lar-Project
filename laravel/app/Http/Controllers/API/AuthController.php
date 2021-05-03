@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     //metodo de registo
     public function register(Request $request)
-    {
+    {/*
         $validatedData = $request->validate([
             'nome' => 'required|max:55',
             'email' => 'email|required|unique:users',
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         return response(['user' => $user, 'access_token' => $accessToken], 201);
     }
-
+*/
     //metodo de login
     public function login(Request $request)
     {

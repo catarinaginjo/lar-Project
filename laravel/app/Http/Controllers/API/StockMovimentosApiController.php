@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\gestor;
 use Illuminate\Http\Request;
 
-class GestorController extends Controller
+class StockMovimentosApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,16 +12,6 @@ class GestorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -41,21 +30,10 @@ class GestorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\gestor  $gestor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(gestor $gestor)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\gestor  $gestor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(gestor $gestor)
+    public function show($id)
     {
         //
     }
@@ -64,10 +42,10 @@ class GestorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\gestor  $gestor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, gestor $gestor)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +53,10 @@ class GestorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\gestor  $gestor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(gestor $gestor)
+    public function destroy($id)
     {
         //
     }

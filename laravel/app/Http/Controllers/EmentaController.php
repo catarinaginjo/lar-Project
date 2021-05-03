@@ -72,7 +72,6 @@ class EmentaController extends Controller
             'sex_sopa' => 'string|nullable',
             'sex_almoço' => 'string|nullable',
             'sex_sob_almoço' => 'string|nullable',
-            'seg_sob_jantar' => 'string|nullable',
             'sex_jantar' => 'string|nullable',
             'sex_sob_jantar' => 'string|nullable',
 
@@ -95,7 +94,7 @@ class EmentaController extends Controller
         }
 
         //senão, cria um utente
-        $ementa = ementa::create($data);
+        ementa::create($data);
 
         
         return redirect('/inicio/ementa'); //vai ser redirecionada para o 'index'
@@ -144,6 +143,6 @@ class EmentaController extends Controller
      */
     public function destroy(ementa $ementa)
     {
-        //
+        return redirect('/inicio/ementa/?sucesso_delete_ementa=1');
     }
 }

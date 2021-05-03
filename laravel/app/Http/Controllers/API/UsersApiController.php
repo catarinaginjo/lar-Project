@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class UsersApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -82,8 +82,6 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return response(['message' => 'Utente eliminado.']);
     
     }
 }

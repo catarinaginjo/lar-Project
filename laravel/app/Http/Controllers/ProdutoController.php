@@ -38,9 +38,9 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome_produto' => 'string',
-            'categoria' => 'string',
-            'reorder_point' => 'number',
+            'nome_produto' => 'required|string',
+            'categoria' => 'required|string',
+            'reorder_point' => 'numeric',
         ]);
         $produto = new produto;
         produto::create($request->all());
@@ -68,7 +68,7 @@ class ProdutoController extends Controller
     public function destroy(produto $produto)
     {
         $produto->delete();
-        return redirect('/inicio/stock/produtos/?sucesso_destroy_utente=1');
+        return redirect('/inicio/stock/produtos/?sucesso_delete_produto=1');
     }
 
     /**

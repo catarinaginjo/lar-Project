@@ -3,13 +3,32 @@
 @section('titulo', 'Contactos')
 @section('content')
 
+<div class="msg">
+    <!-- mensagens de alerta -->
+    <?php if (isset($_GET['sucesso_alteraçao_contactos'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px ;border-radius:0.5rem">
+           <b>O Contacto foi alterado com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_criar_contacto'])) { ?>
+        <div style="width: 30%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>O contacto foi adicionado à lista com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_delete_contacto'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+           <b>O contacto foi eliminado com sucesso!</b>
+        </div>
+    <?php } ?>
+</div>
+
 <div class="container" style="background-color:white;">
     <!-- CONTACTOS-->
-    <h1 style="font-size:20px;margin-bottom:20; color:black; margin-top:30px">CONTACTOS URGENTES & OUTROS</h1>
+    <h1 style="font-size:20px;color:black;">CONTACTOS URGENTES & OUTROS</h1>
 
     <table class="table table-striped table-hover" name="SOS" style="margin-bottom:50px;">
         <thead>
-            <a class="btn btn-primary" style="margin-bottom:10px;" href="/inicio/contactos/create_contacto"><b>Criar Contacto </b></a>
+            <a class="btn btn-success" style="margin-bottom:10px;" href="/inicio/contactos/create_contacto"><b>+ ADICIONAR CONTACTO </b></a>
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Contacto</th>

@@ -2,8 +2,26 @@
 
 @section('titulo', 'Recados')
 @section('content')
+<div class="msg">
+    <!-- mensagens de alerta -->
+    <?php if (isset($_GET['sucesso_alteraçao_recado'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+           <b>O Recado foi alterado com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_criar_recado'])) { ?>
+        <div style="width: 30%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>O Recado foi adicionado à lista com sucesso!</b>
+        </div>
+    <?php } ?>
+    <?php if (isset($_GET['sucesso_delete_recado'])) { ?>
+        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+           <b>O Recado foi eliminado com sucesso!</b>
+        </div>
+    <?php } ?>
+</div>
 
-<a href="{{'/inicio/recados/create_recado'}}" class="btn btn-primary"><b>Novo Recado</b></a>
+<a href="{{'/inicio/recados/create_recado'}}" class="btn btn-success"><b>+ NOVO RECADO</b></a>
 
 <table class="table table-secondary table-hover" id="mytable">
     <thead>

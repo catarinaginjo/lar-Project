@@ -7,7 +7,7 @@
 <div class="msg">
     <!-- mensagens de alerta -->
     <?php if (isset($_GET['sucesso_alteraçao_utilizador'])) { ?>
-        <div style="width: 30%;  height:20%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px">
+        <div style="width: 30%;  height:5%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
             O Perfil do funcionário foi alterado com sucesso!
         </div>
     <?php } ?>

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Utentes;
 use Illuminate\Http\Request;
 
-class UtentesController extends Controller
+class UtentesApiController extends Controller
 {
     /**
      * Retorna os dados em utentes
@@ -19,12 +19,7 @@ class UtentesController extends Controller
     {
         return utentes::all();
     }
-
-    public function index_2()
-    {
-        return view('utentes.lista_utentes');
-    }
-
+    
 
     /**
      * Este método vlaida e guarda um novo utente.
@@ -48,7 +43,7 @@ class UtentesController extends Controller
             'dependencia' => 'string',
             'alergia' => 'string',
             'contacto_familiar' => 'required|max:9'
-            //falta a foto
+            
         ]);
 
         //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
@@ -87,15 +82,5 @@ class UtentesController extends Controller
         $utentes->update($request->all());
     }
 
-    /**
-     * Este método recebe um utente e apaga-o da base de dados.
-     *
-     * @param  \App\Models\Utentes  $utentes
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Utentes $utentes)
-    {
-        $utentes->delete();
-        return response(['message' => 'Utente eliminado.']);
-    }
+   //método destroy nas rotas api.php
 }

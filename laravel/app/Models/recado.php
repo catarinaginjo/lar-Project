@@ -12,5 +12,6 @@ class recado extends Model
         'assunto',
         'recado',
         'descriçao',
+        'responsavel',
     ];
 }
