@@ -12,7 +12,7 @@ class ProdutoController extends Controller
     /* Produtor */
     public function lista_produtos()
     {
-        $produtos = produto::paginate(2);
+        $produtos = produto::paginate(10);
         return view('produtos.stock.lista_produtos', ['produtos' => $produtos]);
     }
 
@@ -40,6 +40,7 @@ class ProdutoController extends Controller
         $request->validate([
             'nome_produto' => 'required|string',
             'categoria' => 'required|string',
+            'quantidade' => 'required|numeric',
             'reorder_point' => 'numeric',
         ]);
         $produto = new produto;
@@ -56,7 +57,7 @@ class ProdutoController extends Controller
      */
     public function show_movimentos(produto $produto)
     {
-        return view('produtos.stock.show_movimentos');
+        return view('produtos.stock.show_movimentos')->with('');
     }
 
     /**

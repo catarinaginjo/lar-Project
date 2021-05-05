@@ -1,6 +1,6 @@
 <!--Tabela relacionada a Tarefas diárias atribuidas ao utente -->
 <hr>
-<p style="margin-left:480px; font-size:25px; font-weight:bold;">TAREFAS DIÁRIAS</p>
+<p style="text-align: center; font-size:25px; font-weight:bold;">TAREFAS DIÁRIAS</p>
 
 <!-- Previous -->
 <div class="imgbox" style=" margin-left:20px;float:left">
@@ -36,7 +36,6 @@
         <th scope="col">Estado atual</th>
         <th scope="col">Auxiliar Responsável</th>
         <th scope="col">Data</th>
-        <th scope="col">Hora</th>
       </tr>
     </thead>
     <tbody>
@@ -45,7 +44,6 @@
         <td> Feito</td>
         <td> Ana Gomes</td>
         <td> 15.03.2021</td>
-        <td> 9h42m</td>
       </tr>
       <tr>
         <th scope="row">Insulina</th>
@@ -68,11 +66,10 @@
 
 <style>
   .abc {
-    margin-left: 500px;
-    background: orange;
-    height: 40px;
+    margin-left: 476px;
+    background: none;
+    height: 35px;
     width: 170px;
-    border: 2px solid red;
     border-radius: 10px;
     font-size:20px;
     font-weight: bold;

@@ -4,24 +4,22 @@
 @section('titulo', 'Recado - vista geral')
 @section('content')
 
-<div class="edit-recado" style="margin-left:200px; margin-top:-30px">
-    <form action="/inicio/recados/update/{{$recados->id}}" method="POST" id="alterar-recado" class="input-grouphideBox">
+<div class="edit-recado" style="margin-left:200px; margin-top:30px;">
+    <form action="/inicio/recados/update/{{$recado->id}}" method="POST" id="alterar-recado" class="input-grouphideBox">
         {{ csrf_field() }}
         <p>Assunto: </p>
-        <input type="text" name="assunto" value="{{$recados->assunto}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
-
+        <textarea name="assunto" name="assunto" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->assunto}}</textarea>
         <p>Responsável: </p>
-        <input type="text" name="responsavel" value="{{$recados->responsavel}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
-
+        <textarea name="responsavel" name="responsavel" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->responsavel}}</textarea>
         <p>Descrição do recado: </p>
-        <textarea name="descriçao" value="{{$recados->descriçao}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">></textarea>
+        <textarea name="descriçao" name="descriçao" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->descriçao}}</textarea>
 
         <!--Botões-->
         <div class="botoes">
             <?php if (!isset($_GET['editar'])) { ?>
-                <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+                <a class="btn btn-primary" href="?editar=1"> <b>Editar</b></a>
             <?php } else { ?>
-                <input type="submit" name="save" value="Guardar" id="save">
+                <input type="submit" class="btn btn-primary" style="font-weight:bold" name="save" value="Guardar" id="save">
             <?php } ?>
         </div>
     </form>

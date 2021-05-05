@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ $utente->foto() }}" alt="foto do utente" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> >
+                                <img src="{{ $utente->foto() }}" alt="foto do utente" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
                                 <div class="mt-3" style="color:black">
                                     <input type="text" name="nome" value="{{$utente->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
                                     <input type="text" name="apelido" value="{{$utente->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
@@ -19,7 +19,6 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
@@ -143,11 +142,11 @@
                             <!--Botões-->
                             <div class="botoes">
                                 <?php if (!isset($_GET['editar'])) { ?>
-                                    <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+                                    <a class="btn btn-primary" href="?editar=1"><b>Editar Perfil</b> </a>
                                 <?php } else { ?>
-                                    <input type="submit" name="save" value="Guardar" id="save">
+                                    <input type="submit" class="btn btn-primary" name="save" value="Guardar" id="save" style="font-weight:bold;">
                                 <?php } ?>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -155,10 +154,10 @@
         </div>
     </form>
     <div class="row">
-        <div class="col-sm-11">
+        <div class="col-sm-11" style="text-align: center">
             <form action="{{ url('/inicio/utente/destroy/'.$utente->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger">Apagar Utente</button>
+                <button type="submit" class="btn btn-danger"><b>Apagar Utente</b></button>
             </form>
         </div>
     </div>

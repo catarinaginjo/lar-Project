@@ -8,14 +8,7 @@ use App\Http\Controllers\EmentaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ControloMpController;
 use App\Http\Controllers\StockMovimentosController;
-
-
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,6 +20,9 @@ Route::get('/dashboard', function () {
 
 /*Home Page*/
 Route::get('/lar', function () {
+    return view('welcome');
+});
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -51,7 +47,7 @@ Route::post('/inicio/utente/destroy/{utente}', [UtentesController::class, 'destr
 
 /*Perfil*/
 Route::get('/inicio/perfil',  [UsersController::class, 'show_perfil']);
-Route::post('/inicio/perfil/update/{user}', [UsersController::class, 'update']);
+Route::post('/inicio/perfil/update/{user}', [UsersController::class, 'update_perfil']);
 
 
 /*Contactos*/
@@ -67,14 +63,15 @@ Route::post('/inicio/contactos/destroy/{contacto}', [ContactosController::class,
 Route::get('/inicio/recados', [RecadoController::class, 'index']);
 Route::get('/inicio/recados/create_recado', [RecadoController::class, 'create']);
 Route::post('/inicio/contactos/store_recado', [RecadoController::class, 'store']);
-Route::get('/inicio/recados/{recado}', [RecadoController::class, 'show']);
-Route::post('inicio/recados/edit/{recado}', [RecadoController::class, 'edit']);
-Route::post('inicio/recados/update/{recado}', [RecadoController::class, 'update']);
+Route::get('/inicio/recados/show/{recado}', [RecadoController::class, 'show']);
+Route::post('/inicio/recados/edit/{recado}', [RecadoController::class, 'edit']);
+Route::post('/inicio/recados/update/{recado}', [RecadoController::class, 'update']);
 Route::post('/inicio/recados/destroy/{recado}', [RecadoController::class, 'destroy']);
 
 
 /*Ementa*/
-Route::get('/inicio/ementa', [EmentaController::class, 'index']);
+Route::get('/inicio/lista-ementas', [EmentaController::class, 'lista_ementas']);
+Route::get('/inicio/lista-ementas/show/{ementa}', [EmentaController::class, 'show_ementa']);
 Route::get('/inicio/ementa/create-ementa', [EmentaController::class, 'create']);
 Route::post('/inicio/ementa/store-ementa', [EmentaController::class, 'store']);
 
@@ -86,14 +83,14 @@ Route::post('/inicio/produtos/destroy_produto/{produto}', [ProdutoController::cl
 Route::post('/inicio/produtos/update_produto{produto}', [ProdutoController::class, 'produtos_update']);
 Route::get('/inicio/produtos/movimentos/{produto}', [ProdutoController::class, 'show_movimentos']);
 
-//Movimentos
+//Movimentos de stock*/
 Route::post('/inicio/movimentos/update/{movimento}', [StockMovimentosController::class, 'update']); //para editar a quantidade atual
-
-
 
 /*Controlo matérias-Primas*/
 Route::get('/inicio/controlo_materias_primas', [ControloMpController::class, 'index']);
 Route::get('/inicio/controlo_materias_primas/create', [ControloMpController::class, 'create']);
+Route::post('/inicio/controlo_materias_primas/store', [ControloMpController::class, 'store']);
+Route::post('/inicio/controlo_materias_primas/destroy/{controlo}', [ControloMpController::class, 'index']);
 
 //});
 require __DIR__ . '/auth.php';

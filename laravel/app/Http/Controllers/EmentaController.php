@@ -8,14 +8,22 @@ use Illuminate\Http\Request;
 
 class EmentaController extends Controller
 {
+
+    public function lista_ementas(){
+
+        $ementas = ementa::all();
+        return view('ementa.lista_ementas')->with('ementas', $ementas);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show_ementa(ementa $ementa)
     {
-        return view('ementa.show_ementa');
+        return view('ementa.show_ementa')->with('ementa', $ementa);
     }
 
     /**
@@ -97,7 +105,7 @@ class EmentaController extends Controller
         ementa::create($data);
 
         
-        return redirect('/inicio/ementa'); //vai ser redirecionada para o 'index'
+        return redirect('/inicio/lista-ementas/?sucesso_criar_ementa=1'); 
 
     }
 

@@ -44,7 +44,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{url('inicio/ementa')}}" class="nav-link text-dark font-italic">
+            <a href="{{url('inicio/lista-ementas')}}" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
                 Ementa
             </a>
@@ -78,7 +78,7 @@
 
             <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                {{ __('Terminar sessão') }}
+              <b>  {{ __('Terminar sessão') }}</b>
             </x-responsive-nav-link>
         </form>
     </div>

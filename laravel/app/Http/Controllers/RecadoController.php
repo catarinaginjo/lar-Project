@@ -64,9 +64,9 @@ class RecadoController extends Controller
      * @param  \App\Models\recado  $recado
      * @return \Illuminate\Http\Response
      */
-    public function show(recado $recados)
+    public function show(recado $recado)
     {
-        return view('info.recados.show_recado')->with('recados', $recados); //dá o recado com este ID
+        return view('info.recados.show_recado')->with('recado', $recado); //dá o recado com este ID
 
     }
 
@@ -80,7 +80,6 @@ class RecadoController extends Controller
      */
     public function update(Request $request, recado $recados)
     {
-
         $recados = recado::find($recados->id);
         $recados->update($request->all());
         $recados->save();

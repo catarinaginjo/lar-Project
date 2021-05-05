@@ -11,6 +11,7 @@ class produto extends Model
     protected $fillable =  [
         'categoria',
         'nome_produto',
+        'quantidade',
         'reorder_point',
     ];
 }

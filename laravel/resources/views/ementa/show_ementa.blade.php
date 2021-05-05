@@ -5,11 +5,6 @@
 @section('content')
 <div class="msg">
     <!-- mensagens de alerta -->
-    <?php if (isset($_GET['sucesso_alteraçao_ementa'])) { ?>
-        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
-            <b>A ementa foi alterada com sucesso!</b>
-        </div>
-    <?php } ?>
     <?php if (isset($_GET['sucesso_criar_ementa'])) { ?>
         <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
             <b>A ementa foi criada com sucesso!</b>
@@ -22,27 +17,14 @@
     <?php } ?>
 </div>
 
-<div class="btn">
-    <a class="btn btn-success" style="margin-bottom:10px;" href="/inicio/ementa/create-ementa"><b>+ NOVA EMENTA </b></a>
-</div>
-<div class="imgbox">
-    <a href="{{url('/')}}">
-        <img src="{{ asset('images/previous.png') }}" alt="previous" style="width:50px; height:50px;margin-left:-50px;">
-    </a>
-</div>
-<div class="imgbox">
-    <a href="{{url('/')}}">
-        <img src="{{ asset('images/next.png') }}" alt="previous" style="width:50px;">
-    </a>
+
+<div class="container" id="data" style="text-align:center">
+
+    DE <input type="date" name="semana_inicio">
+    A <input type="date" name="semana_fim">
+
 </div>
 
-<div class="container" id="data">
-    <form>
-        DE <input type="date" name="semana_inicio">
-        A <input type="date" name="semana_fim">
-</div>
-
-</form>
 <div class="container" style="margin-bottom: 150px">
     <table class="table table-secondary table-hover" style="border-radius:0.5rem">
         <thead>
@@ -57,74 +39,106 @@
         </thead>
         <tbody>
             <tr>
-                <form action="">
-                    <th scope="row">Segunda-feira</th>
-                    <td><textarea name="sopa_seg"> </textarea>
-                    <td><textarea name="almoço_seg"> </textarea>
-                    <td><textarea name="sobremesaA_seg"> </textarea>
-                    <td><textarea name="jantar_seg"> </textarea>
-                    <td><textarea name="sobremesaJ_seg"> </textarea>
-                </form>
+                <th scope="row">Segunda-feira</th>
+                <td>
+                    <p> {{$ementa->sopa_seg}} </p>
+                <td>
+                    <p> {{$ementa->almoço_seg }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_seg }}</p>
+                <td>
+                    <p>{{$ementa-> jantar_seg }}</p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_seg }}</p>
+
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Terça-feira</th>
-                    <td><textarea name="sopa_ter"> </textarea>
-                    <td><textarea name="almoço_ter"> </textarea>
-                    <td><textarea name="sobremesaA_ter"> </textarea>
-                    <td><textarea name="jantar_ter"> </textarea>
-                    <td><textarea name="sobremesaJ_ter"> </textarea>
-                </form>
+
+                <th scope="row">Terça-feira</th>
+                <td>
+                    <p>{{$ementa->sopa_ter }} </p>
+                <td>
+                    <p>{{$ementa-> almoço_ter }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_ter }} </p>
+                <td>
+                    <p>{{$ementa-> jantar_ter }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_ter }} </p>
+
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Quarta-feira</th>
-                    <td><textarea name="sopa_qua"> </textarea>
-                    <td><textarea name="almoço_qua"> </textarea>
-                    <td><textarea name="sobremesaA_qua"> </textarea>
-                    <td><textarea name="jantar_qua"> </textarea>
-                    <td><textarea name="sobremesaJ_qua"> </textarea>
-                </form>
+
+                <th scope="row">Quarta-feira</th>
+                <td>
+                    <p>{{$ementa-> sopa_qua }}</p>
+                <td>
+                    <p>{{$ementa->almoço_qua }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_qua }} </p>
+                <td>
+                    <p>{{$ementa->jantar_qua }} </p>
+                <td>
+                    <p>{{$ementa->sobremesaJ_qua }} </p>
+
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Quinta-feira</th>
-                    <td><textarea name="sopa_qui"> </textarea>
-                    <td><textarea name="almoço_qui"> </textarea>
-                    <td><textarea name="sobremesaA_qui"> </textarea>
-                    <td><textarea name="jantar_qui"> </textarea>
-                    <td><textarea name="sobremesaJ_qui"> </textarea>
-                </form>
+                <th scope="row">Quinta-feira</th>
+                <td>
+                    <p>{{$ementa->sopa_qui }} </p>
+                <td>
+                    <p>{{$ementa-> almoço_qui }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_qu }} </p>
+                <td>
+                    <p>{{$ementa-> jantar_qu }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_qui }} </p>
+
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Sexta-feira</th>
-                    <td><textarea name="sopa_sex"> </textarea>
-                    <td><textarea name="almoço_sex"> </textarea>
-                    <td><textarea name="sobremesaA_sex"> </textarea>
-                    <td><textarea name="jantar_sex"> </textarea>
-                    <td><textarea name="sobremesaJ_sex"> </textarea>
-                </form>
+
+                <th scope="row">Sexta-feira</th>
+                <td>
+                    <p>{{$ementa-> sopa_sex }}</p>
+                <td>
+                    <p>{{$ementa-> almoço_sex }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_sex }}</p>
+                <td>
+                    <p>{{$ementa-> jantar_sex }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_sex }} </p>
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Sábado</th>
-                    <td><textarea name="sopa_sab"> </textarea>
-                    <td><textarea name="almoço_sab"> </textarea>
-                    <td><textarea name="sobremesaA_sab"> </textarea>
-                    <td><textarea name="jantar_sab"> </textarea>
-                    <td><textarea name="sobremesaJ_sab"> </textarea>
-                </form>
+
+                <th scope="row">Sábado</th>
+                <td>
+                    <p>{{$ementa->sopa_sab }} </p>
+                <td>
+                    <p>{{$ementa-> almoço_sab }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_sa }}</p>
+                <td>
+                    <p>{{$ementa-> jantar_sab }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_sab }}</p>
+
             </tr>
             <tr>
-                <form action="">
-                    <th scope="row">Domingo</th>
-                    <td><textarea name="sopa_dom"> </textarea>
-                    <td><textarea name="almoço_dom"> </textarea>
-                    <td><textarea name="sobremesaA_dom"> </textarea>
-                    <td><textarea name="jantar_dom"> </textarea>
-                    <td><textarea name="sobremesaJ_dom"> </textarea>
-                </form>
+
+                <th scope="row">Domingo</th>
+                <td>
+                    <p>{{$ementa-> sopa_dom }}</p>
+                <td>
+                    <p>{{$ementa-> almoço_dom }} </p>
+                <td>
+                    <p>{{$ementa-> sobremesaA_dom }} </p>
+                <td>
+                    <p>{{$ementa->jantar_dom }}</p>
+                <td>
+                    <p>{{$ementa-> sobremesaJ_dom }}</p>
+
             </tr>
         </tbody>
     </table>
@@ -132,24 +146,28 @@
     <h2 style="font-size:20px">Informações adicionais à ementa:</h2>
 
     <div class="info">
-        <textarea style="width:700px;height:200px;border-radius:0.5rem""></textarea>
+        <textarea style="width:700px;height:200px;border-radius:0.5rem"></textarea>
     </div>
 
-    <p style="margin-top:20px; font-size:20px">Ementa criada por:</p>
+    <p style=" margin-top:20px; font-size:20px">Ementa criada por:</p>
     <div>
-        <input type="text" name="nutricionista" style="width:400px;height:50px;border-radius:0.5rem"">
+        <input type="text" name="nutricionista" style="width:400px;height:50px;border-radius:0.5rem">
 
     </div>
-
   
 </div>
 
 @endsection
-
 
 <style>
     .button {
         color: white;
         font-family: 'Roboto', sans-serif;
     }
+  
+  th,
+  td {
+    border: 1px solid black;
+  }
+
 </style>

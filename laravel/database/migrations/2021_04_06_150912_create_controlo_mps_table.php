@@ -15,10 +15,8 @@ class CreateControloMpsTable extends Migration
     {
         Schema::create('controlo_mps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('produtos');//id do auxiliar responsável
-            $table->unsignedBigInteger('gestor_id');
-            $table->foreign('gestor_id')->references('id')->on('users');//id do auxiliar responsável
+            $table->string('nome_produto');
+            $table->string('responsavel');
             $table->date('data_receçao');
             $table->string('fornecedor');
             $table->string('num_fatura');
@@ -28,6 +26,7 @@ class CreateControloMpsTable extends Migration
             $table->string('temperatura');
             $table->string('peso');
             $table->string('aspeto');
+            $table->string('açoes_corretivas');
             $table->timestamps();
         });
     }

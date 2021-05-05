@@ -12,9 +12,10 @@ class TarefasUtenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show_tarefa()
     {
-        //
+        $tarefas = tarefas_utente::all();
+        return view('utentes.show_utente')->with('tarefas', $tarefas);
     }
 
     /**

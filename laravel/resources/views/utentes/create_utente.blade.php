@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="{{ asset('images/user.png') }}" alt="utente pic" class="rounded-circle" width="150">
+                            <img src="{{ asset('images/user.png') }}" alt="utente pic" id="utente_pic" class="rounded-circle" width="150">
                             <form action="{{url('/inicio/store_utente')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mt-3" style="color:black">*

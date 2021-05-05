@@ -17,10 +17,11 @@ class CreateStockMovimentosTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');//id do auxiliar responsável
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('produtos');//id do auxiliar responsável
-            $table->string('quantidade');
+            $table->foreign('product_id')->references('id')->on('produtos');
+           /* $table->unsignedBigInteger('quantidade');
+            $table->foreign('quantidade')->references('quantidade')->on('produtos');*/
             $table->timestamps(); //data de alteração
         });
     }

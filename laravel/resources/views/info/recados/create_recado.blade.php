@@ -3,6 +3,7 @@
 @section('titulo', 'Novo recado')
 @section('content')
 
+<p>Os campos com * são obrigatórios.</p>
 <table class="table table-secondary ">
     <thead>
         <tr>

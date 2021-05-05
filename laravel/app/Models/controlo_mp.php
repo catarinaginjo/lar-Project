@@ -16,8 +16,9 @@ class controlo_mp extends Model
         'lote',
         'higiente',
         'temperatura',
+        'nome_produto',
         'peso',
-        'aspeto'
-        
+        'aspeto',
+        'açoes_corretivas'
     ];
 }

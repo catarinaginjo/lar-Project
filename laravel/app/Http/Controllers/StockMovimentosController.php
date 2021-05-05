@@ -14,7 +14,7 @@ class StockMovimentosController extends Controller
      */
     public function index()
     {
-        //
+        $movimento = stock_movimentos::all();
     }
 
     /**
@@ -72,14 +72,4 @@ class StockMovimentosController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\stock_movimentos  $stock_movimentos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(stock_movimentos $stock_movimentos)
-    {
-        //
-    }
 }

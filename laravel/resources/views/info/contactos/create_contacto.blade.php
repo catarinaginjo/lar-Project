@@ -4,11 +4,12 @@
 @section('content')
 
 
+<p>Os campos com * são obrigatórios.</p>
 <table class="table table-secondary ">
     <thead>
         <tr>
-            <th scope="row">Nome</th>
-            <th scope="col">Número</th>
+            <th scope="row">Nome*</th>
+            <th scope="col">Número*</th>
         </tr>
     </thead>
     <tbody>
@@ -16,8 +17,8 @@
             <form action="{{url('/inicio/contactos/store_contacto')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
                 @csrf
                 <th scope="row"> <input type="text" name="nome"></th>
-                <td> <input type="text" name="numero"></td>
-                <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary">Criar contacto</button>
+                <td> <input type="number" name="numero"></td>
+                <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary"><b>Criar contacto</b></button>
             </form>
 
 

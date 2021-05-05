@@ -17,6 +17,7 @@ class CreateProdutosTable extends Migration
             $table->id();
             $table->string('categoria');
             $table->string('nome_produto');
+            $table->integer('quantidade');
             $table->string('reorder_point'); //num minimo de quantidade deste produto para se proceder a um aviso de falta de stock, por exemplo.
 
             $table->timestamps();

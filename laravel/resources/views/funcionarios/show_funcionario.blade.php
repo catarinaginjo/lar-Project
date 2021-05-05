@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ $user->foto() }}" alt="Admin" class="rounded-circle" width="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
+                                <img src="{{ $user->foto() }}" alt="Admin" class="rounded-circle" width="150" height="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
                                 <div class="mt-3" style="color:black">
                                     <input type="text" name="nome" value="{{$user->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
                                     <input type="text" name="apelido" value="{{$user->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
@@ -74,7 +74,7 @@
                             <hr>
                             <div class="botoes">
                                 <?php if (!isset($_GET['editar'])) { ?>
-                                    <a class="btn btn-primary" href="?editar=1">Editar Perfil </a>
+                                    <a class="btn btn-primary" href="?editar=1"><b>Editar Perfil </b></a>
                                 <?php } else { ?>
                                     <input type="submit" name="save" value="Guardar" id="save">
                                 <?php } ?>
@@ -89,7 +89,7 @@
         <div class="col-sm-11">
             <form action="{{ url('/inicio/funcionarios/destroy/'. $user->id) }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger">Apagar Utente</button>
+                <button type="submit" class="btn btn-danger"><b>Apagar Funcionário</b></button>
             </form>
         </div>
     </div>

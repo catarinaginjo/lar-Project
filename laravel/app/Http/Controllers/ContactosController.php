@@ -43,7 +43,7 @@ class ContactosController extends Controller
 
         $validator = Validator::make($data, [
             'nome' => 'required|string|max:255',
-            'numero' => 'required|max:9'
+            'numero' => 'required|numeric|min:3|max:9|unique:contactos'
         ]);
 
         //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
@@ -54,7 +54,7 @@ class ContactosController extends Controller
         //senão, cria um utente
         Contactos::create($data);
 
-        return redirect('/inicio/contactos'); //vai ser redirecionada para o 'index'
+        return redirect('/inicio/contactos/?sucesso_criar_contacto=1'); //vai ser redirecionada para o 'index'
     }
 
     /**
@@ -95,6 +95,6 @@ class ContactosController extends Controller
     {
         $contacto->delete();
         // dd($contactos);
-        return redirect('/inicio/contactos/?sucesso_delete_produto=1');
+        return redirect('/inicio/contactos/?sucesso_delete_contacto=1');
     }
 }

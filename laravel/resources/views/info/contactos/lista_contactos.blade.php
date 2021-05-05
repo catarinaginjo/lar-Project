@@ -5,7 +5,7 @@
 
 <div class="msg">
     <!-- mensagens de alerta -->
-    <?php if (isset($_GET['sucesso_alteraçao_contactos'])) { ?>
+    <?php if (isset($_GET['sucesso_alteraçao_contacto'])) { ?>
         <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px ;border-radius:0.5rem">
            <b>O Contacto foi alterado com sucesso!</b>
         </div>
@@ -16,7 +16,7 @@
         </div>
     <?php } ?>
     <?php if (isset($_GET['sucesso_delete_contacto'])) { ?>
-        <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+        <div style="width: 26%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
            <b>O contacto foi eliminado com sucesso!</b>
         </div>
     <?php } ?>
@@ -44,9 +44,9 @@
                     <form action="/inicio/contactos/destroy/{{$contacto->id}}" method="POST">
                         @csrf
                         <?php if (!isset($_GET['editar'])) { ?>
-                            <a class="btn btn-primary" href="?editar=1"><b>Editar Perfil </b></a>
+                            <a class="btn btn-primary" href="?editar=1"><b>Editar</b></a>
                         <?php } else { ?>
-                            <a href="{{url('/inicio/contactos/update/' . $contacto->id)}}"> Guardar</a>
+                            <a  class="btn btn-primary" href="{{url('/inicio/contactos/update/'. $contacto->id)}}"> <b>Guardar</b></a>
                         <?php } ?>
                         <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
@@ -84,10 +84,3 @@
 
 
 @endsection
-
-<style>
-    .button {
-        color: white;
-        font-family: 'Roboto', sans-serif;
-    }
-</style>

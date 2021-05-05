@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Auth;
 
 //Controlador destinado aos funcionários e gestores (utilizadores)
 
@@ -65,10 +66,10 @@ class UsersController extends Controller
             'data_nascimento' => 'required|date',
             'morada' => 'required|string|max:255',
             'username' => 'string|max:255',
-            'email' => 'required|email|string|max:255',
+            'email' => 'required|email|string|unique|max:255',
             'localidade' => 'required|string|max:255',
             'password' => 'string',
-            'contacto' => 'required|max:9'
+            'contacto' => 'required|max:9|unique'
         ]);
     
         $user = User::create($data);
@@ -110,6 +111,21 @@ class UsersController extends Controller
         return redirect('/inicio/funcionarios/' . $user->id . '/?sucesso_alteraçao_utilizador=1');
     }
 
+    public function update_perfil(Request $request){
+        $post = $request->post();
+
+        Auth::user()->nome = $post['nome'];
+        Auth::user()->apelido = $post['apelido'];
+        Auth::user()->localidade = $post['localidade'];
+        Auth::user()->morada = $post['morada'];
+        Auth::user()->contacto = $post['contacto'];
+        Auth::user()->email= $post['email'];
+        Auth::user()->data_nascimento = $post['data_nascimento'];
+        Auth::user()->cargo = $post['cargo'];
+        Auth::user()->save();
+
+        return redirect('inicio/perfil?sucesso=1');
+    }
     /**
      * Remove the specified resource from storage.
      *

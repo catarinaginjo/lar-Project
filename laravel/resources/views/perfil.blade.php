@@ -1,6 +1,15 @@
 @extends('layouts.vertical')
 @section('titulo', 'O meu Perfil')
 @section('content')
+<div class="msg">
+    <!-- mensagens de alerta -->
+    <?php if (isset($_GET['sucesso'])) { ?>
+        <div style="width: 25%;  height:20%;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
+            <b>Alterações guardadas com sucesso!</b>
+        </div>
+    <?php } ?>
+</div>
+
 <div class="container">
   <form action="/inicio/perfil/update/{{$user->id}}" method="POST" id="alterar-perfil" class="input-grouphideBox">
     {{ csrf_field() }}
@@ -10,11 +19,11 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex flex-column align-items-center text-center">
-                <img src="{{ $user->foto() }}" alt="Admin" class="rounded-circle" width="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
+                <img src="{{ Auth::user()->foto() }}" alt="Admin" class="rounded-circle" width="150" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>>
                 <div class="mt-3" style="color:black">
-                  <input type="text" name="nome" value="{{$user->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
-                  <input type="text" name="apelido" value="{{$user->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
-                  <input type="text" name="cargo" value="{{$user->cargo}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                  <input type="text" name="nome" value="{{Auth::user()->nome}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                  <input type="text" name="apelido" value="{{Auth::user()->apelido}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
+                  <input type="text" name="cargo" value="{{Auth::user()->cargo}}" style="width:100px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name">
                 </div>
               </div>
             </div>
@@ -29,7 +38,7 @@
                   <h6 class="mb-0" style="color:black">Email</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" name="email" value="{{$user->email}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                  <input type="text" name="email" value="{{Auth::user()->email}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
 
                 </div>
               </div>
@@ -39,7 +48,7 @@
                   <h6 class="mb-0" style="color:black">Data de Nascimento</h6>
                 </div>
                 <div class="col-sm-5 text-secondary">
-                  <input type="text" name="data_nascimento" value="{{$user->data_nascimento}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                  <input type="text" name="data_nascimento" value="{{Auth::user()->data_nascimento}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                 </div>
               </div>
               <hr>
@@ -49,7 +58,7 @@
                   <h6 class="mb-0" style="color:black">Idade:</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <p style="font-size:18px">{{ $user->idade() }} anos</p>
+                  <p style="font-size:18px">{{ Auth::user()->idade() }} anos</p>
                 </div>
               </div>
 
@@ -59,7 +68,7 @@
                   <h6 class="mb-0" style="color:black">Contacto</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="tel" name="contacto" maxlength="9" value="{{$user->contacto}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                  <input type="tel" name="contacto" maxlength="9" value="{{Auth::user()->contacto}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
 
                 </div>
               </div>
@@ -69,7 +78,7 @@
                   <h6 class="mb-0" style="color:black">Morada</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" name="morada" value="{{$user->morada}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                  <input type="text" name="morada" value="{{Auth::user()->morada}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
 
                 </div>
               </div>
@@ -79,7 +88,7 @@
                   <h6 class="mb-0" style="color:black">Localidade</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <input type="text" name="localidade" value="{{$user->localidade}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                  <input type="text" name="localidade" value="{{Auth::user()->localidade}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
                 </div>
               </div>
               <hr>
