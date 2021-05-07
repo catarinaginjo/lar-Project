@@ -4,6 +4,19 @@
 
 @section('content')
 
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>UPS!</strong>Erro com os dados que forneceu.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+
 <form action="{{url('/inicio/ementa/store-ementa')}}" method="POST" style="font-weight:bold;">
     @csrf
     <div class="container" id="data" style="text-align:center">

@@ -23,7 +23,7 @@ class AuthController extends Controller
             'cargo' => 'required|string',
             'data_nascimento' => 'required|date',
             'localidade' =>*/
-        ]);
+        //]);
 
         //encriptação da password
         $validatedData['password'] = Hash::make($request->password);
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         return response(['user' => $user, 'access_token' => $accessToken], 201);
     }
-*/
+
     //metodo de login
     public function login(Request $request)
     {

@@ -10,11 +10,12 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="{{ asset('images/user.png') }}" alt="Funcionario pic" class="rounded-circle" width="150">
-                            <form action="{{url('/inicio/funcionarios/store_funcionario')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
+                            <form action="{{url('/register')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mt-3" style="color:black">*
                                     <input type="file" name="foto">
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,13 @@
                                 <h6 class="mb-0" style="color:black">Cargo*</h6>
                             </div>
                             <div class="col-sm-5 text-secondary">
-                                <input type="text" name="cargo">
+                                <select id="cargo" name="cargo">
+                                    <option value="Auxiliar">Auxiliar</option>
+                                    <option value="Cozinheiro">Cozinheiro</option>
+                                    @if(Auth::user()->cargo =='SuperAdmin')
+                                    <option value="Administrador">Administrador</option>
+                                    @endif
+                                </select>
                             </div>
                         </div>
                         <hr>
@@ -117,23 +124,24 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-4">
-                                <button type="submit" id="mybtn" class="btn btn-primary">Criar Funcionário</button>
+                                <button type="submit" id="mybtn" class="btn btn-primary"><b>Criar Funcionário</b></button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                
+
             </div>
+
         </div>
     </div>
-</div></form>
+</div>
 
 
-<!-- Gera mensagem de erro caso algum campo não esteja correto (relativamente as validações no controller)-->
+
 @if ($errors->any())
 <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+    <strong>UPS! </strong>Erro com os dados que forneceu.<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>

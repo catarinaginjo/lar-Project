@@ -17,7 +17,8 @@ class UsersApiController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //return User::all();
+        return response(['result' => User::all()], 200);
     }
 
     /**

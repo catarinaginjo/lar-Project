@@ -12,7 +12,7 @@ class UtentesController extends Controller
 {
     public function index()
     {
-        $utentes = utentes::all(); //vai ao modelo e ve as utentes
+        $utentes = utentes::all(); //vai ao modelo e ve os utentes
         return view('utentes.lista_utentes')->with('utentes', $utentes); //recebe dentro de 'utentes' todos os utentes
     }
 

@@ -32,9 +32,17 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-
                     <div class="card mb-3">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Cargo:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="tel" name="cargo" maxlength="9" value="{{$user->cargo}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
+                            </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0" style="color:black">Contacto:</h6>
@@ -95,3 +103,9 @@
     </div>
 </div>
 @endsection
+
+<style>
+    input {
+        font-weight: bold;
+    }
+</style>

@@ -2,6 +2,19 @@
 @section('titulo', 'Novo registo')
 @section('content')
 
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>UPS!</strong>Erro com os dados que forneceu.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+
 <div class="" style="background-color:white">
     <table class="table table-striped">
         <thead>
@@ -27,10 +40,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Designação</th>
-                <th scope="col">Higiente no transporte</th>
+                <th scope="col">Designação*</th>
+                <th scope="col">Higiente no transporte*</th>
                 <th scope="col">Peso (kg)</th>
-                <th scope="col">Aspeto embalagem e/ou produto</th>
+                <th scope="col">Aspeto embalagem e/ou produto*</th>
 
             </tr>
         </thead>
@@ -49,10 +62,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Data de validade</th>
+                <th scope="col">Data de validade*</th>
                 <th scope="col">Temperatura ºC</th>
-                <th scope="col">Ações corretivas</th>
-                <th scope="col">Responsável pelo registo</th>
+                <th scope="col">Ações corretivas*</th>
+                <th scope="col">Responsável pelo registo*</th>
             </tr>
         </thead>
         <tbody>
@@ -70,6 +83,8 @@
     @csrf
     <button type="submit" class="btn btn-success" style="margin-top:20px; margin-bottom:20px;font-size:20px;font-weight:bold;">Submeter Registo</button>
 </form>
+
+
 
 
 @endsection

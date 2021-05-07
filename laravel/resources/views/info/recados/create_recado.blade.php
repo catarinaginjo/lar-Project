@@ -25,7 +25,7 @@
             <!-- Gera mensagem de erro caso algum campo não esteja correto (relativamente as validações no controller)-->
             @if ($errors->any())
             <div class="alert alert-danger">
-                <strong>UPS!</strong>Erro com os dados que forneceu.<br><br>
+                <strong>UPS! </strong>Erro com os dados que forneceu.<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

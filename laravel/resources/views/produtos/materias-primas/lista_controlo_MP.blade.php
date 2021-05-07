@@ -62,7 +62,7 @@
           <p>{{$controlo->lote}}</p>
         </td>
         <td>
-          <p>{{$controlo->product_id}}</p>
+          <p>{{$controlo->nome_produto}}</p>
         </td>
         <td>
           <p>{{$controlo->higiene}}</p>

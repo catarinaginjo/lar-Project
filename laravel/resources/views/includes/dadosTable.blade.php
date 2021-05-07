@@ -162,3 +162,9 @@
         </div>
     </div>
 </div>
+
+<style>
+  input {
+    font-weight: bold;
+  }
+</style>

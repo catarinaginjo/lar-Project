@@ -23,7 +23,7 @@ class CreateControloMpsTable extends Migration
             $table->date('data_val');
             $table->string('lote');
             $table->string('higiene');
-            $table->string('temperatura');
+            $table->string('temperatura')->nullable();
             $table->string('peso');
             $table->string('aspeto');
             $table->string('açoes_corretivas');

@@ -23,6 +23,7 @@ class EmentaController extends Controller
      */
     public function show_ementa(ementa $ementa)
     {
+       // dd($ementa);
         return view('ementa.show_ementa')->with('ementa', $ementa);
     }
 
@@ -109,27 +110,6 @@ class EmentaController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ementa  $ementa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ementa $ementa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ementa  $ementa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ementa $ementa)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -140,7 +120,11 @@ class EmentaController extends Controller
      */
     public function update(Request $request, ementa $ementa)
     {
-        //
+        $ementa = ementa::find($ementa->id);
+        $ementa->update($request->all());
+        $ementa->save();
+
+        return redirect('/inicio/lista-ementas/show/' . $ementa->id . '/?sucesso_alteraçao_ementa=1');
     }
 
     /**
@@ -151,6 +135,7 @@ class EmentaController extends Controller
      */
     public function destroy(ementa $ementa)
     {
-        return redirect('/inicio/ementa/?sucesso_delete_ementa=1');
+        $ementa->delete();
+        return redirect('/inicio/lista-ementas/?sucesso_delete_ementa=1');
     }
 }

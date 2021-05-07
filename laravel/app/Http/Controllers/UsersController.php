@@ -1,52 +1,88 @@
 <?php
 
 namespace App\Http\Controllers;
+//use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Auth;
+
+use Illuminate\Support\Facades\Hash;
+
 
 //Controlador destinado aos funcionários e gestores (utilizadores)
 
 class UsersController extends Controller
 {
-    //lista de funcionarios
+    //lista de cozinheiros/auxiliares
     public function show_funcionarios()
     {
-        $user = User::all(); //vai ao modelo e ve os users
+        $cargos_permitidos = ['Auxiliar', 'Cozinheira'];
+
+        $user = User::where('cargo', $cargos_permitidos)->get();
+
+        return view('funcionarios.lista_funcionarios')->with('user', $user);
+    }
+
+    //admin, superadmin, auxiliar, cozinheiro
+    public function show_all_funcionarios()
+    {
+        $user = User::all();
         return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
     }
 
-    /*
-    public function show_funcionarios()
+    public function show(User $user)
     {
-        $user = User::all(); //vai ao modelo e ve os users
-        if (!($user->cargo = "ab")) {
-            return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
-        }
-        else {
-            echo "not found";
-        }
-    }*/
-
-
-    //lista de funcionarios e gestores
-    public function show_users()
-    {
-        $user = User::all(); //vai ao modelo e ve os users
-        return view('funcionarios.lista_funcionarios')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+        return view('funcionarios.show_funcionario')->with('user', $user); //dá o utente com este ID
     }
 
-    public function show_perfil()
+
+    public function show_perfil(User $user)
     {
-        $user = User::all(); //vai ao modelo e ve os users
+        $user = User::find($user->id); //vai ao modelo e ve os users
         return view('perfil')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
     }
+
 
     public function create()
     {
         return view('funcionarios.criar_funcionario');
+    }
+
+    public function create_all()
+    {
+        return view('auth.register');
+    }
+
+    public function store_all(Request $request)
+    {
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'apelido' => 'required|string|max:255',
+            'cargo' => 'required|string|max:255',
+            'email' => 'required|email|string|unique|max:255',
+            'password' => 'string',
+            'contacto' => 'required|max:9|unique'
+        ]);
+
+        $user = User::create([
+            'nome' => $request->nome,
+            'apelido' => $request->apelido,
+            'cargo' =>  $request->cargo,
+            'email' => $request->email,
+            'contacto' => $request->contacto,
+            'password' => Hash::make($request->password),
+        ]);
+        event(new Registered($user));
+        //guarda a fotografia
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
+        }
+
+        return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
     }
 
     /**
@@ -58,7 +94,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
+
         $validator = Validator::make($data, [
             'nome' => 'required|string|max:255',
             'apelido' => 'required|string|max:255',
@@ -71,29 +107,16 @@ class UsersController extends Controller
             'password' => 'string',
             'contacto' => 'required|max:9|unique'
         ]);
-    
+
         $user = User::create($data);
-  
+
         //guarda a fotografia
-       if ($request->hasFile('foto')) {
+        if ($request->hasFile('foto')) {
             $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
         }
 
         return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
-
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $superadmin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('funcionarios.show_funcionario')->with('user', $user); //dá o utente com este ID
-    }
-
 
     /**
      * Update the specified resource in storage.
@@ -111,20 +134,13 @@ class UsersController extends Controller
         return redirect('/inicio/funcionarios/' . $user->id . '/?sucesso_alteraçao_utilizador=1');
     }
 
-    public function update_perfil(Request $request){
-        $post = $request->post();
+    public function update_perfil(Request $request, User $user)
+    {
+        $user = Auth::user()::find($user->id);
+        $user->update($request->all());
+        $user->save();
 
-        Auth::user()->nome = $post['nome'];
-        Auth::user()->apelido = $post['apelido'];
-        Auth::user()->localidade = $post['localidade'];
-        Auth::user()->morada = $post['morada'];
-        Auth::user()->contacto = $post['contacto'];
-        Auth::user()->email= $post['email'];
-        Auth::user()->data_nascimento = $post['data_nascimento'];
-        Auth::user()->cargo = $post['cargo'];
-        Auth::user()->save();
-
-        return redirect('inicio/perfil?sucesso=1');
+        return redirect('inicio/perfil/ ' . $user->id . '?sucesso=1');
     }
     /**
      * Remove the specified resource from storage.

@@ -36,8 +36,8 @@ use App\Models\User;
 /*Funcionários*/
 
 Route::get('/funcionarios', [UsersApiController::class, 'index']);
-Route::get('/funcionarios/create', [UsersApiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/funcionarios/store', [UsersApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/funcionarios/create', [UsersApiController::class, 'create'])->middleware(['auth']);
+Route::post('/funcionarios/store', [UsersApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/funcionarios/{id}', function ($id) {
     return User::find($id);
 });
@@ -54,8 +54,8 @@ Route::get('/funcionarios/delete/{id}', function ($id) {
 
 /*Utentes*/
 Route::get('/utentes', [UtentesApiController::class, 'index']);
-Route::get('/utentes/create', [UtentesApiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/utentes/store', [UtentesApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/utentes/create', [UtentesApiController::class, 'create'])->middleware(['auth']);
+Route::post('/utentes/store', [UtentesApiController::class, 'store'])->middleware(['auth:api']); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/utentes/{id}', function ($id) {
     return utentes::find($id);
 });
@@ -69,8 +69,8 @@ Route::get('utentes/delete/{id}', function ($id) {
 
 /*Contactos*/
 Route::get('/contactos', [ContactoApiController::class, 'index']);
-Route::get('/contactos/create', [ContactoAPiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/contactos/store', [ContactosApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/contactos/create', [ContactoAPiController::class, 'create'])->middleware(['auth']);
+Route::post('/contactos/store', [ContactosApiController::class, 'store'])->middleware(['auth:api']); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/contactos/{id}', function ($id) {
     return utentes::find($id);
 });
@@ -84,8 +84,8 @@ Route::get('/contactos/delete/{id}', function ($id) {
 
 /*Recados*/
 Route::get('/recados', [RecadoApiController::class, 'index']);
-Route::get('/recados/create', [RecadoApiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/recados/store', [RecadoApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/recados/create', [RecadoApiController::class, 'create'])->middleware(['auth']);
+Route::post('/recados/store', [RecadoApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/recados/{id}', function ($id) {
     return utentes::find($id);
 });
@@ -100,8 +100,8 @@ Route::get('/recados/delete/{id}', function ($id) {
 /*Ementa*/
 
 Route::get('/ementa', [EmentaApiController::class, 'index']);
-Route::get('/ementa/create', [EmentaApiControllerd::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/ementa/store', [EmentaApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/ementa/create', [EmentaApiControllerd::class, 'create'])->middleware(['auth']);
+Route::post('/ementa/store', [EmentaApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/ementa/{id}', function ($id) {
     return utentes::find($id);
 });
@@ -117,8 +117,8 @@ Route::get('/ementa/delete/{id}', function ($id) {
 /*Stock*/
 /*
 Route::get('/ementa', [StockMovimentosApiController::class, 'index']);
-Route::get('/ementa/create', [StockMovimentosApiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/ementa/store', [StockMovimentosApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente');//quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/ementa/create', [StockMovimentosApiController::class, 'create'])->middleware(['auth']);
+Route::post('/ementa/store', [StockMovimentosApiController::class, 'store'])->middleware(['auth:api']) ;//quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('ementa/{id}', function($id) {return utentes::find($id); });
 Route::delete('ementa/delete/{id}', function($id) {
     utentes::find($id)->delete();
@@ -128,8 +128,8 @@ Route::delete('ementa/delete/{id}', function($id) {
 
 /*Produtos*/
 Route::get('/produtos', [ProdutosApiController::class, 'index']);
-Route::get('/produtos/create', [ProdutosApiController::class, 'create'])->middleware(['auth'])->name('create_utente');
-Route::post('/produtos/store', [ProdutosApiController::class, 'store'])->middleware(['auth:api'])->name('guarda_utente'); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+Route::get('/produtos/create', [ProdutosApiController::class, 'create'])->middleware(['auth']);
+Route::post('/produtos/store', [ProdutosApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/produtos/{id}', function ($id) {
     return utentes::find($id);
 });
@@ -150,7 +150,7 @@ Route::get('/produtos/delete/{id}', function ($id) {
 
 /*Register and Login */
 Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
 
 
 /*

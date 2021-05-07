@@ -16,9 +16,16 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
 <?php } ?>
 
 
-<div class="add_utente">
-    <a class="btn btn-success" href="{{ url('/inicio/funcionarios/create_funcionario')}}"><b>+ CRIAR FUNCIONÁRIO</b></a>
+@if(Auth::user()->cargo =='SuperAdmin')
+<div class="add_admin">
+    <a class="btn btn-danger" href="{{ url('/inicio/superadmin/lista-funcionarios/create')}}"> <b>+ CRIAR ADMINISTRADOR</b></a>
 </div>
+@endif
+
+<div class="add_utente">
+    <a class="btn btn-success" href="{{ url('/inicio/funcionarios/create_funcionario')}}"> <b>+ CRIAR FUNCIONÁRIO</b></a>
+</div>
+
 
 
 <div class="myFuncionario" style="margin-top:50px">
@@ -34,8 +41,6 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
         @endforeach
     </div>
 </div>
-
-
 
 
 

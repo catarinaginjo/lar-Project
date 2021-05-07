@@ -57,6 +57,7 @@ class ProdutoController extends Controller
      */
     public function show_movimentos(produto $produto)
     {
+        
         return view('produtos.stock.show_movimentos')->with('');
     }
 

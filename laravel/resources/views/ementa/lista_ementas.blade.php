@@ -3,7 +3,7 @@
 @section('content')
 
 <?php
-if (isset($_GET['sucesso_destroy_ementa'])) { ?>
+if (isset($_GET['sucesso_delete_ementa'])) { ?>
     <div style="width: 27%; height:40px; padding: 0.5rem;background-color:green;color:white; margin-bottom:20px; ;border-radius:0.5rem">
         <b>A ementa foi eliminada com sucesso.</b>
     </div>
@@ -17,6 +17,7 @@ if (isset($_GET['sucesso_criar_ementa'])) { ?>
     <a class="btn btn-success" style="margin-bottom:10px;" href="/inicio/ementa/create-ementa"><b>+ NOVA EMENTA </b></a>
 </div>
 
+
 @foreach($ementas as $ementa)
 
 <div>
@@ -28,7 +29,5 @@ if (isset($_GET['sucesso_criar_ementa'])) { ?>
 
 
 @endforeach
-
-
 
 @endsection

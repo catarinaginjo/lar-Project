@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\controlo_mp;
+use App\Models\controlo_mps;
 use Illuminate\Http\Request;
 
 class ControloMpController extends Controller
@@ -14,7 +14,7 @@ class ControloMpController extends Controller
      */
     public function index()
     {
-        $controlos = controlo_mp::paginate(10);
+        $controlos = controlo_mps::paginate(10);
         return view('produtos.materias-primas.lista_controlo_MP')->with('controlos', $controlos);
     }
 
@@ -35,23 +35,24 @@ class ControloMpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {  
         $request->validate([
-            'fornecedor' => 'string',
-            'nome_produto' =>'string',
-            'data_receçao'=>'date',
-            'num_fatura' => 'numeric',
-            'lote' => 'numeric',
-            'aspeto' => 'string',
-            'higiene' => 'string',
-            'peso' => 'numeric|min:0',
-            'data_val' => 'string',
-            'temperatura' => 'string',
-            'açoes_corretivas' => 'string',
+            'fornecedor' => 'string|required',
+            'nome_produto' =>'string|required',
+            'data_receçao'=>'date|required',
+            'num_fatura' => 'numeric|required',
+            'lote' => 'numeric|required',
+            'aspeto' => 'string|required',
+            'higiene' => 'string|required',
+            'peso' => 'numeric|min:0|nullable',
+            'data_val' => 'string|required',
+            'temperatura' => 'string|nullable',
+            'açoes_corretivas' => 'string|nullable',
         ]);
+        //dd("hello");
     
-        $controlo_mp = new controlo_mp;
-        controlo_mp::create($request->all());
+        $controlo_mp = new controlo_mps;
+        controlo_mps::create($request->all());
         $controlo_mp->save();
 
         return redirect('/inicio/controlo_materias_primas' . $controlo_mp->id . '?sucesso_criar_dados=1');
@@ -65,7 +66,7 @@ class ControloMpController extends Controller
      * @param  \App\Models\controlo_mp  $controlo_mp
      * @return \Illuminate\Http\Response
      */
-    public function destroy(controlo_mp $controlo_mp)
+    public function destroy(controlo_mps $controlo_mp)
     {
         $controlo_mp->delete();
         return redirect('/inicio/controlo_materias_primas/?sucesso_delete_dados=1)');
