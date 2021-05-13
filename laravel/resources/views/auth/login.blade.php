@@ -1,9 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/"> 
-                <img src="{{ asset('images/logo.png') }}" class = "w-25 h-25">
-            </a>
+            <img src="{{ asset('images/logo.png') }}" class="w-25 h-25">
         </x-slot>
 
         <!-- Session Status -->
@@ -26,17 +24,15 @@
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <input type="checkbox" onclick="myFunction()"> Ver Password
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Esqueceu-se da password?') }}
-                    </a>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    {{ __('Esqueceu-se da password?') }}
+                </a>
                 @endif
 
                 <x-button class="ml-3">
@@ -46,3 +42,14 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

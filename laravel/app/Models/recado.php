@@ -15,4 +15,9 @@ class recado extends Model
         'descriçao',
         'responsavel',
     ];
+
+    public function getResponsavel() {
+        return User::find($this->responsavel);
+    }   
+
 }

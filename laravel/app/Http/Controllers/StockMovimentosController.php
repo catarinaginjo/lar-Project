@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\produto;
 use App\Models\stock_movimentos;
 use Illuminate\Http\Request;
 
@@ -22,10 +24,12 @@ class StockMovimentosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(produto $produto)
     {
-        //
+        return view('produtos.stock.create_movimentos', ['produto' => $produto]);
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +39,20 @@ class StockMovimentosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'quantidade_alterada' => 'required'|'',
+            'product_id' => 'string'
+        ]);
+        $params = $request->all();
+
+        $params['user_id'] =  Auth::user()->id;
+
+        //dd($params);
+        $movimento = stock_movimentos::create($params);
+        $movimento->save();
+
+        return redirect('/inicio/stock/produtos');
+        // return redirect('/inicio/stock/produtos' . $produto->id . '?sucesso_criar_produto=1');
     }
 
     /**
@@ -71,5 +88,9 @@ class StockMovimentosController extends Controller
     {
         //
     }
-
+    public static function destroy($stock_movimentos)
+    {
+        $stock_movimentos = new stock_movimentos();
+        $stock_movimentos->delete();
+    }
 }

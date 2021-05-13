@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Models\tarefas_utente;
 use Illuminate\Http\Request;
 
-class TarefasUtenteApiController extends Controller
+class TarefasUtenteApiController
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class TarefasUtenteApiController extends Controller
      */
     public function index()
     {
-        //
+        return tarefas_utente::all();
     }
 
     /**

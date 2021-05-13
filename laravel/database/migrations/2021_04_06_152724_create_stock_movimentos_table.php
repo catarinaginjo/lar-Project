@@ -15,13 +15,10 @@ class CreateStockMovimentosTable extends Migration
     {
         Schema::create('stock_movimentos', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('produtos');
-           /* $table->unsignedBigInteger('quantidade');
-            $table->foreign('quantidade')->references('quantidade')->on('produtos');*/
+            $table->string('product_id');
+            $table->string('quantidade_alterada')->nullable();
             $table->timestamps(); //data de alteração
         });
     }

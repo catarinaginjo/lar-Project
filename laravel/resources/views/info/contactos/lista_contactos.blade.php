@@ -7,7 +7,7 @@
     <!-- mensagens de alerta -->
     <?php if (isset($_GET['sucesso_alteraçao_contacto'])) { ?>
         <div style="width: 25%;  height:40px;  padding: 0.5rem;background-color: green;color:white; margin-top:0px; margin-bottom:20px ;border-radius:0.5rem">
-           <b>O Contacto foi alterado com sucesso!</b>
+            <b>O Contacto foi alterado com sucesso!</b>
         </div>
     <?php } ?>
     <?php if (isset($_GET['sucesso_criar_contacto'])) { ?>
@@ -17,7 +17,7 @@
     <?php } ?>
     <?php if (isset($_GET['sucesso_delete_contacto'])) { ?>
         <div style="width: 26%;  height:40px;  padding: 0.5rem;background-color:green;color:white; margin-top:0px; margin-bottom:20px;border-radius:0.5rem">
-           <b>O contacto foi eliminado com sucesso!</b>
+            <b>O contacto foi eliminado com sucesso!</b>
         </div>
     <?php } ?>
 </div>
@@ -32,7 +32,8 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Contacto</th>
-                <th scope="col">Alterações</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -40,17 +41,24 @@
             <tr>
                 <td> <input type="text" name="nome" value="{{$contacto->nome}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>> </td>
                 <td> <input type="text" name="numero" maxlength="9" value="{{$contacto->numero}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>> </td>
-                <td scope="row">
-                    <form action="/inicio/contactos/destroy/{{$contacto->id}}" method="POST">
+                <td>
+                    <form action="/inicio/contactos/update/{{$contacto->id}}" method="POST">
                         @csrf
                         <?php if (!isset($_GET['editar'])) { ?>
                             <a class="btn btn-primary" href="?editar=1"><b>Editar</b></a>
                         <?php } else { ?>
-                            <a  class="btn btn-primary" href="{{url('/inicio/contactos/update/'. $contacto->id)}}"> <b>Guardar</b></a>
+                            <button class="btn btn-success" type="submit"> <b>Guardar</b></button>
                         <?php } ?>
+                    </form>
+                </td>
+
+                <td scope="row">
+                    <form action="/inicio/contactos/destroy/{{$contacto->id}}" method="POST">
+                        @csrf
                         <button type="submit" class="btn btn-danger"><b>Apagar</b></button>
                     </form>
                 </td>
+
             </tr>
 
             @endforeach
@@ -59,7 +67,7 @@
 
 
     <!-- FUNCIONÁRIOS E GESTORES -->
-    <h1 style="font-size:20px;margin-bottom:20px;color:black">FUNCIONÁRIOS & GESTORES</h1>
+    <h1 style="font-size:20px;margin-bottom:20px;color:black">FUNCIONÁRIOS & ADMINISTRADORES</h1>
 
     <table class="table table-striped table-hover" name="funcionarios" style="margin-bottom:50px;">
 

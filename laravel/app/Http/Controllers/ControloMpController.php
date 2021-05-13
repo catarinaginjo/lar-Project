@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\controlo_mps;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ControloMpController extends Controller
@@ -35,13 +37,13 @@ class ControloMpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $request->validate([
             'fornecedor' => 'string|required',
-            'nome_produto' =>'string|required',
-            'data_receçao'=>'date|required',
+            'nome_produto' => 'string|required',
+            'data_receçao' => 'date|required',
             'num_fatura' => 'numeric|required',
-            'lote' => 'numeric|required',
+            'lote' => 'numeric|nullable',
             'aspeto' => 'string|required',
             'higiene' => 'string|required',
             'peso' => 'numeric|min:0|nullable',
@@ -49,13 +51,17 @@ class ControloMpController extends Controller
             'temperatura' => 'string|nullable',
             'açoes_corretivas' => 'string|nullable',
         ]);
-        //dd("hello");
-    
-        $controlo_mp = new controlo_mps;
-        controlo_mps::create($request->all());
+        $params = $request->all();
+
+        $params['responsavel'] =  Auth::user()->id;
+
+        //dd($params);
+        $controlo_mp = controlo_mps::create($params);
+
         $controlo_mp->save();
 
-        return redirect('/inicio/controlo_materias_primas' . $controlo_mp->id . '?sucesso_criar_dados=1');
+        return redirect('/inicio/controlo_materias_primas?sucesso_criar_dados=1');
+        //return redirect('/inicio/controlo_materias_primas' . $controlo_mp->id . '?sucesso_criar_dados=1');
     }
 
 
@@ -67,8 +73,8 @@ class ControloMpController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(controlo_mps $controlo_mp)
-    {
+    {   
         $controlo_mp->delete();
-        return redirect('/inicio/controlo_materias_primas/?sucesso_delete_dados=1)');
+        return redirect('/inicio/controlo_materias_primas/?sucesso_delete_dados=1');
     }
 }

@@ -15,10 +15,11 @@ class CreateTarefasUtentesTable extends Migration
     {
         Schema::create('tarefas_utentes', function (Blueprint $table) {
             $table->id();
-            //$table->unsignedBigInteger('utente_id');
-            //$table->foreign('utente_id')->references('id')->on('utentes');//id do utente
-            //$table->unsignedBigInteger('auxiliar_id');
-           // $table->foreign('auxiliar_id')->references('id')->on('users');//id do auxiliar responsável
+            $table->unsignedBigInteger('utente_id');
+            $table->foreign('utente_id')->references('id')->on('utentes');//id do utente
+            $table->unsignedBigInteger('auxiliar_id');
+            $table->foreign('auxiliar_id')->references('id')->on('users');//id do auxiliar responsável
+            $table->string('banho')->default(0);
             $table->string('insulina')->default(0);
             $table->integer('num_fraldas')->default(0);
             $table->integer('num_medicaçao')->default(0);

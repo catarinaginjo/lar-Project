@@ -18,7 +18,9 @@ use App\Models\Contactos;
 use App\Models\ementa;
 use App\Models\produto;
 use App\Models\recado;
+use App\Models\tarefas_utente;
 use App\Models\User;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,14 @@ Route::get('/utentes/create', [UtentesApiController::class, 'create'])->middlewa
 Route::post('/utentes/store', [UtentesApiController::class, 'store'])->middleware(['auth:api']); //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/utentes/{id}', function ($id) {
     return utentes::find($id);
+});
+Route::post('/utentes/{id}/tarefas', function (Request $request, $id) {
+    $params = $request->all();
+    return tarefas_utente::get()->where("utente_id" , "=", $id)
+            ->filter(function ($task) use($params) {
+                return Carbon::parse($task->created_at)->isSameDay(Carbon::parse($params['date']));
+            })
+            ->all();
 });
 Route::get('utentes/delete/{id}', function ($id) {
     if (!utentes::find($id)) {
@@ -153,8 +163,17 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 
+/*Tarefas utente */
+
+Route::get('get_tarefas', [TarefasUtenteApiController::class, 'index']);
+
+
+
 /*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
+
+
+

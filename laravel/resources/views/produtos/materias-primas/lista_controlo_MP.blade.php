@@ -83,7 +83,7 @@
           <p>{{$controlo->açoes_corretivas}}</p>
         </td>
         <td>
-          <p>{{$controlo->user_id}}</p>
+          <p>{{$controlo->getResponsavel()->nome}} {{$controlo->getResponsavel()->apelido}}</p>
         </td>
         <td>
           <form action="{{ url('/inicio/controlo_materias_primas/destroy/'. $controlo->id) }}" method="POST">

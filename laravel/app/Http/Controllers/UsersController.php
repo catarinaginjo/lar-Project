@@ -16,17 +16,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-    //lista de cozinheiros/auxiliares
+    //se for apenas admin pode ver: lista de cozinheiros/auxiliares
     public function show_funcionarios()
     {
-        $cargos_permitidos = ['Auxiliar', 'Cozinheira'];
+        $cargos_permitidos = ['Auxiliar', 'Cozinheira', 'Cozinheiro'];
 
-        $user = User::where('cargo', $cargos_permitidos)->get();
+        $user = User::whereIn('cargo', $cargos_permitidos)->get();
 
         return view('funcionarios.lista_funcionarios')->with('user', $user);
     }
 
-    //admin, superadmin, auxiliar, cozinheiro
+    //se for superadmin pode ver: admin, superadmin, auxiliar, cozinheiro
     public function show_all_funcionarios()
     {
         $user = User::all();
@@ -51,40 +51,7 @@ class UsersController extends Controller
         return view('funcionarios.criar_funcionario');
     }
 
-    public function create_all()
-    {
-        return view('auth.register');
-    }
-
-    public function store_all(Request $request)
-    {
-
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'apelido' => 'required|string|max:255',
-            'cargo' => 'required|string|max:255',
-            'email' => 'required|email|string|unique|max:255',
-            'password' => 'string',
-            'contacto' => 'required|max:9|unique'
-        ]);
-
-        $user = User::create([
-            'nome' => $request->nome,
-            'apelido' => $request->apelido,
-            'cargo' =>  $request->cargo,
-            'email' => $request->email,
-            'contacto' => $request->contacto,
-            'password' => Hash::make($request->password),
-        ]);
-        event(new Registered($user));
-        //guarda a fotografia
-        if ($request->hasFile('foto')) {
-            $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
-        }
-
-        return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
-    }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -93,29 +60,41 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $validator = Validator::make($data, [
+        $request->validate([
             'nome' => 'required|string|max:255',
             'apelido' => 'required|string|max:255',
             'cargo' => 'required|string|max:255',
             'data_nascimento' => 'required|date',
             'morada' => 'required|string|max:255',
-            'username' => 'string|max:255',
-            'email' => 'required|email|string|unique|max:255',
+            'username' => 'string|unique:users|max:255',
+            'email' => 'required|email|string|unique:users|max:255',
             'localidade' => 'required|string|max:255',
             'password' => 'string',
-            'contacto' => 'required|max:9|unique'
+            'contacto' => 'required|numeric|unique:users'
         ]);
 
-        $user = User::create($data);
-
+        $user = User::create([
+            'nome' => $request->nome,
+            'apelido' => $request->apelido,
+            'email' => $request->email,
+            'contacto' => $request->contacto,
+            'cargo' => $request->cargo,
+            'username' => $request->username,
+            'data_nascimento' => $request->data_nascimento,
+            'localidade' => $request->localidade,
+            'morada' => $request->morada,
+            'password' => Hash::make($request->password),
+        ]);
         //guarda a fotografia
         if ($request->hasFile('foto')) {
             $request->file('foto')->storeAs('public/images/users/', $user->id . '.png');
         }
 
-        return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
+        if(Auth::user()->cargo =='SuperAdmin'){
+            return redirect('/inicio/superadmin/lista_funcionarios'); //vai ser redirecionada para o 'index'
+        }
+          return redirect('/inicio/lista_funcionarios'); //vai ser redirecionada para o 'index'
+       
     }
 
     /**

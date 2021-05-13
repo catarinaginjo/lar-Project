@@ -137,5 +137,6 @@ class EmentaController extends Controller
     {
         $ementa->delete();
         return redirect('/inicio/lista-ementas/?sucesso_delete_ementa=1');
+        
     }
 }

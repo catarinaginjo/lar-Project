@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 namespace App\Http\Controllers;
 
+use App\Models\tarefas_utente;
 use Illuminate\Support\Facades\Validator;
 use App\Models\utentes;
 use Illuminate\Http\Request;
@@ -67,8 +68,11 @@ class UtentesController extends Controller
      */
     public function show(utentes $utente)
     {
-        return view('utentes.show_utente')->with('utente', $utente); //dá o utente com este ID
+        $tarefa = tarefas_utente::get()->where('utente_id', '=', $utente->id)->all();
+        return view('utentes.show_utente', array('utente' => $utente, 'tarefa' => $tarefa));
     }
+
+
 
 
     /**

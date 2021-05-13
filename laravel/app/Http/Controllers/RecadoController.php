@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\recado;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -37,25 +38,20 @@ class RecadoController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = $request->all();
-
-        $validator = Validator::make($data, [
+        $request->validate([
             'assunto' => 'required|string|max:255',
             'descriçao' => 'required|string|max:255',
             'responsavel' => 'string|max:255',
         ]);
 
-        //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
-        if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Erro de validacao!!!']);
-        }
+        $params = $request->all();
+        $params['responsavel'] =  Auth::user()->id;
+        //dd($params);
+        $recado = recado::create($params);
+        $recado->save();
 
-        //senão, cria um utente
-        $recado = recado::create($data);
-
-        return redirect('/inicio/recados'); //vai ser redirecionada para o 'index'
-
+        return redirect('/inicio/recados'); 
     }
 
     /**
@@ -78,13 +74,14 @@ class RecadoController extends Controller
      * @param  \App\Models\recado  $recado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, recado $recados)
+    public function update(Request $request, recado $recado)
     {
-        $recados = recado::find($recados->id);
-        $recados->update($request->all());
-        $recados->save();
+        $recado->assunto = $request->assunto;
+        $recado->descriçao = $request->descriçao;
+        $recado->responsavel = $request->responsavel;
+        $recado->save();
 
-        return redirect('/inicio/recados/' . $recados->id . '/?sucesso_alteraçao_recado=1');
+        return redirect('/inicio/recados/show/' . $recado->id . '/?sucesso_alteraçao_recado=1');
     }
 
     /**

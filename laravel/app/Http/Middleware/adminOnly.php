@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class adminOnly
+class AdminOnly
 {
     /**
      * Handle an incoming request.
@@ -18,11 +18,12 @@ class adminOnly
      */
     public function handle(Request $request, Closure $next)
     {
-        if((boolean)Auth::user()->cargo == 'Admin'){
-            return redirect('/lar');
+        $isPermitted = (Auth::user()->cargo == 'Administrador' || Auth::user()->cargo == 'SuperAdmin' || Auth::user()->cargo == 'Admin');
+
+        if ($isPermitted == false) {
+            return redirect('/login')->with(Auth::logout())->withErrors( 'UPS! Não tem permissões de acesso.');
         }
-        
-        
+
         return $next($request);
     }
 }

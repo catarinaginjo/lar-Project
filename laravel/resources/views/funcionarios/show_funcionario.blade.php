@@ -80,6 +80,35 @@
                                 </div>
                             </div>
                             <hr>
+                            
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Morada:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="text" value="{{$user->morada}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Localidade:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="localidade" value="{{$user->localidade}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0" style="color:black">Username:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="username" value="{{$user->username}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:300px">
+                                </div>
+                            </div>
+                            <hr>
                             <div class="botoes">
                                 <?php if (!isset($_GET['editar'])) { ?>
                                     <a class="btn btn-primary" href="?editar=1"><b>Editar Perfil </b></a>

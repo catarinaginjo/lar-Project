@@ -3,25 +3,34 @@
 
 @section('titulo', 'Recado - vista geral')
 @section('content')
+<div class="container" style="background-color:white;">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="row">Assunto*</th>
+                <th scope="col">Descrição do recado*</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form action="/inicio/recados/update/{{$recado->id}}" method="POST" id="alterar-recado" class="input-grouphideBox">
+                @csrf
+                <tr>
 
-<div class="edit-recado" style="margin-left:200px; margin-top:30px;">
-    <form action="/inicio/recados/update/{{$recado->id}}" method="POST" id="alterar-recado" class="input-grouphideBox">
-        {{ csrf_field() }}
-        <p>Assunto: </p>
-        <textarea name="assunto" name="assunto" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->assunto}}</textarea>
-        <p>Responsável: </p>
-        <textarea name="responsavel" name="responsavel" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->responsavel}}</textarea>
-        <p>Descrição do recado: </p>
-        <textarea name="descriçao" name="descriçao" style="width:300px; height:150px" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->descriçao}}</textarea>
-
-        <!--Botões-->
-        <div class="botoes">
-            <?php if (!isset($_GET['editar'])) { ?>
-                <a class="btn btn-primary" href="?editar=1"> <b>Editar</b></a>
-            <?php } else { ?>
-                <input type="submit" class="btn btn-primary" style="font-weight:bold" name="save" value="Guardar" id="save">
-            <?php } ?>
-        </div>
-    </form>
+                    <input type="hidden" name="responsavel" value="{{$recado->responsavel}}">
+                    <th scope="row"> <textarea name="assunto" style="width:300px; height:150px" value="{{$recado->assunto}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->assunto}}</textarea></textarea>
+                    <td> <textarea name="descriçao" style="width:300px; height:150px" value="{{$recado->descriçao}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> required class="text-name"> {{$recado->descriçao}}</textarea> </textarea>
+                    <td>
+                        <!--Botões-->
+                        <div class="botoes">
+                            <?php if (!isset($_GET['editar'])) { ?>
+                                <a class="btn btn-primary" style="width:100px; font-size:17px" href="?editar=1"> <b>Editar</b></a>
+                            <?php } else { ?>
+                                <input type="submit" class="btn btn-primary" style="font-weight:bold;" name="save" value="Guardar alterações" id="save">
+                            <?php } ?>
+                        </div>
+                </tr>
+            </form>
+        </tbody>
+    </table>
 </div>
 @endsection

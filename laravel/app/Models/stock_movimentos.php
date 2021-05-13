@@ -7,8 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class stock_movimentos extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-      'quantidade',  
-    ];
+  use HasFactory;
+  protected $fillable = [
+    'user_id',
+    'product_id',
+    'quantidade_alterada',
+
+  ];
+
+  public function getResponsavel() {
+    return User::find($this->user_id);
+}   
+
 }

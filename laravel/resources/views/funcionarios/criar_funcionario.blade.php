@@ -10,12 +10,11 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="{{ asset('images/user.png') }}" alt="Funcionario pic" class="rounded-circle" width="150">
-                            <form action="{{url('/register')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
+                            <form action="{{url('/inicio/superadmin/store')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mt-3" style="color:black">*
                                     <input type="file" name="foto">
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -51,6 +50,7 @@
                                     <option value="Cozinheiro">Cozinheiro</option>
                                     @if(Auth::user()->cargo =='SuperAdmin')
                                     <option value="Administrador">Administrador</option>
+                                    <option value="SuperAdmin">SuperAdmin</option>
                                     @endif
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                                 <h6 class="mb-0" style="color:black">Contacto*</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" name="contacto">
+                                <input type="text" maxlength="9" name="contacto">
                             </div>
                         </div>
                         <hr>
@@ -117,7 +117,9 @@
                                 <h6 class="mb-0" style="color:black">Password*</h6>
                             </div>
                             <div class="col-sm-5 text-secondary">
-                                <input type="text" name="password">
+                                <input type="password" id="myInput" name="password">
+                                <input type="checkbox" onclick="myFunction()"><b>Ver Password</b>
+
                                 <p>Esta password é temporária.</p>
                             </div>
                         </div>
@@ -132,7 +134,7 @@
                 </div>
 
             </div>
-
+            </form>
         </div>
     </div>
 </div>
@@ -151,3 +153,14 @@
 @endif
 
 @endsection
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

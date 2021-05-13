@@ -19,14 +19,14 @@ class CreateControloMpsTable extends Migration
             $table->string('responsavel');
             $table->date('data_receçao');
             $table->string('fornecedor');
-            $table->string('num_fatura');
-            $table->date('data_val');
-            $table->string('lote');
+            $table->string('num_fatura')->nullable();
+            $table->date('data_val')->nullable();
+            $table->string('lote')->nullable();
             $table->string('higiene');
             $table->string('temperatura')->nullable();
-            $table->string('peso');
+            $table->string('peso')->nullable();
             $table->string('aspeto');
-            $table->string('açoes_corretivas');
+            $table->string('açoes_corretivas')->nullable();
             $table->timestamps();
         });
     }

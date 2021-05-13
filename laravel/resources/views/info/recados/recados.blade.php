@@ -39,7 +39,7 @@
                 <!-- A data do recado tem de ser a data do pc ao criar o recado-->
                 <th scope="row">{{$recado->created_at}}</th>
                 <td>{{$recado->assunto}}</td>
-                <td>{{$recado->responsavel}}</td>
+                <td>{{$recado->getResponsavel()->nome}} {{$recado->getResponsavel()->apelido}}</td>
                 <!-- Botões -->
                 <td>
                     <form action="{{ url('/inicio/recados/destroy/'.$recado->id) }}" method="POST">

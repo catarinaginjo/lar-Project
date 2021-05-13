@@ -10,8 +10,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-      
-        <form method="POST" action="{{ route('register') }}">
+
+        <form method="POST" action="{{url('/inicio/superadmin/stor')}} ">
             @csrf
 
             <!-- Name -->
@@ -49,11 +49,17 @@
                 <x-input id="contacto" class="block mt-1 w-full" type="number" name="contacto" :value="old('contacto')" required />
             </div>
 
+            <div class="mt-4">
+                <x-label for="contacto" :value="__('Data de Nascimento')" />
+
+                <x-input id="data_nascimento" class="block mt-1 w-full" type="date" name="data_nascimento" :value="old('data_nascimento')" required />
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
-
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <input type="checkbox" onclick="myFunction()"> Ver Password
             </div>
 
 
@@ -65,3 +71,15 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

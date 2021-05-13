@@ -39,20 +39,17 @@ class ContactosController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $validator = Validator::make($data, [
+        $request->validate([
             'nome' => 'required|string|max:255',
-            'numero' => 'required|numeric|min:3|max:9|unique:contactos'
+            'numero' => 'required|numeric',
+
         ]);
 
-        //se os dados fornecidos não estão válidos, aparece uma mensagem de erro
-        if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Validation Error']);
-        }
+        Contactos::create([
+            'nome' => $request->nome,
+            'numero' => $request->numero,
 
-        //senão, cria um utente
-        Contactos::create($data);
+        ]);
 
         return redirect('/inicio/contactos/?sucesso_criar_contacto=1'); //vai ser redirecionada para o 'index'
     }
@@ -68,7 +65,6 @@ class ContactosController extends Controller
         return view('info.contactos.show_contacto')->with('contactos', $contacto); //dá o contacto com este ID
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -78,11 +74,11 @@ class ContactosController extends Controller
      */
     public function update(Request $request, Contactos $contacto)
     {
-        $contacto = Contactos::find($contacto->id);
-        $contacto->update($request->all());
+        $contacto->nome =  $request->nome;
+        $contacto->numero = $request->numero;
         $contacto->save();
 
-        return redirect('/inicio/contactos/' . $contacto->id . '/?sucesso_alteraçao_contacto=1');
+        return redirect('/inicio/contactos/?sucesso_alteraçao_contacto=1');
     }
 
     /**
@@ -94,7 +90,6 @@ class ContactosController extends Controller
     public function destroy(Contactos $contacto)
     {
         $contacto->delete();
-        // dd($contactos);
         return redirect('/inicio/contactos/?sucesso_delete_contacto=1');
     }
 }

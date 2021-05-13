@@ -29,7 +29,7 @@
             </a>
         </li>
 
-        @if(!(Auth::user()->cargo =='SuperAdmin'))
+        @if((Auth::user()->cargo =='Admin') || (Auth::user()->cargo =='Administrador'))
         <li class="nav-item">
             <a href="{{url('/inicio/lista_funcionarios')}}" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
@@ -42,7 +42,7 @@
         <li class="nav-item">
             <a href="{{url('/inicio/superadmin/lista_funcionarios')}}" class="nav-link text-dark font-italic">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                Funcionários
+                Funcionários + Admin
             </a>
         </li>
         @endif

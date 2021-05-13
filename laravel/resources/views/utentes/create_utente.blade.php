@@ -46,7 +46,7 @@
                                 <h6 class="mb-0" style="color:black">Contacto familiar*</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" name="contacto_familiar">
+                                <input type="tel" maxlength="9"  name="contacto_familiar">
                             </div>
                         </div>
                         <hr>
@@ -83,7 +83,7 @@
                                 <h6 class="mb-0" style="color:black">Doenças</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" name="doenças">
+                                <input type="text" name="doença">
                             </div>
                         </div>
                         <hr>

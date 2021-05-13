@@ -3,9 +3,10 @@
 @section('titulo', 'Novo contacto')
 @section('content')
 
-
 <p>Os campos com * são obrigatórios.</p>
-<table class="table table-secondary ">
+
+<div class="container" style="background-color:white;">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th scope="row">Nome*</th>
@@ -17,8 +18,8 @@
             <form action="{{url('/inicio/contactos/store_contacto')}}" method="POST" style="font-weight:bold;" enctype="multipart/form-data">
                 @csrf
                 <th scope="row"> <input type="text" name="nome"></th>
-                <td> <input type="number" name="numero"></td>
-                <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary"><b>Criar contacto</b></button>
+                <td> <input type="text" maxlength="9" name="numero"></td>
+                <td><button type="submit" id="mybtn"  class="btn btn-primary"><b>Criar contacto</b></button><td>
             </form>
 
 
@@ -36,5 +37,5 @@
         </tr>
     </tbody>
 </table>
-
+</div>
 @endsection

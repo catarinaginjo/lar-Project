@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class controlo_mps extends Model
 {
@@ -14,11 +15,18 @@ class controlo_mps extends Model
         'num_fatura',
         'data_val',
         'lote',
-        'higiente',
+        'higiene',
         'temperatura',
         'nome_produto',
         'peso',
         'aspeto',
-        'açoes_corretivas'
+        'açoes_corretivas',
+        'responsavel',
     ];
+
+    public function getResponsavel() {
+        return User::find($this->responsavel);
+    }   
+
+
 }

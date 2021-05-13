@@ -104,6 +104,7 @@
                 <?php if (!isset($_GET['editar'])) { ?>
                   <a class="btn btn-primary" href="?editar=1" style="margin-left:250px; width:200px;"><b>Editar Perfil</b> </a>
                 <?php } else { ?>
+                  <input type="file" style="margin-left:250px; width:200px; font-weight:bold"  name="save" value="Guardar" id="save">
                   <input class="btn btn-success" style="margin-left:250px; width:200px; font-weight:bold" type="submit" name="save" value="Guardar" id="save">
                 <?php } ?>
               </div>
