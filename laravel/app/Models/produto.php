@@ -11,7 +11,11 @@ class produto extends Model
     protected $fillable =  [
         'categoria',
         'nome_produto',
-        'quantidade',
         'reorder_point',
     ];
+
+    public function getQuantidade()
+    {
+        return  stock_movimentos::orderBy('created_at', 'desc')->get()->where('product_id', '=', $this->id)->sum('quantidade');;
+    }
 }

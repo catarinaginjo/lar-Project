@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+use Illuminate\Support\Facades\Auth; ?>
 
 <head>
     <!-- Required meta tags -->
@@ -15,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    
+
     <!--css-->
     <link href="{{ url('css/template.css') }}" rel="stylesheet">
     <title>@yield('title', 'Lar - administrador')</title>
@@ -28,14 +31,10 @@
 <div class="page-content p-5" id="content">
     <!-- Botão menu -->
     <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Menu</small></button>
-
     <!-- Conteúdo -->
-    <h2 class="display-4 text-white"> @yield('titulo', 'Bem-vindo/a Joana')</h2>
+    <h2 class="display-4 text-white"> @yield('titulo', 'Bem-vindo/a ')</h2>
     <div class="separator"></div>
-    <!--<div class="row text-white"> -->
-        @yield('content')
-
-   <!-- </div>-->
+    @yield('content')
 
 </div>
 

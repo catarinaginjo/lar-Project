@@ -60,7 +60,7 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
                 <a href="{{url('/inicio/funcionarios/' . $us->id)}}">
                     <img src="{{ $us->foto() }}" alt="fotografia do utilizador" class="rounded-circle" style="width:170px; height:170px">
                     <p style="margin-left:13px; font-size:20px; color:white">{{$us->nome}} {{$us->apelido}}</p>
-                     <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
+                    <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
                 </a>
             </div>
             @endif
@@ -78,14 +78,14 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
                 <a href="{{url('/inicio/funcionarios/' . $us->id)}}">
                     <img src="{{ $us->foto() }}" alt="fotografia do utilizador" class="rounded-circle" style="width:170px; height:170px">
                     <p style="margin-left:13px; font-size:20px; color:white">{{$us->nome}} {{$us->apelido}}</p>
-                     <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
+                    <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
                 </a>
             </div>
             @endif
             @endforeach
         </div>
     </div>
-
+    @if(Auth::user()->cargo =='SuperAdmin')
     <div class="mydiv">
         <h1 style="font-size:30px">Super administradores </h1>
         <div class="row" style="margin-left:25px;">
@@ -95,13 +95,14 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
                 <a href="{{url('/inicio/funcionarios/' . $us->id)}}">
                     <img src="{{ $us->foto() }}" alt="fotografia do utilizador" class="rounded-circle" style="width:170px; height:170px">
                     <p style="margin-left:13px; font-size:20px; color:white">{{$us->nome}} {{$us->apelido}}</p>
-                   <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
+                    <!-- <p style="margin-left:13px; font-size:20px; color:white">{{$us->cargo}}</p>-->
                 </a>
             </div>
             @endif
             @endforeach
         </div>
     </div>
+    @endif
 
 
 </div>
@@ -115,13 +116,13 @@ if (isset($_GET['sucesso_criar_utilizador'])) { ?>
         font-size: 10px;
     }
 
-    .mydiv{
-        margin-bottom:30px;
-        margin-top:15px;
+    .mydiv {
+        margin-bottom: 30px;
+        margin-top: 15px;
     }
 
-    .imgBox{
-        margin-left:20px;
+    .imgBox {
+        margin-left: 20px;
 
     }
 </style>

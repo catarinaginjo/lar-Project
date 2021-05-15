@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Models\tarefas_utente;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class TarefasUtenteApiController
 {

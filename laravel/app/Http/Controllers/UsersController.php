@@ -41,8 +41,8 @@ class UsersController extends Controller
 
     public function show_perfil(User $user)
     {
-        $user = User::find($user->id); //vai ao modelo e ve os users
-        return view('perfil')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+        $user = User::find($user->id); 
+        return view('perfil')->with('user', $user); 
     }
 
 
@@ -121,6 +121,12 @@ class UsersController extends Controller
 
         return redirect('inicio/perfil/ ' . $user->id . '?sucesso=1');
     }
+
+    public function homepage(User $user){
+        $user = User::find($user->id); //vai ao modelo e ve os users
+        return view('layouts.vertical')->with('user', $user); //recebe dentro de 'user' todos os utilizadores da bd
+    }
+
     /**
      * Remove the specified resource from storage.
      *

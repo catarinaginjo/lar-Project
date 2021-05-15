@@ -11,12 +11,12 @@ class stock_movimentos extends Model
   protected $fillable = [
     'user_id',
     'product_id',
-    'quantidade_alterada',
+    'quantidade',
 
   ];
 
-  public function getResponsavel() {
+  public function getResponsavel()
+  {
     return User::find($this->user_id);
-}   
-
+  }
 }

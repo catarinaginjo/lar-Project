@@ -7,7 +7,7 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Nome Produto</th>
-            <th scope="col">Quantidade a alterar</th>
+            <th scope="col">Quantidade</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
                 <th scope="row">
                     <p>{{$produto->nome_produto}}</p>
                 </th>
-                <td> <input type="text" name="quantidade_alterada"> </td>
+                <td> <input type="text" name="quantidade"> </td>
                 <button type="submit" id="mybtn" style="margin-bottom:10px" class="btn btn-primary"><b>Adicionar movimento de stock a produto</b></button>
             </tr>
         </form>

@@ -30,17 +30,16 @@ class StockMovimentosController extends Controller
     }
 
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, produto $produto)
     {
         $request->validate([
-            'quantidade_alterada' => 'required'|'',
+            'quantidade' => 'required|numeric',
             'product_id' => 'string'
         ]);
         $params = $request->all();
@@ -51,8 +50,7 @@ class StockMovimentosController extends Controller
         $movimento = stock_movimentos::create($params);
         $movimento->save();
 
-        return redirect('/inicio/stock/produtos');
-        // return redirect('/inicio/stock/produtos' . $produto->id . '?sucesso_criar_produto=1');
+        return redirect('/inicio/produtos/movimentos/' . $produto->id . '?sucesso_criar_movimento=1');
     }
 
     /**

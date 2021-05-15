@@ -17,8 +17,8 @@ class CreateStockMovimentosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('product_id');
-            $table->string('quantidade_alterada')->nullable();
+            $table->string('product_id');      
+            $table->integer('quantidade')->nullable();
             $table->timestamps(); //data de alteração
         });
     }

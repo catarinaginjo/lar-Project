@@ -39,7 +39,7 @@
         <tbody>
             @foreach($contactos as $contacto)
             <tr>
-                <td> <input type="text" name="nome" value="{{$contacto->nome}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>> </td>
+                <td> <input type="text" name="nome" value="{{$contacto->nome}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?> style="width:100%"> </td>
                 <td> <input type="text" name="numero" maxlength="9" value="{{$contacto->numero}}" <?php echo !empty($_GET['editar']) ? '' : 'disabled' ?>> </td>
                 <td>
                     <form action="/inicio/contactos/update/{{$contacto->id}}" method="POST">

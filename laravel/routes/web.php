@@ -20,22 +20,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
-
-
-    /*Route::get('/lar/registo', function () {
-        return view('auth.register');
-    });*/
-
+    
     Route::group(['middleware' => ['admin.only']], function () {
 
         /*Home Page*/
-        Route::get('/lar', function () {
-            return view('welcome');
-        });
-        Route::get('/', function () {
-            return view('welcome');
-        });
-
+        Route::get('/', [UsersController::class, 'homepage']);
+        Route::get('/lar', [UsersController::class, 'homepage']);
 
         /*Funcionários*/
         Route::get('/inicio/lista_funcionarios', [UsersController::class, 'show_funcionarios']);
@@ -82,7 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/inicio/recados/edit/{recado}', [RecadoController::class, 'edit']);
         Route::post('/inicio/recados/update/{recado}', [RecadoController::class, 'update']);
         Route::post('/inicio/recados/destroy/{recado}', [RecadoController::class, 'destroy']);
-
 
         /*Ementa*/
         Route::get('/inicio/lista-ementas', [EmentaController::class, 'lista_ementas']);

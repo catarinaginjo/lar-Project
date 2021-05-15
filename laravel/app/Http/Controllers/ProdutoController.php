@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\stock_movimentos;
 use App\Models\produto;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -28,19 +29,22 @@ class ProdutoController extends Controller
         $request->validate([
             'nome_produto' => 'required|string',
             'categoria' => 'required|string',
-            'quantidade' => 'required|numeric',
             'reorder_point' => 'numeric',
         ]);
-        $produto = new produto;
-        produto::create($request->all());
+        $produto = produto::create($request->all());
+        $produto->save();
 
-        //adicionamos um movimento a esse produto
+        if ($produto->id < 1) {
+            echo  'Produto não foi criado.';
+            return;
+        }
         $movimento = new stock_movimentos();
-        //$movimento->user_id = 
+        $movimento->quantidade = $request['quantidade'];
+        $movimento->product_id = $produto->id;
+        $movimento->user_id = Auth::user()->id;
+        $movimento->save();
 
-        //  $recado->descriçao = $request->descriçao;
-
-        return redirect('/inicio/stock/produtos' . $produto->id . '?sucesso_criar_produto=1');
+        return redirect('/inicio/stock/produtos?sucesso_criar_produto=1');
     }
 
     /**
@@ -51,10 +55,16 @@ class ProdutoController extends Controller
      */
     public function show_movimentos(produto $produto)
     {
-        $movimentos = stock_movimentos::get()->where('product_id', '=', $produto->id)->all();
+        $movimentos = stock_movimentos::orderBy('created_at', 'desc')->get()->where('product_id', '=', $produto->id);
+        $quantidade_atual = $movimentos->sum('quantidade');
+        $movimentos = $movimentos->all();
         // die(var_dump($movimentos));
 
-        return view('produtos.stock.show_movimentos', array('movimentos' => $movimentos, 'produto' => $produto));
+        return view('produtos.stock.show_movimentos', array(
+            'movimentos' => $movimentos, 
+            'produto' => $produto,
+            'quantidade_atual' => $quantidade_atual
+        ));
     }
 
     /**

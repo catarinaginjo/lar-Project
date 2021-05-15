@@ -44,7 +44,7 @@
                 <th scope="row">{{$produto->id}}</th>
                 <td> {{$produto->nome_produto}} </td>
                 <td> {{$produto->categoria}} </td>
-                <td> {{$produto->quantidade}}</td>
+                <td> {{$produto->getQuantidade()}}</td>
                 <td>{{$produto->reorder_point}} </td>
 
                 <td>

@@ -66,4 +66,9 @@ class User extends Authenticatable
         //die(var_dump($idade));
         return $idade->format('%y');
     }
+
+    protected function auxiliar()
+    {
+        return $this->hasOne('App\Models\tarefas_utente', 'auxiliar_id', 'id');
+    }
 }

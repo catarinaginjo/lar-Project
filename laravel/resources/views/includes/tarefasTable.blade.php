@@ -40,7 +40,7 @@
         <tr v-for="task in tasks">
           <th scope="row">[[ task.insulina ]]</th>
           <td> [[ task.auxiliar_id ]]</td>
-          <td> [[ task.created_at ]]</td>
+          <td> [[ task.auxiliar.nome ]]</td>
           <td> [[ task.updated_at ]]</td>
         </tr>
       </tbody>
