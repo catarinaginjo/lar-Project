@@ -13,7 +13,7 @@ class ContactoApiController extends Controller
      */
     public function index()
     {
-        return Contactos::all();
+        return response(['result' => Contactos::all()], 200);
     }
 
     /**

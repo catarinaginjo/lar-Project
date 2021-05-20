@@ -11,8 +11,6 @@ use App\Http\Controllers\ControloMpController;
 use App\Http\Controllers\StockMovimentosController;
 use Illuminate\Support\Facades\Route;
 
-
-
 /* Rotas com middleware */
 
 Route::group(['middleware' => ['auth']], function () {
@@ -20,7 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
-    
+
     Route::group(['middleware' => ['admin.only']], function () {
 
         /*Home Page*/
@@ -62,7 +60,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/inicio/contactos/{contacto}', [ContactosController::class, 'show']);
         Route::post('inicio/contactos/update/{contacto}', [ContactosController::class, 'update']);
         Route::post('/inicio/contactos/destroy/{contacto}', [ContactosController::class, 'destroy']);
-
 
         /*Recados*/
         Route::get('/inicio/recados', [RecadoController::class, 'index']);

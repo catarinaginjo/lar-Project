@@ -25,7 +25,8 @@
     <a class="btn btn-success" style="margin-bottom:15px" href="{{ url('/inicio/produtos/create_produto')}}"><b>+ NOVO PRODUTO</b></a>
 </div>
 <div class="container" style="background-color:white;">
-    <table class="table table-striped table-hover">
+    <h1>Tabela de produtos</h1>
+    <table class="table table-striped table-hover" id="tabela-produtos">
 
         <thead class="thead-dark">
             <tr>
@@ -39,7 +40,8 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($produtos as $produto)
+            @foreach($produtos as $produto)
+            @if($produto->categoria == 'Equipamentos')
             <tr>
                 <th scope="row">{{$produto->id}}</th>
                 <td> {{$produto->nome_produto}} </td>
@@ -55,10 +57,88 @@
                     </form>
                 </td>
             </tr>
-            <!--Se não fizer o que está dentro do for else faz o seguinte -->
-            @empty
-            <h5 class="text-center">Não foram encontrados Produtos!</h5>
-            @endforelse
+            @endif
+            @endforeach
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h1>Tabela de alimentos</h1>
+    <table class="table table-striped table-hover" id="tabela-produtos">
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Quantidade atual</th>
+                <th scope="col">Re-order point</th>
+                <th scope="col">Opções</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($produtos as $produto)
+
+            @if($produto->categoria == 'Alimentação')
+            <tr>
+                <th scope="row">{{$produto->id}}</th>
+                <td> {{$produto->nome_produto}} </td>
+                <td> {{$produto->categoria}} </td>
+                <td> {{$produto->getQuantidade()}}</td>
+                <td>{{$produto->reorder_point}} </td>
+
+                <td>
+                    <form action="{{ url('/inicio/produtos/destroy_produto/'. $produto->id)}}" method="POST">
+                        <a class="btn btn-info" href="{{ url('/inicio/produtos/movimentos/' . $produto->id ) }}"><b>Ver Movimentos</b></a>
+                        @csrf
+                        <button type="submit" class="btn btn-danger"><b>Apagar produto</b></button>
+                    </form>
+                </td>
+            </tr>
+            @endif
+            @endforeach
+        </tbody>
+    </table>
+
+
+    <hr>
+    <h1>Tabela de produtos de higiene</h1>
+    <table class="table table-striped table-hover" id="tabela-produtos">
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Quantidade atual</th>
+                <th scope="col">Re-order point</th>
+                <th scope="col">Opções</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($produtos as $produto)
+
+            @if($produto->categoria == 'Higiene')
+            <tr>
+                <th scope="row">{{$produto->id}}</th>
+                <td> {{$produto->nome_produto}} </td>
+                <td> {{$produto->categoria}} </td>
+                <td> {{$produto->getQuantidade()}}</td>
+                <td>{{$produto->reorder_point}} </td>
+
+                <td>
+                    <form action="{{ url('/inicio/produtos/destroy_produto/'. $produto->id)}}" method="POST">
+                        <a class="btn btn-info" href="{{ url('/inicio/produtos/movimentos/' . $produto->id ) }}"><b>Ver Movimentos</b></a>
+                        @csrf
+                        <button type="submit" class="btn btn-danger"><b>Apagar produto</b></button>
+                    </form>
+                </td>
+            </tr>
+            @endif
+            @endforeach
         </tbody>
     </table>
 </div>

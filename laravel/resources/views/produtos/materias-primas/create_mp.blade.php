@@ -16,6 +16,12 @@
 
 <p>Os campos com * são obrigatórios;</p>
 <p>Os campos com # têm de ser números;</p>
+<div>
+<p>__________________________________________</p>
+  <p> C - conforme </p>
+  <p> NC - não conforme </p>
+  <p> D - devolvido </p>
+</div>
 
 <form action="{{url('/inicio/controlo_materias_primas/store')}}" method="POST" style="font-weight:bold;">
     @csrf

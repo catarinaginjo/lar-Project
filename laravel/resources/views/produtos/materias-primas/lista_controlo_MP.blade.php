@@ -17,14 +17,20 @@
   <?php } ?>
 </div>
 
-
 <a class="btn btn-success" style="margin-bottom:20px;" href="/inicio/controlo_materias_primas/create"><b>+ NOVO REGISTO </b></a>
+
 
 <div class="input-group" style="margin-bottom:10px">
   <form class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" placeholder="Ex.: Laranjas" aria-label="Search">
     <button class="btn btn-primary my-2 my-sm-0" type="submit"><b>Pesquisar</b></button>
   </form>
+</div>
+
+<div>
+  <p> C - conforme </p>
+  <p> NC - não conforme </p>
+  <p> D - devolvido </p>
 </div>
 
 <div class="tabela" style="background-color:white;">

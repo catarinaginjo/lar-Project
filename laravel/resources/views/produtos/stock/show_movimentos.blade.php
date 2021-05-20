@@ -21,7 +21,8 @@
     <h1> Quantidade atual: {{$quantidade_atual}}</h1>
 </div>
 
-<table class="table table-secondary">
+<div class="container" style="background-color:white;">
+<table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Nome Produto</th>
@@ -45,6 +46,7 @@
         @endforelse
     </tbody>
 </table>
+</div>
 
 
 @endsection
