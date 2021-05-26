@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use App\Models\Utentes;
+use App\Models\utentes;
 use Illuminate\Http\Request;
 
 class UtentesApiController extends Controller
