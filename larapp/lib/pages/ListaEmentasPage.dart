@@ -1,31 +1,33 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lar_mobile/pages/HomePage.dart';
 import 'package:lar_mobile/pages/Menu.dart';
-import 'package:lar_mobile/pages/UtentePage.dart';
 import 'package:lar_mobile/GlobalProvider.dart';
 
-class UtentesPage extends StatefulWidget {
-  _UtentesState createSate() => _UtentesState();
+import 'EmentaPage.dart';
+
+class ListaEmentasPage extends StatefulWidget {
+  _EmentasState createSate() => _EmentasState();
 
   @override
   State<StatefulWidget> createState() {
-    return _UtentesState();
+    return _EmentasState();
   }
 }
 
-class _UtentesState extends State<UtentesPage> {
-  List utentes = [];
+class _EmentasState extends State<ListaEmentasPage> {
+  List ementas = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    this.getListaUtentes();
+    this.getEmentas();
   }
 
-  getListaUtentes() async {
-    var myurl = "http://larsendim.pt/api/utentes";
+  getEmentas() async {
+    var myurl = "http://larsendim.pt/api/ementas";
     var response = await http.get(Uri.parse(myurl));
     //para aparecerem logo os dados
     setState(() {
@@ -36,10 +38,10 @@ class _UtentesState extends State<UtentesPage> {
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['result'];
       //print(items);
-      utentes = items;
+      ementas = items;
     } else {
       setState(() {
-        utentes = [];
+        ementas = [];
         isLoading = false;
       });
     }
@@ -49,7 +51,7 @@ class _UtentesState extends State<UtentesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de Utentes"),
+        title: Text("Lista de ementas"),
         backgroundColor: Colors.blueGrey[300],
       ),
       drawer: Menu(), //menu hamburguer
@@ -58,48 +60,43 @@ class _UtentesState extends State<UtentesPage> {
   }
 
   Widget getBody() {
-    if (utentes.contains(null) || utentes.length < 0 || isLoading) {
+    if (ementas.contains(null) || ementas.length < 0 || isLoading) {
+      // "loading"
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
       ));
     }
     return ListView.builder(
-        itemCount: utentes.length, //vai buscar a quantidade de utentes à lista
+        itemCount: ementas.length, //vai buscar a quantidade de ementas à lista
         itemBuilder: (context, index) {
-          return getCard(utentes[index]);
+          return getCard(ementas[index]);
         });
   }
+//quero a ementa mais recente em cima
 
-  Widget getCard(utente) {
-    var fullname = utente['nome'] + " " + utente['apelido'];
-    //var profileUrl = item['foto']['large'];
+  Widget getCard(ementa) {
+    var fullname =
+        " Ementa de: " + ementa['data_inicio'] + " a " + ementa['data_fim'];
     return Card(
       elevation: 1.5,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15.0),
         child: ListTile(
           onTap: () {
-            GlobalProvider().engine.currentUtenteId = utente['id'];
+            GlobalProvider().engine.currentUtenteId = ementa['id'];
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UtentePage(),
+                builder: (context) => EmentaPage(),
               ),
             );
           },
           title: Row(
             children: <Widget>[
               Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(60 / 2),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "https://t3.ftcdn.net/jpg/01/41/00/56/360_F_141005630_clElMFRAdVUEMg0fYlbyZJzP1Glt2BxU.jpg"))),
+                width: 5,
+                height: 5,
               ),
               SizedBox(
                 width: 20,

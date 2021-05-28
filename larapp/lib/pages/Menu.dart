@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lar_mobile/main.dart';
+import 'package:lar_mobile/pages/ContactosPage.dart';
+import 'package:lar_mobile/pages/EmentaPage.dart';
 
+import 'LoginPage.dart';
 import 'Profilepage.dart';
-import 'EmentaPage.dart';
+import 'ListaEmentasPage.dart';
 import 'HomePage.dart';
 import 'UtentesPage.dart';
 
@@ -17,16 +19,16 @@ class Menu extends StatelessWidget {
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/fundo.jpg"),
-              fit: BoxFit.cover,
-            ),
+                image: NetworkImage(
+                    'https://i.pinimg.com/originals/81/e3/5c/81e35cc214732e0eb532d22ec54c0a96.jpg'),
+                fit: BoxFit.fill),
           ),
           child: Center(
             child: Column(
               children: <Widget>[
                 Container(
-                  width: 120,
-                  height: 120,
+                  width: 125,
+                  height: 125,
                   margin: EdgeInsets.only(top: 50),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -38,11 +40,11 @@ class Menu extends StatelessWidget {
                 ),
                 Text(
                   'Paula Afonso',
-                  style: TextStyle(fontSize: 22, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
                 Text(
                   'Auxiliar',
-                  style: TextStyle(fontSize: 17, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ],
             ),
@@ -91,7 +93,19 @@ class Menu extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EmentaPage(),
+                builder: (context) => ListaEmentasPage(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.add_call),
+          title: Text('Contactos', style: TextStyle(fontSize: 20)),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ContactosPage(),
               ),
             );
           },
@@ -103,7 +117,7 @@ class Menu extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MyApp(),
+                builder: (context) => EmentaPage(),
               ),
             );
           },

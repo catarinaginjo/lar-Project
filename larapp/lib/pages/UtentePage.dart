@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lar_mobile/pages/UtentesPage.dart';
+import 'package:lar_mobile/GlobalProvider.dart';
+import 'package:http/http.dart' as http;
+
+const url = 'http://larsendim.pt/api/utentes/';
 
 class UtentePage extends StatefulWidget {
   @override
@@ -8,11 +14,51 @@ class UtentePage extends StatefulWidget {
 
 class MapScreenState extends State<UtentePage>
     with SingleTickerProviderStateMixin {
+  List info_utente = [];
+  //late final List<String> info_utente;
+  Map<String, String> credenciais = new Map<String, String>();
+
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    this.getInfoUtente();
+  }
+
+  getInfoUtente() async {
+    var utenteid = GlobalProvider().engine.currentUtenteId.toString();
+    var response = await http.get(Uri.parse(url + utenteid));
+
+    setState(() {
+      response; //para aparecerem logo os dados
+    });
+
+    //print(response.body);
+    if (response.statusCode == 200) {
+      var items = json.decode(response.body)['result'];
+      print(items.nome);
+      info_utente = items;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    var utenteid = GlobalProvider().engine.currentUtenteId.toString();
+    //var fullname = info_utente['nome'] + " " + info_utente['apelido'];
+    var fullname = credenciais['nome'];
+    /*
+    var u_apelido = info_utente['apelido'];
+    var u_contacto =credenciais['contacto_familiar'] ;
+    var u_doença = credenciais['doença'];
+    var u_condiçao = credenciais['condiçao'];
+    var u_medicaçao = credenciais['medicaçao'];
+    var u_dieta = credenciais['dieta'];
+    var u_hipertenso = credenciais['hipertensao'];
+    var u_diabetes = credenciais['diabetes'];
+    var u_alergias = credenciais['alergia'];
+    var u_cuidados = credenciais['cuidados'];
+*/
     return new Scaffold(
         body: new Container(
       color: Colors.white,
@@ -25,6 +71,7 @@ class MapScreenState extends State<UtentePage>
                 color: Colors.white,
                 child: new Column(
                   children: <Widget>[
+                    Text(utenteid),
                     Padding(
                         padding: EdgeInsets.only(left: 20.0, top: 20.0),
                         child: new Row(
@@ -39,12 +86,14 @@ class MapScreenState extends State<UtentePage>
                             ),
                             Padding(
                               padding: EdgeInsets.only(left: 25.0),
-                              child: new Text('PERFIL',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0,
-                                      fontFamily: 'sans-serif-light',
-                                      color: Colors.black)),
+                              child: new Text(
+                                'PERFIL DE UTENTE',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0,
+                                    fontFamily: 'sans-serif-light',
+                                    color: Colors.black),
+                              ),
                             ),
                           ],
                         )),
@@ -141,12 +190,10 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration: const InputDecoration(
-                                    hintText: "Paula",
-                                  ),
-                                  enabled: !_status,
-                                  autofocus: !_status,
+                                child: Text(
+                                  //info_utente['nome'].toString(),
+                                  fullname.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -178,10 +225,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration: const InputDecoration(
-                                      hintText: "932111222"),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -213,10 +259,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -248,10 +293,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -286,10 +330,9 @@ class MapScreenState extends State<UtentePage>
                               Flexible(
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 10.0),
-                                  child: new TextField(
-                                    decoration:
-                                        const InputDecoration(hintText: ""),
-                                    enabled: !_status,
+                                  child: Text(
+                                    utenteid.toString(),
+                                    style: TextStyle(fontSize: 17),
                                   ),
                                 ),
                                 flex: 2,
@@ -323,10 +366,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -358,10 +400,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -393,10 +434,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -428,10 +468,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -463,10 +502,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utenteid.toString(),
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
