@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lar_mobile/pages/ContactosPage.dart';
-import 'package:lar_mobile/pages/EmentaPage.dart';
 
 import 'LoginPage.dart';
 import 'Profilepage.dart';
@@ -20,7 +19,7 @@ class Menu extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
-                    'https://i.pinimg.com/originals/81/e3/5c/81e35cc214732e0eb532d22ec54c0a96.jpg'),
+                    'https://www.pngarea.com/pngm/2/4987595_aesthetic-png-watercolor-background-with-frame-transparent-png.png'),
                 fit: BoxFit.fill),
           ),
           child: Center(
@@ -117,7 +116,7 @@ class Menu extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EmentaPage(),
+                builder: (context) => LoginDemo(),
               ),
             );
           },

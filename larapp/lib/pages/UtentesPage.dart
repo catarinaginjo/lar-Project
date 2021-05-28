@@ -80,7 +80,7 @@ class _UtentesState extends State<UtentesPage> {
         padding: const EdgeInsets.all(10.0),
         child: ListTile(
           onTap: () {
-            GlobalProvider().engine.currentUtenteId = utente['id'];
+            GlobalProvider().engine.currentUtenteID = utente['id'];
             Navigator.push(
               context,
               MaterialPageRoute(

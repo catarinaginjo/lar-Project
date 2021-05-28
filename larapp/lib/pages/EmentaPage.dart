@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:lar_mobile/pages/Menu.dart';
 import 'package:lar_mobile/GlobalProvider.dart';
 
+const myurl = "http://larsendim.pt/api/ementas/";
+
 class EmentaPage extends StatefulWidget {
   _EmentasS createState() => _EmentasS();
 }
@@ -20,11 +22,12 @@ class _EmentasS extends State<EmentaPage> {
   }
 
   get_this_ementa() async {
-    var myurl = "http://larsendim.pt/api/ementas";
-    var response = await http.get(Uri.parse(myurl));
     var ementaid = GlobalProvider().engine.currentEmentaId.toString();
-    //para aparecerem logo os dados
     print(ementaid);
+    var response = await http.get(Uri.parse(myurl + ementaid));
+
+    //para aparecerem logo os dados
+    //print(ementaid);
     setState(() {
       response;
     });
@@ -32,18 +35,14 @@ class _EmentasS extends State<EmentaPage> {
     //print(response.body);
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['result'];
-      print(items);
+      print(response.body);
       this_ementa = items;
-    } else {
-      setState(() {
-        this_ementa = [];
-        isLoading = false;
-      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var ementaid = GlobalProvider().engine.currentEmentaID.toString();
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -55,9 +54,10 @@ class _EmentasS extends State<EmentaPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Text(ementaid),
               getDiaSemana("Segunda-feira"),
               getTitle("Sopa"),
-              getDadosEmenta("-"),
+              getDadosEmenta(ementaid),
               getTitle("Almoço"),
               getDadosEmenta("-"),
               getTitle("Sobremesa"),
@@ -132,6 +132,7 @@ class _EmentasS extends State<EmentaPage> {
               getDadosEmenta("-"),
               getTitle("Sobremesa"),
               getDadosEmenta("-"),
+              Container()
             ],
           ),
         ),

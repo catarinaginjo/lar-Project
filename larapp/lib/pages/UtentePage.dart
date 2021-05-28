@@ -44,7 +44,7 @@ class MapScreenState extends State<UtentePage>
 
   @override
   Widget build(BuildContext context) {
-    var utenteid = GlobalProvider().engine.currentUtenteId.toString();
+    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
     //var fullname = info_utente['nome'] + " " + info_utente['apelido'];
     var fullname = credenciais['nome'];
     /*

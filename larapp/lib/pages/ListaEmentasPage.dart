@@ -84,7 +84,7 @@ class _EmentasState extends State<ListaEmentasPage> {
         padding: const EdgeInsets.all(15.0),
         child: ListTile(
           onTap: () {
-            GlobalProvider().engine.currentUtenteId = ementa['id'];
+            GlobalProvider().engine.currentEmentaID = ementa['id'];
             Navigator.push(
               context,
               MaterialPageRoute(
