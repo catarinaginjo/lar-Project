@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Models\stock_movimentos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class StockMovimentosApiController extends Controller
      */
     public function index()
     {
-        //
+        return response(['result' => stock_movimentos::all()], 200);
     }
 
     /**

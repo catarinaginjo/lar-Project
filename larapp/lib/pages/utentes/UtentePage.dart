@@ -1,11 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:lar_mobile/pages/UtentesPage.dart';
+import 'package:lar_mobile/pages/utentes/UtentesPage.dart';
 import 'package:lar_mobile/GlobalProvider.dart';
+import 'package:lar_mobile/models/utente.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
-const url = 'http://larsendim.pt/api/utentes/';
+const url = 'https://larsendim.pt/api/utentes/';
+
+const url_img = 'https://larsendim.pt/storage/images/utentes/';
 
 class UtentePage extends StatefulWidget {
   @override
@@ -14,53 +19,58 @@ class UtentePage extends StatefulWidget {
 
 class MapScreenState extends State<UtentePage>
     with SingleTickerProviderStateMixin {
-  List info_utente = [];
+  late Utente utente;
+
+  //List info_utente = [];
   //late final List<String> info_utente;
-  Map<String, String> credenciais = new Map<String, String>();
+  //Map<String, String> credenciais = new Map<String, String>();
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   @override
   void initState() {
     super.initState();
-    this.getInfoUtente();
+    this.fetchUtente();
   }
 
-  getInfoUtente() async {
-    var utenteid = GlobalProvider().engine.currentUtenteId.toString();
-    var response = await http.get(Uri.parse(url + utenteid));
-
-    setState(() {
-      response; //para aparecerem logo os dados
-    });
-
-    //print(response.body);
+  Future<Utente> fetchUtente() async {
+    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    final response = await http.get(Uri.parse(url + utenteid));
+    print("response->");
+    print(response.body);
     if (response.statusCode == 200) {
-      var items = json.decode(response.body)['result'];
-      print(items.nome);
-      info_utente = items;
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return Utente.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to person');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     var utenteid = GlobalProvider().engine.currentUtenteID.toString();
-    //var fullname = info_utente['nome'] + " " + info_utente['apelido'];
-    var fullname = credenciais['nome'];
-    /*
-    var u_apelido = info_utente['apelido'];
-    var u_contacto =credenciais['contacto_familiar'] ;
-    var u_doença = credenciais['doença'];
-    var u_condiçao = credenciais['condiçao'];
-    var u_medicaçao = credenciais['medicaçao'];
-    var u_dieta = credenciais['dieta'];
-    var u_hipertenso = credenciais['hipertensao'];
-    var u_diabetes = credenciais['diabetes'];
-    var u_alergias = credenciais['alergia'];
-    var u_cuidados = credenciais['cuidados'];
-*/
     return new Scaffold(
-        body: new Container(
+      body: new FutureBuilder<Utente>(
+        future: fetchUtente(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return _getContainer(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          }
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+
+  Widget _getContainer(var utente) {
+    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    return new Container(
       color: Colors.white,
       child: new ListView(
         children: <Widget>[
@@ -71,7 +81,6 @@ class MapScreenState extends State<UtentePage>
                 color: Colors.white,
                 child: new Column(
                   children: <Widget>[
-                    Text(utenteid),
                     Padding(
                         padding: EdgeInsets.only(left: 20.0, top: 20.0),
                         child: new Row(
@@ -110,10 +119,8 @@ class MapScreenState extends State<UtentePage>
                               decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
-                                    /*image: new ExactAssetImage(
-                                        'asssets/images/woman.png'),*/
                                     image: NetworkImage(
-                                        'https://paperio.ca/wp-content/uploads/2017/03/slide-6-older-woman-big-smile.png'),
+                                        url_img + utenteid + '.png'),
                                     fit: BoxFit.fill),
                                 //fit: BoxFit.cover,
                               ),
@@ -191,8 +198,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  //info_utente['nome'].toString(),
-                                  fullname.toString(),
+                                  utente.fullName,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -226,9 +232,13 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.contacto,
                                   style: TextStyle(fontSize: 17),
                                 ),
+                              ),
+                              ElevatedButton(
+                                onPressed: _makingPhoneCall,
+                                child: Text('Ligar'),
                               ),
                             ],
                           )),
@@ -260,7 +270,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.doenca,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -294,7 +304,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.condicao,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -331,7 +341,7 @@ class MapScreenState extends State<UtentePage>
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: Text(
-                                    utenteid.toString(),
+                                    utente.medicacao,
                                     style: TextStyle(fontSize: 17),
                                   ),
                                 ),
@@ -367,7 +377,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.dieta,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -401,7 +411,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.hipertensao,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -435,7 +445,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.diabetes,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -469,7 +479,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.alergia,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -503,7 +513,7 @@ class MapScreenState extends State<UtentePage>
                             children: <Widget>[
                               new Flexible(
                                 child: Text(
-                                  utenteid.toString(),
+                                  utente.cuidados,
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
@@ -518,7 +528,7 @@ class MapScreenState extends State<UtentePage>
           ),
         ],
       ),
-    ));
+    );
   }
 
   @override
@@ -596,5 +606,14 @@ class MapScreenState extends State<UtentePage>
         );
       },
     );
+  }
+
+  _makingPhoneCall() async {
+    const number = 'tel:9876543210';
+    if (await canLaunch(number)) {
+      await launch(number);
+    } else {
+      throw 'Could not launch $number';
+    }
   }
 }

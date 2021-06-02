@@ -1,31 +1,33 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lar_mobile/pages/Menu.dart';
-import 'package:lar_mobile/pages/UtentePage.dart';
 import 'package:lar_mobile/GlobalProvider.dart';
 
-class UtentesPage extends StatefulWidget {
-  _UtentesState createSate() => _UtentesState();
+import 'StockPage.dart';
+
+class FoodPage extends StatefulWidget {
+  _FoodState createSate() => _FoodState();
 
   @override
   State<StatefulWidget> createState() {
-    return _UtentesState();
+    return _FoodState();
   }
 }
 
-class _UtentesState extends State<UtentesPage> {
-  List utentes = [];
+class _FoodState extends State<FoodPage> {
+  List stock_food = [];
   bool isLoading = false;
+  bool _status = true;
 
   @override
   void initState() {
     super.initState();
-    this.getListaUtentes();
+    this.getListaStock_food();
   }
 
-  getListaUtentes() async {
-    var myurl = "http://larsendim.pt/api/utentes";
+  getListaStock_food() async {
+    //var myurl = "https://larsendim.pt/api/produtos_c/Higiene";
+    var myurl = "https://larsendim.pt/api/produtos";
     var response = await http.get(Uri.parse(myurl));
     //para aparecerem logo os dados
     setState(() {
@@ -35,11 +37,11 @@ class _UtentesState extends State<UtentesPage> {
     //print(response.body);
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['result'];
-      //print(items);
-      utentes = items;
+      print(response.body);
+      stock_food = items;
     } else {
       setState(() {
-        utentes = [];
+        stock_food = [];
         isLoading = false;
       });
     }
@@ -49,58 +51,41 @@ class _UtentesState extends State<UtentesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de Utentes"),
+        title: Text("Stock - Alimentação"),
         backgroundColor: Colors.blueGrey[300],
       ),
-      drawer: Menu(), //menu hamburguer
       body: getBody(),
     );
   }
 
   Widget getBody() {
-    if (utentes.contains(null) || utentes.length < 0 || isLoading) {
+    if (stock_food.contains(null) || stock_food.length < 0 || isLoading) {
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
       ));
     }
     return ListView.builder(
-        itemCount: utentes.length, //vai buscar a quantidade de utentes à lista
+        itemCount:
+            stock_food.length, //vai buscar a quantidade de stock_food à lista
         itemBuilder: (context, index) {
-          return getCard(utentes[index]);
+          return getCard(stock_food[index]);
         });
   }
 
-  Widget getCard(utente) {
-    var fullname = utente['nome'] + " " + utente['apelido'];
-    //var profileUrl = item['foto']['large'];
+  Widget getCard(stock_food) {
+    var produtoID = GlobalProvider().engine.currentProdutoID.toString();
+    var quantidade = stock_food['reorder_point'];
+    var fullname =
+        stock_food['nome_produto'] + "\n" + "Quantidade atual: " + quantidade;
+
     return Card(
-      elevation: 1.5,
+      elevation: 10.0,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListTile(
-          onTap: () {
-            GlobalProvider().engine.currentUtenteID = utente['id'];
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => UtentePage(),
-              ),
-            );
-          },
           title: Row(
             children: <Widget>[
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(60 / 2),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "https://t3.ftcdn.net/jpg/01/41/00/56/360_F_141005630_clElMFRAdVUEMg0fYlbyZJzP1Glt2BxU.jpg"))),
-              ),
               SizedBox(
                 width: 20,
               ),
@@ -122,6 +107,24 @@ class _UtentesState extends State<UtentesPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getBackIcon() {
+    return new GestureDetector(
+      child: new Icon(
+        Icons.arrow_back_ios,
+        color: Colors.black,
+        size: 22.0,
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StockPage(),
+          ),
+        );
+      },
     );
   }
 }

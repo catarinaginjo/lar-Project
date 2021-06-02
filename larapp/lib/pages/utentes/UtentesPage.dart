@@ -1,33 +1,33 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lar_mobile/pages/HomePage.dart';
 import 'package:lar_mobile/pages/Menu.dart';
 import 'package:lar_mobile/GlobalProvider.dart';
+import 'package:lar_mobile/pages/utentes/UtentePage.dart';
 
-import 'EmentaPage.dart';
+const url_img = 'https://larsendim.pt/storage/images/utentes/';
 
-class ListaEmentasPage extends StatefulWidget {
-  _EmentasState createSate() => _EmentasState();
+class UtentesPage extends StatefulWidget {
+  _UtentesState createSate() => _UtentesState();
 
   @override
   State<StatefulWidget> createState() {
-    return _EmentasState();
+    return _UtentesState();
   }
 }
 
-class _EmentasState extends State<ListaEmentasPage> {
-  List ementas = [];
+class _UtentesState extends State<UtentesPage> {
+  List utentes = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    this.getEmentas();
+    this.getListaUtentes();
   }
 
-  getEmentas() async {
-    var myurl = "http://larsendim.pt/api/ementas";
+  getListaUtentes() async {
+    var myurl = "https://larsendim.pt/api/utentes";
     var response = await http.get(Uri.parse(myurl));
     //para aparecerem logo os dados
     setState(() {
@@ -38,10 +38,10 @@ class _EmentasState extends State<ListaEmentasPage> {
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['result'];
       //print(items);
-      ementas = items;
+      utentes = items;
     } else {
       setState(() {
-        ementas = [];
+        utentes = [];
         isLoading = false;
       });
     }
@@ -51,7 +51,7 @@ class _EmentasState extends State<ListaEmentasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de ementas"),
+        title: Text("Lista de Utentes"),
         backgroundColor: Colors.blueGrey[300],
       ),
       drawer: Menu(), //menu hamburguer
@@ -60,43 +60,51 @@ class _EmentasState extends State<ListaEmentasPage> {
   }
 
   Widget getBody() {
-    if (ementas.contains(null) || ementas.length < 0 || isLoading) {
-      // "loading"
+    if (utentes.contains(null) || utentes.length < 0 || isLoading) {
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
       ));
     }
     return ListView.builder(
-        itemCount: ementas.length, //vai buscar a quantidade de ementas à lista
+        itemCount: utentes.length, //vai buscar a quantidade de utentes à lista
         itemBuilder: (context, index) {
-          return getCard(ementas[index]);
+          return getCard(utentes[index]);
         });
   }
-//quero a ementa mais recente em cima
 
-  Widget getCard(ementa) {
-    var fullname =
-        " Ementa de: " + ementa['data_inicio'] + " a " + ementa['data_fim'];
+  Widget getCard(utente) {
+    //var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    var fullname = utente['nome'] + " " + utente['apelido'];
+
     return Card(
-      elevation: 1.5,
+      elevation: 10.0,
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
         child: ListTile(
           onTap: () {
-            GlobalProvider().engine.currentEmentaID = ementa['id'];
+            
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EmentaPage(),
+                builder: (context) => UtentePage(),
               ),
             );
           },
           title: Row(
             children: <Widget>[
               Container(
-                width: 5,
-                height: 5,
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(60 / 2),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                        url_img + utente['id'].toString() + '.png'),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 20,

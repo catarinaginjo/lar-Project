@@ -21,6 +21,8 @@ class GlobalProviderEngine {
   String? _token;
   int? currentUtenteID;
   int? currentEmentaID;
+  int? currentProdutoID;
+
   login(String username, String password) {
     _username = username;
     _password = password;

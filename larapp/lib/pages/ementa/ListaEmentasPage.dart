@@ -2,29 +2,30 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lar_mobile/pages/Menu.dart';
+import 'package:lar_mobile/GlobalProvider.dart';
+import 'package:lar_mobile/pages/ementa/NewEmentaPage.dart';
 
-//import 'package:url_launcher/url_launcher.dart';
-class ContactosPage extends StatefulWidget {
-  _ContactosState createSate() => _ContactosState();
+class ListaEmentasPage extends StatefulWidget {
+  _EmentasState createSate() => _EmentasState();
 
   @override
   State<StatefulWidget> createState() {
-    return _ContactosState();
+    return _EmentasState();
   }
 }
 
-class _ContactosState extends State<ContactosPage> {
-  List contactos = [];
+class _EmentasState extends State<ListaEmentasPage> {
+  List ementas = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    this.getListaUtentes();
+    this.getEmentas();
   }
 
-  getListaUtentes() async {
-    var myurl = "http://larsendim.pt/api/contactos";
+  getEmentas() async {
+    var myurl = "https://larsendim.pt/api/ementas";
     var response = await http.get(Uri.parse(myurl));
     //para aparecerem logo os dados
     setState(() {
@@ -35,10 +36,10 @@ class _ContactosState extends State<ContactosPage> {
     if (response.statusCode == 200) {
       var items = json.decode(response.body)['result'];
       //print(items);
-      contactos = items;
+      ementas = items;
     } else {
       setState(() {
-        contactos = [];
+        ementas = [];
         isLoading = false;
       });
     }
@@ -48,7 +49,7 @@ class _ContactosState extends State<ContactosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de Contactos"),
+        title: Text("Lista de ementas"),
         backgroundColor: Colors.blueGrey[300],
       ),
       drawer: Menu(), //menu hamburguer
@@ -57,32 +58,47 @@ class _ContactosState extends State<ContactosPage> {
   }
 
   Widget getBody() {
-    if (contactos.contains(null) || contactos.length < 0 || isLoading) {
+    if (ementas.contains(null) || ementas.length < 0 || isLoading) {
+      // "loading"
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
       ));
     }
     return ListView.builder(
-        itemCount:
-            contactos.length, //vai buscar a quantidade de contactos à lista
+        itemCount: ementas.length, //vai buscar a quantidade de ementas à lista
         itemBuilder: (context, index) {
-          return getCard(contactos[index]);
+          return getCard(ementas[index]);
         });
   }
+//quero a ementa mais recente em cima
 
-  Widget getCard(contacto) {
-    var fullname = contacto['nome'] + " " + contacto['numero'];
+  Widget getCard(ementa) {
+    var fullname =
+        " Ementa de: " + ementa['data_inicio'] + " a " + ementa['data_fim'];
     return Card(
-      elevation: 1.5,
+      elevation: 10.0,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.add_call),
+          leading: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            GlobalProvider().engine.currentEmentaID = ementa['id'];
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NewEmentaPage(),
+              ),
+            );
+          },
           title: Row(
             children: <Widget>[
+              Container(
+                width: 0,
+                height: 0,
+              ),
               SizedBox(
-                width: 4,
+                width: 0,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:lar_mobile/pages/ContactosPage.dart';
+import 'package:lar_mobile/pages/info/ContactosPage.dart';
+import 'package:lar_mobile/pages/stock/StockPage.dart';
 
 import 'LoginPage.dart';
 import 'Profilepage.dart';
-import 'ListaEmentasPage.dart';
+import 'ementa/ListaEmentasPage.dart';
 import 'HomePage.dart';
-import 'UtentesPage.dart';
+import 'utentes/UtentesPage.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -93,6 +94,18 @@ class Menu extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ListaEmentasPage(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.add_shopping_cart),
+          title: Text('Stock', style: TextStyle(fontSize: 20)),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StockPage(),
               ),
             );
           },
