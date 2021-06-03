@@ -36,6 +36,7 @@ class _ContactosState extends State<ContactosPage>
     //para aparecerem logo os dados
     setState(() {
       response;
+      isLoading = true;
     });
 
     //print(response.body);
@@ -56,6 +57,7 @@ class _ContactosState extends State<ContactosPage>
     //para aparecerem logo os dados
     setState(() {
       response;
+      isLoading = true;
     });
 
     //print(response.body);
@@ -75,7 +77,7 @@ class _ContactosState extends State<ContactosPage>
     return Scaffold(
       appBar: AppBar(
         title: Text("Lista de Contactos"),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: Colors.pink.shade800,
       ),
       drawer: Menu(), //menu hamburguer
       body: Column(
@@ -84,17 +86,17 @@ class _ContactosState extends State<ContactosPage>
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             child: TabBar(
               controller: _tabController,
-              labelColor: Colors.blue,
+              labelColor: Colors.blue.shade900,
               isScrollable: true,
               indicatorColor: Colors.transparent,
               unselectedLabelColor: Colors.grey,
               unselectedLabelStyle: TextStyle(
-                fontSize: 16,
+                fontSize: 20,
                 color: Colors.grey,
                 fontWeight: FontWeight.w700,
               ),
               labelStyle: TextStyle(
-                fontSize: 16,
+                fontSize: 24,
                 fontWeight: FontWeight.w700,
               ),
               tabs: <Widget>[
@@ -118,7 +120,7 @@ class _ContactosState extends State<ContactosPage>
   }
 
   Widget getBody() {
-    if (contactos.contains(null) || contactos.length < 0 || isLoading) {
+    if (contactos.contains(null) || contactos.length < 0 || !isLoading) {
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
@@ -133,7 +135,7 @@ class _ContactosState extends State<ContactosPage>
   }
 
   Widget getBodyFuncionarios() {
-    if (contactos_f.contains(null) || contactos_f.length < 0 || isLoading) {
+    if (contactos_f.contains(null) || contactos_f.length < 0 || !isLoading) {
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),

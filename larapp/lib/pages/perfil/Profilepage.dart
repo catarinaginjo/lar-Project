@@ -19,7 +19,7 @@ class MapScreenState extends State<ProfilePage>
     return Scaffold(
         appBar: AppBar(
           title: Text('Perfil'),
-          backgroundColor: Colors.blueGrey[300],
+          backgroundColor: Colors.green.shade400,
         ),
         drawer: Menu(), //menu hamburguer
         body: new Container(
@@ -69,7 +69,6 @@ class MapScreenState extends State<ProfilePage>
                     ),
                   ),
                   new Container(
-                    color: Color(0xffFFFFFF),
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 25.0),
                       child: new Column(

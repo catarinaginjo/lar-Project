@@ -50,7 +50,7 @@ class _EmentasState extends State<ListaEmentasPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Lista de ementas"),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: Colors.orange.shade700,
       ),
       drawer: Menu(), //menu hamburguer
       body: getBody(),
@@ -81,7 +81,7 @@ class _EmentasState extends State<ListaEmentasPage> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.arrow_forward_ios),
+          trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
             GlobalProvider().engine.currentEmentaID = ementa['id'];
             Navigator.push(

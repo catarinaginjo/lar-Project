@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Página Inicial"),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: Colors.blue.shade400,
       ),
       drawer: Menu(), //menu hamburguer
 

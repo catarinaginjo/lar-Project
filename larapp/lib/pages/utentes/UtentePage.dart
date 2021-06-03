@@ -48,8 +48,11 @@ class MapScreenState extends State<UtentePage>
 
   @override
   Widget build(BuildContext context) {
-    
     return new Scaffold(
+      appBar: AppBar(
+        title: Text("Lista de Utentes"),
+        backgroundColor: Colors.red.shade400,
+      ),
       body: new FutureBuilder<Utente>(
         future: fetchUtente(),
         builder: (context, snapshot) {
@@ -60,9 +63,9 @@ class MapScreenState extends State<UtentePage>
           }
           // By default, show a loading spinner.
           return Center(
-            child: CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
-            ));
+              child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+          ));
         },
       ),
     );
@@ -86,24 +89,24 @@ class MapScreenState extends State<UtentePage>
                         child: new Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            new Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                _status ? _getBackIcon() : new Container(),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 25.0),
-                              child: new Text(
-                                'PERFIL DE UTENTE',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                    fontFamily: 'sans-serif-light',
-                                    color: Colors.black),
-                              ),
-                            ),
+                            // new Column(
+                            //   mainAxisAlignment: MainAxisAlignment.end,
+                            //   mainAxisSize: MainAxisSize.min,
+                            //   children: <Widget>[
+                            //     _status ? _getBackIcon() : new Container(),
+                            //   ],
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(left: 25.0),
+                            //   child: new Text(
+                            //     'PERFIL DE UTENTE',
+                            //     style: TextStyle(
+                            //         fontWeight: FontWeight.bold,
+                            //         fontSize: 20.0,
+                            //         fontFamily: 'sans-serif-light',
+                            //         color: Colors.black),
+                            //   ),
+                            // ),
                           ],
                         )),
                     Padding(
@@ -598,18 +601,19 @@ class MapScreenState extends State<UtentePage>
         size: 22.0,
       ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => UtentesPage(),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => UtentesPage(),
+        //   ),
+        // );
+        Navigator.pop(context);
       },
     );
   }
 
   _makingPhoneCall() async {
-    const number = 'tel:9876543210';
+    const number = 'tel://9876543210';
     if (await canLaunch(number)) {
       await launch(number);
     } else {

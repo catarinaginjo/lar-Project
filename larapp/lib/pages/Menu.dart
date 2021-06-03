@@ -51,7 +51,10 @@ class Menu extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.home),
+          leading: Icon(
+            Icons.home,
+            color: Colors.blue.shade400,
+          ),
           title: Text('Página inicial', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -63,7 +66,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.person),
+          leading: Icon(
+            Icons.face,
+            color: Colors.green.shade400,
+          ),
           title: Text('Perfil', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -75,7 +81,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.group),
+          leading: Icon(
+            Icons.groups,
+            color: Colors.red.shade400,
+          ),
           title: Text('Lista de utentes', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -87,7 +96,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.food_bank_rounded),
+          leading: Icon(
+            Icons.menu_book,
+            color: Colors.orange.shade700,
+          ),
           title: Text('Ementa semanal', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -99,7 +111,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.add_shopping_cart),
+          leading: Icon(
+            Icons.add_shopping_cart,
+            color: Colors.grey.shade600,
+          ),
           title: Text('Stock', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -111,7 +126,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.add_call),
+          leading: Icon(
+            Icons.add_call,
+            color: Colors.pink.shade800,
+          ),
           title: Text('Contactos', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(
@@ -123,7 +141,10 @@ class Menu extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.arrow_back),
+          leading: Icon(
+            Icons.logout,
+            color: Colors.black,
+          ),
           title: Text('Terminar sessão', style: TextStyle(fontSize: 20)),
           onTap: () {
             Navigator.push(

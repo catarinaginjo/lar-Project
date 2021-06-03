@@ -16,7 +16,7 @@ class _StockPageState extends State<StockPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Stock'),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: Colors.grey.shade600,
       ),
       drawer: Menu(), //menu hamburguer
       body: Padding(
@@ -26,8 +26,8 @@ class _StockPageState extends State<StockPage> {
             runSpacing: 20, // to apply margin in the cross axis of the wrap
             children: [
               ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
-                  child: ElevatedButton(
+                  constraints: BoxConstraints.tightFor(width: 500, height: 60),
+                  child: ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -36,16 +36,20 @@ class _StockPageState extends State<StockPage> {
                         ),
                       );
                     },
-                    child: Text('Equipamentos diários'),
+                    label: Text(
+                      'Equipamentos diários',
+                      textAlign: TextAlign.right,
+                    ),
+                    icon: Icon(Icons.construction),
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.grey[600]),
+                            MaterialStateProperty.all(Colors.blue[400]),
                         padding: MaterialStateProperty.all(EdgeInsets.all(10)),
                         textStyle:
                             MaterialStateProperty.all(TextStyle(fontSize: 20))),
                   )),
               ConstrainedBox(
-                constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                constraints: BoxConstraints.tightFor(width: 500, height: 60),
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
@@ -55,8 +59,11 @@ class _StockPageState extends State<StockPage> {
                       ),
                     );
                   },
-                  label: Text('Alimentação'),
-                  icon: Icon(Icons.food_bank),
+                  label: Text(
+                    'Alimentação',
+                    textAlign: TextAlign.right,
+                  ),
+                  icon: Icon(Icons.restaurant_menu),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green),
                       padding: MaterialStateProperty.all(EdgeInsets.all(10)),
@@ -65,8 +72,8 @@ class _StockPageState extends State<StockPage> {
                 ),
               ),
               ConstrainedBox(
-                constraints: BoxConstraints.tightFor(width: 300, height: 60),
-                child: ElevatedButton(
+                constraints: BoxConstraints.tightFor(width: 500, height: 60),
+                child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -75,7 +82,8 @@ class _StockPageState extends State<StockPage> {
                       ),
                     );
                   },
-                  child: Text('Higiene'),
+                  label: Text('Higiene'),
+                  icon: Icon(Icons.sanitizer),
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.red[200]),

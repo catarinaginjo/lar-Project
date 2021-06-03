@@ -54,7 +54,7 @@ class _UtentesState extends State<UtentesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Lista de Utentes"),
-        backgroundColor: Colors.blueGrey[300],
+        backgroundColor: Colors.red.shade400,
       ),
       drawer: Menu(), //menu hamburguer
       body: getBody(),
@@ -76,7 +76,6 @@ class _UtentesState extends State<UtentesPage> {
   }
 
   Widget getCard(utente) {
- 
     var fullname = utente['nome'] + " " + utente['apelido'];
 
     return Card(
@@ -88,7 +87,7 @@ class _UtentesState extends State<UtentesPage> {
             GlobalProvider().engine.currentUtenteID = utente['id'];
             Navigator.push(
               context,
-              MaterialPageRoute(          
+              MaterialPageRoute(
                 builder: (context) => UtentePage(),
               ),
             );
