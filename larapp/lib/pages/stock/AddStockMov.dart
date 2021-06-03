@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../Menu.dart';
 import 'StockPage.dart';
 
 Future<Stock_movimento> createStockMovimento(String title) async {
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp2> {
         appBar: AppBar(
           title: Text('Nome produto'),
         ),
+        drawer: Menu(),
         body: new Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.all(8.0),

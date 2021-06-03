@@ -22,7 +22,7 @@ class _LoginDemoState extends State<LoginDemo> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,6 @@ class _LoginDemoState extends State<LoginDemo> {
               ),
             ),
             Padding(
-              
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(

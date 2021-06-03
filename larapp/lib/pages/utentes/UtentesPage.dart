@@ -76,7 +76,7 @@ class _UtentesState extends State<UtentesPage> {
   }
 
   Widget getCard(utente) {
-    //var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+ 
     var fullname = utente['nome'] + " " + utente['apelido'];
 
     return Card(
@@ -85,9 +85,10 @@ class _UtentesState extends State<UtentesPage> {
         padding: const EdgeInsets.all(10.0),
         child: ListTile(
           onTap: () {
+            GlobalProvider().engine.currentUtenteID = utente['id'];
             Navigator.push(
               context,
-              MaterialPageRoute(
+              MaterialPageRoute(          
                 builder: (context) => UtentePage(),
               ),
             );

@@ -44,7 +44,7 @@ class MapScreenState extends State<NewEmentaPage>
 
   @override
   Widget build(BuildContext context) {
-    var ementaid = GlobalProvider().engine.currentEmentaID.toString();
+  //  var ementaid = GlobalProvider().engine.currentEmentaID.toString();
     return new Scaffold(
       body: new FutureBuilder<Ementa>(
         future: fetchEmenta(),
@@ -55,7 +55,10 @@ class MapScreenState extends State<NewEmentaPage>
             return Text("Error: ${snapshot.error}");
           }
           // By default, show a loading spinner.
-          return CircularProgressIndicator();
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            ));
         },
       ),
     );

@@ -3,7 +3,7 @@ import 'package:lar_mobile/pages/info/ContactosPage.dart';
 import 'package:lar_mobile/pages/stock/StockPage.dart';
 
 import 'LoginPage.dart';
-import 'Profilepage.dart';
+import 'perfil/Profilepage.dart';
 import 'ementa/ListaEmentasPage.dart';
 import 'HomePage.dart';
 import 'utentes/UtentesPage.dart';
@@ -20,7 +20,7 @@ class Menu extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
-                    'https://www.pngarea.com/pngm/2/4987595_aesthetic-png-watercolor-background-with-frame-transparent-png.png'),
+                    'https://image.freepik.com/free-photo/light-peach-blue-bokeh-light-abstract-background_73588-56.jpg'),
                 fit: BoxFit.fill),
           ),
           child: Center(
@@ -39,7 +39,7 @@ class Menu extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Paula Afonso',
+                  'Marta Peres',
                   style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
                 Text(

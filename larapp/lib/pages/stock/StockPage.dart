@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lar_mobile/pages/stock/FoodStock.dart';
-import 'package:lar_mobile/pages/stock/create.dart';
+import 'package:lar_mobile/pages/stock/AddStockMov.dart';
+import 'package:lar_mobile/pages/stock/HigieneStock.dart';
 
 import '../Menu.dart';
 
@@ -44,44 +45,45 @@ class _StockPageState extends State<StockPage> {
                             MaterialStateProperty.all(TextStyle(fontSize: 20))),
                   )),
               ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FoodPage(),
-                        ),
-                      );
-                    },
-                    label: Text('Alimentação'),
-                    icon: Icon(Icons.food_bank),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.green),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                        textStyle:
-                            MaterialStateProperty.all(TextStyle(fontSize: 20))),
-                  )),
+                constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FoodPage(),
+                      ),
+                    );
+                  },
+                  label: Text('Alimentação'),
+                  icon: Icon(Icons.food_bank),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                      textStyle:
+                          MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                ),
+              ),
               ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FoodPage(),
-                        ),
-                      );
-                    },
-                    child: Text('Higiene'),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.red[200]),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                        textStyle:
-                            MaterialStateProperty.all(TextStyle(fontSize: 20))),
-                  )),
+                constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HigienePage(),
+                      ),
+                    );
+                  },
+                  child: Text('Higiene'),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.red[200]),
+                      padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                      textStyle:
+                          MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                ),
+              ),
             ]),
       ),
     );

@@ -14,16 +14,20 @@ class ContactosPage extends StatefulWidget {
   }
 }
 
-class _ContactosState extends State<ContactosPage> {
+class _ContactosState extends State<ContactosPage>
+    with SingleTickerProviderStateMixin {
   List contactos = [];
   List contactos_f = [];
   bool isLoading = false;
+
+  TabController? _tabController;
 
   @override
   void initState() {
     super.initState();
     this.getListaContactos();
     this.getListaContactosFuncionarios();
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   getListaContactosFuncionarios() async {
@@ -74,21 +78,42 @@ class _ContactosState extends State<ContactosPage> {
         backgroundColor: Colors.blueGrey[300],
       ),
       drawer: Menu(), //menu hamburguer
-      body: getBody(),
-      /*Container(
-        width:200,
-        height:100,
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: getBody(),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            child: TabBar(
+              controller: _tabController,
+              labelColor: Colors.blue,
+              isScrollable: true,
+              indicatorColor: Colors.transparent,
+              unselectedLabelColor: Colors.grey,
+              unselectedLabelStyle: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+                fontWeight: FontWeight.w700,
+              ),
+              labelStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+              tabs: <Widget>[
+                Text('Gerais'),
+                Text('Funcionários'),
+              ],
             ),
-            Container(
-              child: getBodyFuncionarios(),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                Center(child: getBody()),
+                Center(child: getBodyFuncionarios()),
+              ],
             ),
-          ],
-        ),
-      ),*/
+          ),
+        ],
+      ),
     );
   }
 

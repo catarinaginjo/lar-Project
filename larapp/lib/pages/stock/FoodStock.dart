@@ -26,8 +26,8 @@ class _FoodState extends State<FoodPage> {
   }
 
   getListaStock_food() async {
-    //var myurl = "https://larsendim.pt/api/produtos_c/Higiene";
-    var myurl = "https://larsendim.pt/api/produtos";
+    var myurl = "https://larsendim.pt/api/produtos_c/Alimentação";
+   // var myurl = "https://larsendim.pt/api/produtos";
     var response = await http.get(Uri.parse(myurl));
     //para aparecerem logo os dados
     setState(() {
@@ -36,7 +36,8 @@ class _FoodState extends State<FoodPage> {
 
     //print(response.body);
     if (response.statusCode == 200) {
-      var items = json.decode(response.body)['result'];
+      var items = json.decode(response.body);
+      //var items = json.decode(response.body)['result'];
       print(response.body);
       stock_food = items;
     } else {
@@ -84,10 +85,11 @@ class _FoodState extends State<FoodPage> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListTile(
+          leading: Icon(Icons.arrow_forward_rounded),
           title: Row(
             children: <Widget>[
               SizedBox(
-                width: 20,
+                width: 0,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

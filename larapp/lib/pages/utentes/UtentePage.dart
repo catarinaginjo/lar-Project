@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
 const url = 'https://larsendim.pt/api/utentes/';
-
 const url_img = 'https://larsendim.pt/storage/images/utentes/';
 
 class UtentePage extends StatefulWidget {
@@ -21,10 +20,6 @@ class MapScreenState extends State<UtentePage>
     with SingleTickerProviderStateMixin {
   late Utente utente;
 
-  //List info_utente = [];
-  //late final List<String> info_utente;
-  //Map<String, String> credenciais = new Map<String, String>();
-
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   @override
@@ -35,6 +30,8 @@ class MapScreenState extends State<UtentePage>
 
   Future<Utente> fetchUtente() async {
     var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    print("utente id ->");
+    print(utenteid);
     final response = await http.get(Uri.parse(url + utenteid));
     print("response->");
     print(response.body);
@@ -51,7 +48,7 @@ class MapScreenState extends State<UtentePage>
 
   @override
   Widget build(BuildContext context) {
-    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    
     return new Scaffold(
       body: new FutureBuilder<Utente>(
         future: fetchUtente(),
@@ -62,7 +59,10 @@ class MapScreenState extends State<UtentePage>
             return Text("Error: ${snapshot.error}");
           }
           // By default, show a loading spinner.
-          return CircularProgressIndicator();
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            ));
         },
       ),
     );
