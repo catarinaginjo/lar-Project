@@ -19,55 +19,70 @@ class _StockPageState extends State<StockPage> {
       ),
       drawer: Menu(), //menu hamburguer
       body: Padding(
-        padding: const EdgeInsets.all(80),
-        child: Column(children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyApp2(),
-                ),
-              );
-            },
-            child: Text('Equipamentos diários'),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
-                padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
-          ),
-          ElevatedButton.icon(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FoodPage(),
-                ),
-              );
-            },
-            label: Text('Alimentação'),
-            icon: Icon(Icons.food_bank),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green),
-                padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FoodPage(),
-                ),
-              );
-            },
-            child: Text('Higiene'),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.red[200]),
-                padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 20))),
-          ),
-        ]),
+        padding: const EdgeInsets.all(60),
+        child: Wrap(
+            spacing: 20, // to apply margin in the main axis of the wrap
+            runSpacing: 20, // to apply margin in the cross axis of the wrap
+            children: [
+              ConstrainedBox(
+                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyApp2(),
+                        ),
+                      );
+                    },
+                    child: Text('Equipamentos diários'),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.grey[600]),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                        textStyle:
+                            MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                  )),
+              ConstrainedBox(
+                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodPage(),
+                        ),
+                      );
+                    },
+                    label: Text('Alimentação'),
+                    icon: Icon(Icons.food_bank),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                        textStyle:
+                            MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                  )),
+              ConstrainedBox(
+                  constraints: BoxConstraints.tightFor(width: 300, height: 60),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodPage(),
+                        ),
+                      );
+                    },
+                    child: Text('Higiene'),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.red[200]),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                        textStyle:
+                            MaterialStateProperty.all(TextStyle(fontSize: 20))),
+                  )),
+            ]),
       ),
     );
   }

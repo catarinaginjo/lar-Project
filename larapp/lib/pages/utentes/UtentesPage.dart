@@ -29,10 +29,6 @@ class _UtentesState extends State<UtentesPage> {
   getListaUtentes() async {
     var myurl = "https://larsendim.pt/api/utentes";
     var response = await http.get(Uri.parse(myurl));
-    //para aparecerem logo os dados
-    setState(() {
-      response;
-    });
 
     //print(response.body);
     if (response.statusCode == 200) {
@@ -45,6 +41,12 @@ class _UtentesState extends State<UtentesPage> {
         isLoading = false;
       });
     }
+
+    //para aparecerem logo os dados
+    setState(() {
+      response;
+      isLoading = true;
+    });
   }
 
   @override
@@ -60,7 +62,7 @@ class _UtentesState extends State<UtentesPage> {
   }
 
   Widget getBody() {
-    if (utentes.contains(null) || utentes.length < 0 || isLoading) {
+    if (!isLoading) {
       return Center(
           child: CircularProgressIndicator(
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
@@ -83,7 +85,6 @@ class _UtentesState extends State<UtentesPage> {
         padding: const EdgeInsets.all(10.0),
         child: ListTile(
           onTap: () {
-            
             Navigator.push(
               context,
               MaterialPageRoute(
