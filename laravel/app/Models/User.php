@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+//use HasApiTokens, Notifiable;
+//use Laravel\Passport\HasApiTokens;
 use DateTime;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

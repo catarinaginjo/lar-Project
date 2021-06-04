@@ -17,7 +17,7 @@ class UtentesApiController extends Controller
      */
     public function index()
     {
-        return utentes::all();
+	return response(['result' => utentes::all()], 200);
     }
     
 

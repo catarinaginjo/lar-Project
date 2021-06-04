@@ -9,11 +9,12 @@ use App\Http\Controllers\API\ContactoApiController;
 use App\Http\Controllers\API\ControloMpApiController;
 use App\Http\Controllers\API\StockMovimentosApiController;
 use App\Http\Controllers\API\TarefasUtenteApiController;
-
+use App\Http\Controllers\Auth\AuthApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Models\utentes;
+use App\Models\stock_movimentos;
 use App\Models\Contactos;
 use App\Models\ementa;
 use App\Models\produto;
@@ -35,7 +36,7 @@ use Carbon\Carbon;
 
 
 /*Register and Login */
-Route::post('/app/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthApiController::class, 'login']);
 
 
 /*Funcionários*/
@@ -67,27 +68,42 @@ Route::get('get_tarefas', [TarefasUtenteApiController::class, 'index']);
 /*Contactos*/
 Route::get('/contactos', [ContactoApiController::class, 'index']);
 Route::get('/contactos/{id}', function ($id) {
-    return utentes::find($id);
+    return Contactos::find($id);
 });
 
 /*Recados*/
 Route::get('/recados', [RecadoApiController::class, 'index']);
-Route::get('/recados/create', [RecadoApiController::class, 'create'])->middleware(['auth']);
-Route::post('/recados/store', [RecadoApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
+//Route::get('/recados/create', [RecadoApiController::class, 'create'])->middleware(['auth']);
+//Route::post('/recados/store', [RecadoApiController::class, 'store'])->middleware(['auth:api']) ; //quando fizer um post para 'utentes' vai ao controlador dentro do store,este recebe o pedido, grava na bd e redirectiona para /utentes
 Route::get('/recados/{id}', function ($id) {
-    return utentes::find($id);
+    return recado::find($id);
 });
 
 /*Ementa*/
 Route::get('/ementas', [EmentaApiController::class, 'index']);
-Route::get('/ementa/{id}', function ($id) { return utentes::find($id);
+Route::get('/ementas/{id}', function ($id) { return ementa::find($id);
 });
+
+/* Show movimentos de stock */
+Route::get('/stock_movimentos', [StockMovimentosApiController::class, 'index']); //vai buscar os movimentos
+Route::get('/stock_movimentos/{id}', function ($id) { //vai buscar um x utente
+    return stock_movimentos::find($id);
+});
+
+Route::post('/stock_movimentos/store', [StockMovimentosApiController::class, 'store']);
+
 
 /*Produtos*/
 Route::get('/produtos', [ProdutosApiController::class, 'index']);
 Route::get('/produtos/{id}', function ($id) {
-    return utentes::find($id);
+    return produto::find($id);
 });
+
+Route::get('/produtos_c/{categoria}',  [ProdutosApiController::class, 'show']);
+/*
+Route::get('/produtos_c/{categoria}', function ($categoria) {
+    return produto::find($categoria);
+});*/
 //ter um metodo update
 
 

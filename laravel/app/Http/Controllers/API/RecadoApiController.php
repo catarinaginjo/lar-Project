@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Models\recado;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 
 class RecadoApiController extends Controller
 {
@@ -13,7 +15,8 @@ class RecadoApiController extends Controller
      */
     public function index()
     {
-        //
+         return response(['result' => recado::all()], 200);
+  
     }
 
     /**

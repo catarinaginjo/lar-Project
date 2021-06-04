@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Models\produto;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProdutosApiController extends Controller
@@ -13,7 +14,8 @@ class ProdutosApiController extends Controller
      */
     public function index()
     {
-        //
+        return response(['result' => produto::all()], 200);
+ 
     }
 
     /**
@@ -33,9 +35,10 @@ class ProdutosApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($categoria)
     {
-        //
+	return	$produto = produto::where('categoria','=', $categoria)->get();
+	       
     }
 
     /**

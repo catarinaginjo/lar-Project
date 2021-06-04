@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Models\stock_movimentos;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StockMovimentosApiController extends Controller
 {
@@ -13,7 +14,7 @@ class StockMovimentosApiController extends Controller
      */
     public function index()
     {
-        //
+        return response(['result' => stock_movimentos::all()], 200);
     }
 
     /**
@@ -24,7 +25,20 @@ class StockMovimentosApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+            'quantidade' => 'required|numeric',
+            'product_id' => 'string'
+        ]);
+        $params = $request->all();
+
+        $params['user_id'] =  Auth::user()->id;
+
+        //dd($params);
+        $movimento = stock_movimentos::create($params);
+        $movimento->save();
+
+        return response(200);
+   
     }
 
     /**
@@ -53,7 +67,7 @@ class StockMovimentosApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     *@param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
