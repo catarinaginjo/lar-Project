@@ -19,13 +19,14 @@ class GlobalProviderEngine {
   String? _username;
   String? _password;
   String? _token;
+  int? currentUtenteID;
+  int? currentEmentaID;
+  int? currentProdutoID;
+
   login(String username, String password) {
     _username = username;
     _password = password;
-    http.post(
-      Uri.http('127.0.0.1:5555', '/'),
-      body: "asdasd"
-    );
+    http.post(Uri.http('127.0.0.1:5555', '/'), body: "asdasd");
 
     ///
   }

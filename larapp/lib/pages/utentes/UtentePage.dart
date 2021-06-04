@@ -1,5 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:lar_mobile/pages/UtentesPage.dart';
+import 'package:lar_mobile/pages/utentes/UtentesPage.dart';
+import 'package:lar_mobile/GlobalProvider.dart';
+import 'package:lar_mobile/models/utente.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+
+const url = 'https://larsendim.pt/api/utentes/';
+const url_img = 'https://larsendim.pt/storage/images/utentes/';
 
 class UtentePage extends StatefulWidget {
   @override
@@ -8,13 +18,62 @@ class UtentePage extends StatefulWidget {
 
 class MapScreenState extends State<UtentePage>
     with SingleTickerProviderStateMixin {
+  late Utente utente;
+
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    this.fetchUtente();
+  }
+
+  Future<Utente> fetchUtente() async {
+    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    print("utente id ->");
+    print(utenteid);
+    final response = await http.get(Uri.parse(url + utenteid));
+    print("response->");
+    print(response.body);
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return Utente.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to person');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: new Container(
+      appBar: AppBar(
+        title: Text("Lista de Utentes"),
+        backgroundColor: Colors.red.shade400,
+      ),
+      body: new FutureBuilder<Utente>(
+        future: fetchUtente(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return _getContainer(snapshot.data);
+          } else if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          }
+          // By default, show a loading spinner.
+          return Center(
+              child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+          ));
+        },
+      ),
+    );
+  }
+
+  Widget _getContainer(var utente) {
+    var utenteid = GlobalProvider().engine.currentUtenteID.toString();
+    return new Container(
       color: Colors.white,
       child: new ListView(
         children: <Widget>[
@@ -30,22 +89,24 @@ class MapScreenState extends State<UtentePage>
                         child: new Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            new Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                _status ? _getBackIcon() : new Container(),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 25.0),
-                              child: new Text('PERFIL',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0,
-                                      fontFamily: 'sans-serif-light',
-                                      color: Colors.black)),
-                            ),
+                            // new Column(
+                            //   mainAxisAlignment: MainAxisAlignment.end,
+                            //   mainAxisSize: MainAxisSize.min,
+                            //   children: <Widget>[
+                            //     _status ? _getBackIcon() : new Container(),
+                            //   ],
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.only(left: 25.0),
+                            //   child: new Text(
+                            //     'PERFIL DE UTENTE',
+                            //     style: TextStyle(
+                            //         fontWeight: FontWeight.bold,
+                            //         fontSize: 20.0,
+                            //         fontFamily: 'sans-serif-light',
+                            //         color: Colors.black),
+                            //   ),
+                            // ),
                           ],
                         )),
                     Padding(
@@ -61,10 +122,8 @@ class MapScreenState extends State<UtentePage>
                               decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
-                                    /*image: new ExactAssetImage(
-                                        'asssets/images/woman.png'),*/
                                     image: NetworkImage(
-                                        'https://paperio.ca/wp-content/uploads/2017/03/slide-6-older-woman-big-smile.png'),
+                                        url_img + utenteid + '.png'),
                                     fit: BoxFit.fill),
                                 //fit: BoxFit.cover,
                               ),
@@ -141,12 +200,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration: const InputDecoration(
-                                    hintText: "Paula",
-                                  ),
-                                  enabled: !_status,
-                                  autofocus: !_status,
+                                child: Text(
+                                  utente.fullName,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -178,11 +234,14 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration: const InputDecoration(
-                                      hintText: "932111222"),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.contacto,
+                                  style: TextStyle(fontSize: 17),
                                 ),
+                              ),
+                              ElevatedButton(
+                                onPressed: _makingPhoneCall,
+                                child: Text('Ligar'),
                               ),
                             ],
                           )),
@@ -213,10 +272,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.doenca,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -248,10 +306,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.condicao,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -286,10 +343,9 @@ class MapScreenState extends State<UtentePage>
                               Flexible(
                                 child: Padding(
                                   padding: EdgeInsets.only(right: 10.0),
-                                  child: new TextField(
-                                    decoration:
-                                        const InputDecoration(hintText: ""),
-                                    enabled: !_status,
+                                  child: Text(
+                                    utente.medicacao,
+                                    style: TextStyle(fontSize: 17),
                                   ),
                                 ),
                                 flex: 2,
@@ -323,10 +379,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.dieta,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -358,10 +413,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.hipertensao,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -393,10 +447,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.diabetes,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -428,10 +481,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.alergia,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -463,10 +515,9 @@ class MapScreenState extends State<UtentePage>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               new Flexible(
-                                child: new TextField(
-                                  decoration:
-                                      const InputDecoration(hintText: ""),
-                                  enabled: !_status,
+                                child: Text(
+                                  utente.cuidados,
+                                  style: TextStyle(fontSize: 17),
                                 ),
                               ),
                             ],
@@ -480,7 +531,7 @@ class MapScreenState extends State<UtentePage>
           ),
         ],
       ),
-    ));
+    );
   }
 
   @override
@@ -550,13 +601,23 @@ class MapScreenState extends State<UtentePage>
         size: 22.0,
       ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => UtentesPage(),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => UtentesPage(),
+        //   ),
+        // );
+        Navigator.pop(context);
       },
     );
+  }
+
+  _makingPhoneCall() async {
+    const number = 'tel://9876543210';
+    if (await canLaunch(number)) {
+      await launch(number);
+    } else {
+      throw 'Could not launch $number';
+    }
   }
 }

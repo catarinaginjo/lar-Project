@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lar_mobile/pages/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lar_mobile/pages/Menu.dart';
+import 'package:lar_mobile/pages/perfil/ChangePasswordPage.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class MapScreenState extends State<ProfilePage>
     return Scaffold(
         appBar: AppBar(
           title: Text('Perfil'),
-          backgroundColor: Colors.blueGrey[300],
+          backgroundColor: Colors.green.shade400,
         ),
         drawer: Menu(), //menu hamburguer
         body: new Container(
@@ -68,7 +69,6 @@ class MapScreenState extends State<ProfilePage>
                     ),
                   ),
                   new Container(
-                    color: Color(0xffFFFFFF),
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 25.0),
                       child: new Column(
@@ -135,10 +135,45 @@ class MapScreenState extends State<ProfilePage>
                                   new Flexible(
                                     child: new TextField(
                                       decoration: const InputDecoration(
-                                        hintText: "Paula",
+                                        hintText: "Marta Peres",
                                       ),
                                       enabled: !_status,
                                       autofocus: !_status,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 25.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      new Text(
+                                        'Cargo',
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 2.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Flexible(
+                                    child: new TextField(
+                                      decoration: const InputDecoration(
+                                          hintText: "Auxiliar"),
+                                      enabled: !_status,
                                     ),
                                   ),
                                 ],
@@ -172,7 +207,7 @@ class MapScreenState extends State<ProfilePage>
                                   new Flexible(
                                     child: new TextField(
                                       decoration: const InputDecoration(
-                                          hintText: "paula@lar.com"),
+                                          hintText: "marta@lar.com"),
                                       enabled: !_status,
                                     ),
                                   ),
@@ -199,60 +234,50 @@ class MapScreenState extends State<ProfilePage>
                                 ],
                               )),
                           Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: new Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  new Flexible(
-                                    child: new TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: "932111222"),
-                                      enabled: !_status,
-                                    ),
+                            padding: EdgeInsets.only(
+                                left: 25.0, right: 25.0, top: 2.0),
+                            child: new Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                new Flexible(
+                                  child: new TextField(
+                                    decoration: const InputDecoration(
+                                        hintText: "912221289"),
+                                    enabled: !_status,
                                   ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: new Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Container(
-                                      child: new Text(
-                                        'Cargo',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(25),
+                            child: Center(
+                              child: new ConstrainedBox(
+                                constraints: BoxConstraints.tightFor(
+                                    width: 180, height: 40),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChangePasswordPage(),
                                       ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: new Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(right: 10.0),
-                                      child: new TextField(
-                                        decoration: const InputDecoration(
-                                            hintText: "Auxiliar"),
-                                        enabled: !_status,
-                                      ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              )),
+                                    );
+                                  },
+                                  child: Text('Alterar Password'),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.grey),
+                                      padding: MaterialStateProperty.all(
+                                          EdgeInsets.all(10)),
+                                      textStyle: MaterialStateProperty.all(
+                                          TextStyle(fontSize: 17))),
+                                ),
+                              ),
+                            ),
+                          ),
                           !_status ? _getActionButtons() : new Container(),
                         ],
                       ),
