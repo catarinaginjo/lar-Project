@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Models\produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosApiController extends Controller
 {
@@ -15,19 +17,25 @@ class ProdutosApiController extends Controller
     public function index()
     {
         return response(['result' => produto::all()], 200);
- 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getproduto()
     {
-        //
+         //dd("cheguei aqui");
+
+        $produto = produto::join('stock_movimentos', 'produto.id', '=', 'stock_movimentos.product_id')
+            ->select('produto.*', 'stock_movimentos.quantidade')
+            ->get();
+
+      /*  $produto = DB::table('produto')
+            ->join('stock_movimentos', 'produto.id', '=', 'stock_movimentos.product_id')
+            ->select('produto.*', 'stock_movimentos.quantidade')
+            ->get();*/
+
+
+        return response(['result' => $produto], 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -37,30 +45,6 @@ class ProdutosApiController extends Controller
      */
     public function show($categoria)
     {
-	return	$produto = produto::where('categoria','=', $categoria)->get();
-	       
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return    $produto = produto::where('categoria', '=', $categoria)->get();
     }
 }

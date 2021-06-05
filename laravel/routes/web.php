@@ -11,13 +11,10 @@ use App\Http\Controllers\ControloMpController;
 use App\Http\Controllers\StockMovimentosController;
 use Illuminate\Support\Facades\Route;
 
+
 /* Rotas com middleware */
 
 Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
 
     Route::group(['middleware' => ['admin.only']], function () {
 
@@ -33,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/inicio/funcionarios/edit/{user}', [UsersController::class, 'edit']);
         Route::post('/inicio/funcionarios/update/{user}', [UsersController::class, 'update']);
         Route::post('/inicio/funcionarios/destroy/{user}', [UsersController::class, 'destroy']);
-
+      
 
         Route::post('/inicio/superadmin/store', [UsersController::class, 'store']);
         Route::get('/inicio/superadmin/lista_funcionarios', [UsersController::class, 'show_all_funcionarios']); //admin, superadmin, auxiliar, cozinheiro
@@ -46,7 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/inicio/utente/{utente}', [UtentesController::class, 'show']);
         Route::post('inicio/utentes/update/{utente}', [UtentesController::class, 'update']);
         Route::post('/inicio/utente/destroy/{utente}', [UtentesController::class, 'destroy']);
-
 
         /*Perfil*/
         Route::get('/inicio/perfil/{perfil}',  [UsersController::class, 'show_perfil']);

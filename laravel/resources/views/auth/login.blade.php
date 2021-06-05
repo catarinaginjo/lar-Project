@@ -1,7 +1,14 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <x-guest-layout>
+    <!--Navbar-->
+    @include('includes.navbar')
+    <!--/.Navbar-->
+
     <x-auth-card>
         <x-slot name="logo">
-            <img src="{{ asset('images/logo.png') }}" class="w-25 h-25">
+            <img src="{{ asset('images/logo.png') }}" class="w-70 h-70">
+
         </x-slot>
 
         <!-- Session Status -->

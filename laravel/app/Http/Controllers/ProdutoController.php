@@ -17,6 +17,8 @@ class ProdutoController extends Controller
         return view('produtos.stock.lista_produtos', ['produtos' => $produtos]);
     }
 
+    
+
     public function create_produto(produto $produto)
     {
         return view('produtos.stock.create_produtos', ['produto' => $produto]);

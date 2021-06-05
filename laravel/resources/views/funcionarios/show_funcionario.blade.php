@@ -123,8 +123,8 @@
         </div>
     </form>
     <div class="row">
-        <div class="col-sm-11">
-            <form action="{{ url('/inicio/funcionarios/destroy/'. $user->id) }}" method="POST">
+        <div class="col-sm-11" style="text-align: center" > 
+            <form action="{{ url('/inicio/funcionarios/destroy/'.$user->id) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger"><b>Apagar Funcionário</b></button>
             </form>

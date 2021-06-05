@@ -36,6 +36,7 @@ use Carbon\Carbon;
 
 
 /*Register and Login */
+
 Route::post('/login', [AuthApiController::class, 'login']);
 
 
@@ -53,11 +54,11 @@ Route::get('/utentes/{id}', function ($id) { //vai buscar um x utente
 });
 Route::get('/utentes/{id}/tarefas', function (Request $request, $id) {  //vai buscar as tarefasde um utente
     $params = $request->all();
-    return tarefas_utente::get()->where("utente_id" , "=", $id)
-           // ->filter(function ($task) use($params) {
-               // return Carbon::parse($task->created_at)->isSameDay(Carbon::parse($params['date']));
-           // })
-            ->all();
+    return tarefas_utente::get()->where("utente_id", "=", $id)
+        // ->filter(function ($task) use($params) {
+        // return Carbon::parse($task->created_at)->isSameDay(Carbon::parse($params['date']));
+        // })
+        ->all();
 });
 
 /*Tarefas utente */
@@ -81,7 +82,8 @@ Route::get('/recados/{id}', function ($id) {
 
 /*Ementa*/
 Route::get('/ementas', [EmentaApiController::class, 'index']);
-Route::get('/ementas/{id}', function ($id) { return ementa::find($id);
+Route::get('/ementas/{id}', function ($id) {
+    return ementa::find($id);
 });
 
 /* Show movimentos de stock */
@@ -95,16 +97,15 @@ Route::post('/stock_movimentos/store', [StockMovimentosApiController::class, 'st
 
 /*Produtos*/
 Route::get('/produtos', [ProdutosApiController::class, 'index']);
+
+Route::get('/produtos/getdata', [ProdutosApiController::class, 'getproduto']);
+
 Route::get('/produtos/{id}', function ($id) {
     return produto::find($id);
 });
 
 Route::get('/produtos_c/{categoria}',  [ProdutosApiController::class, 'show']);
-/*
-Route::get('/produtos_c/{categoria}', function ($categoria) {
-    return produto::find($categoria);
-});*/
-//ter um metodo update
+
 
 
 
@@ -205,8 +206,3 @@ Route::get('utentes/delete/{id}', function ($id) {
     utentes::find($id)->delete();
     return response(['message' => 'Utente eliminado.']);
 });*/
-
-
-
-
-
